@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyRecipeBookMaker.Views.RecipeDetails"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:local="clr-namespace:MyRecipeBookMaker"
+    xmlns:rotator="clr-namespace:Syncfusion.Maui.Rotator;assembly=Syncfusion.Maui.Rotator"
+    xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    Title="Recipe Detail"
+    x:DataType="local:RecipeDetailsViewModel">
+    <ContentPage.BindingContext>
+        <local:RecipeDetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid
+            Margin="5"
+            ColumnDefinitions="200,*"
+            RowDefinitions="200,75,75,*">
+
+            <Image
+                Grid.Row="0"
+                Grid.Column="0"
+                Aspect="AspectFill"
+                HeightRequest="200"
+                Source="{Binding selectedRecipe.imageURL}"
+                WidthRequest="200" />
+
+            <inputLayout:SfTextInputLayout
+                Grid.Row="1"
+                Padding="0"
+                Hint="Course">
+                <editors:SfComboBox
+                    x:Name="comboBoxCourse"
+                    DisplayMemberPath="Name"
+                    EnableAutoSize="True"
+                    FontSize="Micro"
+                    IsEditable="true"
+                    ItemsSource="{Binding Courses}"
+                    Text="{Binding selectedRecipe.course}"
+                    TextMemberPath="Name" />
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout
+                Grid.Row="2"
+                Padding="0"
+                Hint="Cusine">
+                <editors:SfComboBox
+                    x:Name="comboBoxCusine"
+                    DisplayMemberPath="Name"
+                    EnableAutoSize="True"
+                    FontSize="Micro"
+                    IsEditable="true"
+                    ItemsSource="{Binding Cuisines}"
+                    Text="{Binding selectedRecipe.cuisine}"
+                    TextMemberPath="Name" />
+            </inputLayout:SfTextInputLayout>
+
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="1"
+                Padding="10">
+
+                <inputLayout:SfTextInputLayout Hint="Name">
+                    <Entry FontSize="Small" Text="{Binding selectedRecipe.name}" />
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Hint="Description">
+                    <Editor
+                        FontSize="Micro"
+                        HeightRequest="150"
+                        Text="{Binding selectedRecipe.description}" />
+                </inputLayout:SfTextInputLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

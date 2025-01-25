@@ -1,0 +1,26 @@
+﻿[
+  {
+    "course": "Appetizer"
+  },
+  {
+    "course": "Main Course"
+  },
+  {
+    "course": "Side Dish"
+  },
+  {
+    "course": "Dessert"
+  },
+  {
+    "course": "Salad"
+  },
+  {
+    "course": "Soup"
+  },
+  {
+    "course": "Beverage"
+  },
+  {
+    "course": "Snack"
+  }
+]
