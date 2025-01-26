@@ -17,65 +17,68 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid
-            Margin="5"
-            ColumnDefinitions="200,*"
-            RowDefinitions="200,75,75,*">
-
-            <Image
-                Grid.Row="0"
-                Grid.Column="0"
-                Aspect="AspectFill"
-                HeightRequest="200"
-                Source="{Binding selectedRecipe.imageURL}"
-                WidthRequest="200" />
-
+        <FlexLayout Direction="Column" Wrap="Wrap">
             <inputLayout:SfTextInputLayout
-                Grid.Row="1"
-                Padding="0"
-                Hint="Course">
-                <editors:SfComboBox
-                    x:Name="comboBoxCourse"
-                    DisplayMemberPath="Name"
-                    EnableAutoSize="True"
-                    FontSize="Micro"
-                    IsEditable="true"
-                    ItemsSource="{Binding Courses}"
-                    Text="{Binding selectedRecipe.course}"
-                    TextMemberPath="Name" />
+                BackgroundColor="DarkSalmon"
+                HeightRequest="40"
+                Hint="Name">
+                <Entry
+                    FontSize="Small"
+                    Text="{Binding selectedRecipe.name}"
+                    VerticalOptions="Start" />
             </inputLayout:SfTextInputLayout>
+            <FlexLayout Direction="Row">
+                <Image
+                    Aspect="AspectFill"
+                    HeightRequest="200"
+                    Source="{Binding selectedRecipe.imageURL}"
+                    WidthRequest="200" />
 
-            <inputLayout:SfTextInputLayout
-                Grid.Row="2"
-                Padding="0"
-                Hint="Cusine">
-                <editors:SfComboBox
-                    x:Name="comboBoxCusine"
-                    DisplayMemberPath="Name"
-                    EnableAutoSize="True"
-                    FontSize="Micro"
-                    IsEditable="true"
-                    ItemsSource="{Binding Cuisines}"
-                    Text="{Binding selectedRecipe.cuisine}"
-                    TextMemberPath="Name" />
-            </inputLayout:SfTextInputLayout>
 
-            <StackLayout
-                Grid.Row="0"
-                Grid.Column="1"
-                Padding="10">
-
-                <inputLayout:SfTextInputLayout Hint="Name">
-                    <Entry FontSize="Small" Text="{Binding selectedRecipe.name}" />
-                </inputLayout:SfTextInputLayout>
-
-                <inputLayout:SfTextInputLayout Hint="Description">
+                <inputLayout:SfTextInputLayout HeightRequest="200" Hint="Description">
                     <Editor
                         FontSize="Micro"
-                        HeightRequest="150"
-                        Text="{Binding selectedRecipe.description}" />
+                        Text="{Binding selectedRecipe.description}"
+                        VerticalOptions="Start"
+                        VerticalTextAlignment="Start" />
                 </inputLayout:SfTextInputLayout>
-            </StackLayout>
-        </Grid>
+            </FlexLayout>
+            <FlexLayout>
+                <inputLayout:SfTextInputLayout
+                    BackgroundColor="Orange"
+                    HeightRequest="60"
+                    Hint="Course">
+                    <editors:SfComboBox
+                        x:Name="comboBoxCourse"
+                        DisplayMemberPath="Name"
+                        EnableAutoSize="True"
+                        FontSize="Micro"
+                        IsEditable="true"
+                        ItemsSource="{Binding Courses}"
+                        Text="{Binding selectedRecipe.course}"
+                        TextMemberPath="Name" />
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout
+                    Grid.Row="3"
+                    Padding="0"
+                    Hint="Cusine">
+                    <editors:SfComboBox
+                        x:Name="comboBoxCusine"
+                        DisplayMemberPath="Name"
+                        EnableAutoSize="True"
+                        FontSize="Micro"
+                        IsEditable="true"
+                        ItemsSource="{Binding Cuisines}"
+                        Text="{Binding selectedRecipe.cuisine}"
+                        TextMemberPath="Name" />
+                </inputLayout:SfTextInputLayout>
+            </FlexLayout>
+
+
+
+
+
+        </FlexLayout>
     </ContentPage.Content>
 </ContentPage>
