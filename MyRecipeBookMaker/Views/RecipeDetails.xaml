@@ -5,11 +5,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
     xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
     xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
+    xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
     xmlns:rotator="clr-namespace:Syncfusion.Maui.Rotator;assembly=Syncfusion.Maui.Rotator"
     xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:treeview="clr-namespace:Syncfusion.Maui.TreeView;assembly=Syncfusion.Maui.TreeView"
     Title="Recipe Detail"
     x:DataType="local:RecipeDetailsViewModel">
     <ContentPage.BindingContext>
@@ -17,68 +21,229 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <FlexLayout Direction="Column" Wrap="Wrap">
-            <inputLayout:SfTextInputLayout
-                BackgroundColor="DarkSalmon"
-                HeightRequest="40"
-                Hint="Name">
-                <Entry
-                    FontSize="Small"
-                    Text="{Binding selectedRecipe.name}"
-                    VerticalOptions="Start" />
-            </inputLayout:SfTextInputLayout>
-            <FlexLayout Direction="Row">
-                <Image
-                    Aspect="AspectFill"
-                    HeightRequest="200"
-                    Source="{Binding selectedRecipe.imageURL}"
-                    WidthRequest="200" />
+        <ScrollView>
+            <VerticalStackLayout>
+                <FlexLayout Direction="Column">
+                    <inputLayout:SfTextInputLayout
+                        Margin="2,0,3,0"
+                        Padding="0,-6"
+                        BackgroundColor="Green"
+                        HeightRequest="80"
+                        Hint="Name">
+                        <Entry
+                            Margin="0,-4"
+                            FontSize="Small"
+                            Text="{Binding selectedRecipe.name}" />
+                    </inputLayout:SfTextInputLayout>
+                    <VerticalStackLayout>
+                        <FlexLayout Direction="Row">
+                            <Border
+                                Margin="1,0"
+                                Background="#2B0B98"
+                                FlexLayout.Shrink=".2"
+                                HeightRequest="200"
+                                MaximumHeightRequest="200"
+                                StrokeShape="RoundRectangle  4,4,4,4"
+                                StrokeThickness="2">
+                                <Image
+                                    Aspect="AspectFill"
+                                    FlexLayout.Basis="200"
+                                    HeightRequest="200"
+                                    MaximumHeightRequest="200"
+                                    MaximumWidthRequest="200"
+                                    Source="{Binding selectedRecipe.imageURL}" />
+                            </Border>
+
+                            <inputLayout:SfTextInputLayout
+                                Margin="2,2,4,0"
+                                HeightRequest="200"
+                                Hint="Description"
+                                InputViewPadding="14,14,0,10"
+                                ShowHelperText="False">
+                                <Editor
+                                    Margin="5,5"
+                                    FlexLayout.Shrink=".2"
+                                    FontSize="Micro"
+                                    Text="{Binding selectedRecipe.description}"
+                                    VerticalOptions="Start"
+                                    VerticalTextAlignment="Start" />
+                            </inputLayout:SfTextInputLayout>
+                        </FlexLayout>
+
+                        <FlexLayout Wrap="Wrap">
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                HeightRequest="65"
+                                Hint="Author"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                VerticalOptions="Start"
+                                WidthRequest="200">
+                                <Entry
+                                    FontSize="Micro"
+                                    Text="{Binding selectedRecipe.author}"
+                                    VerticalOptions="Start" />
+                            </inputLayout:SfTextInputLayout>
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                Hint="Course"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                ShowLeadingView="False"
+                                ShowTrailingView="False"
+                                WidthRequest="200">
+                                <editors:SfComboBox
+                                    x:Name="comboBoxCourse"
+                                    DisplayMemberPath="Name"
+                                    EnableAutoSize="True"
+                                    FontSize="Micro"
+                                    IsEditable="true"
+                                    ItemsSource="{Binding Courses}"
+                                    Text="{Binding selectedRecipe.course}"
+                                    TextMemberPath="Name" />
+                            </inputLayout:SfTextInputLayout>
+
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                HelperText="Select Cusine"
+                                Hint="Cusine"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                WidthRequest="200">
+                                <editors:SfComboBox
+                                    x:Name="comboBoxCusine"
+                                    DisplayMemberPath="Name"
+                                    EnableAutoSize="True"
+                                    FontSize="Micro"
+                                    IsEditable="true"
+                                    ItemsSource="{Binding Cuisines}"
+                                    Text="{Binding selectedRecipe.cuisine}"
+                                    TextMemberPath="Name" />
+                            </inputLayout:SfTextInputLayout>
+                        </FlexLayout>
+                        <FlexLayout VerticalOptions="Start" Wrap="Wrap">
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                HeightRequest="80"
+                                Hint="Servings"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                WidthRequest="150">
+                                <Entry
+                                    FontSize="Micro"
+                                    Keyboard="Numeric"
+                                    Text="{Binding selectedRecipe.servings}" />
+                            </inputLayout:SfTextInputLayout>
+
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                HeightRequest="80"
+                                Hint="Cook Time"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                WidthRequest="150">
+                                <Entry
+                                    FontSize="Micro"
+                                    Keyboard="Numeric"
+                                    Text="{Binding selectedRecipe.cookTime}" />
+                            </inputLayout:SfTextInputLayout>
+
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                HeightRequest="80"
+                                Hint="Prep Time"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                WidthRequest="150">
+                                <Entry
+                                    FontSize="Micro"
+                                    Keyboard="Numeric"
+                                    Text="{Binding selectedRecipe.prepTime}" />
+                            </inputLayout:SfTextInputLayout>
+
+                            <inputLayout:SfTextInputLayout
+                                Padding="0"
+                                HeightRequest="80"
+                                Hint="Total Time"
+                                InputViewPadding="5,2,0,2"
+                                ShowHelperText="False"
+                                WidthRequest="150">
+                                <Entry
+                                    FontSize="Micro"
+                                    Keyboard="Numeric"
+                                    Text="{Binding selectedRecipe.totalTime}" />
+                            </inputLayout:SfTextInputLayout>
+
+                        </FlexLayout>
 
 
-                <inputLayout:SfTextInputLayout HeightRequest="200" Hint="Description">
-                    <Editor
-                        FontSize="Micro"
-                        Text="{Binding selectedRecipe.description}"
-                        VerticalOptions="Start"
-                        VerticalTextAlignment="Start" />
-                </inputLayout:SfTextInputLayout>
-            </FlexLayout>
-            <FlexLayout>
-                <inputLayout:SfTextInputLayout
-                    BackgroundColor="Orange"
-                    HeightRequest="60"
-                    Hint="Course">
-                    <editors:SfComboBox
-                        x:Name="comboBoxCourse"
-                        DisplayMemberPath="Name"
-                        EnableAutoSize="True"
-                        FontSize="Micro"
-                        IsEditable="true"
-                        ItemsSource="{Binding Courses}"
-                        Text="{Binding selectedRecipe.course}"
-                        TextMemberPath="Name" />
-                </inputLayout:SfTextInputLayout>
-
-                <inputLayout:SfTextInputLayout
-                    Grid.Row="3"
-                    Padding="0"
-                    Hint="Cusine">
-                    <editors:SfComboBox
-                        x:Name="comboBoxCusine"
-                        DisplayMemberPath="Name"
-                        EnableAutoSize="True"
-                        FontSize="Micro"
-                        IsEditable="true"
-                        ItemsSource="{Binding Cuisines}"
-                        Text="{Binding selectedRecipe.cuisine}"
-                        TextMemberPath="Name" />
-                </inputLayout:SfTextInputLayout>
-            </FlexLayout>
+                    </VerticalStackLayout>
 
 
+                </FlexLayout>
 
 
+                <FlexLayout Direction="Row" Wrap="Wrap">
+                    <CollectionView
+                        ItemsLayout="VerticalList"
+                        ItemsSource="{Binding selectedRecipe.ingredientGroups}"
+                        MaximumWidthRequest="600"
+                        WidthRequest="400">
+                        <CollectionView.Header>
 
-        </FlexLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                HorizontalOptions="Center"
+                                Text="Ingredients" />
+
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:IngredientGroup">
+                                <StackLayout Orientation="Vertical">
+                                    <Label FontAttributes="Bold" Text="{Binding name}" />
+                                    <CollectionView ItemsSource="{Binding ingredients}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Ingredient">
+                                                <Grid ColumnDefinitions="*,40,150">
+                                                    <Entry Grid.Column="0" Text="{Binding name}" />
+                                                    <Entry Grid.Column="1" Text="{Binding quantity}" />
+                                                    <editors:SfComboBox Grid.Column="2" Text="{Binding unit}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <CollectionView
+                        Header="Instructions"
+                        ItemsLayout="VerticalList"
+                        ItemsSource="{Binding selectedRecipe.instructionGroups}"
+                        MaximumWidthRequest="600"
+                        WidthRequest="400">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:InstructionGroup">
+                                <StackLayout Orientation="Vertical">
+                                    <Label FontAttributes="Bold" Text="{Binding name}" />
+                                    <CollectionView ItemsSource="{Binding instructions}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Instruction">
+                                                <Grid ColumnDefinitions="20,*">
+                                                    <Entry Grid.Column="0" Text="{Binding step}" />
+                                                    <Editor Grid.Column="1" Text="{Binding description}" />
+
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

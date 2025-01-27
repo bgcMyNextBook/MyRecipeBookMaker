@@ -13,8 +13,9 @@ namespace MyRecipeBookMaker
         public Recipe? selectedRecipe { get; set; }
         public ObservableCollection<DropDownListObject> Cuisines { get; set; } = new();
         public ObservableCollection<DropDownListObject> Courses { get; set; } = new();
-
-
+        public ObservableCollection<DropDownListObject> Units { get; set; } = new();
+        public ObservableCollection<InstructionGroup> instructionGroups { get; set; } = new();
+        public ObservableCollection<IngredientGroup> ingredientGroups { get; set; } = new();
 
         public RecipeDetailsViewModel()
         {
@@ -25,8 +26,10 @@ namespace MyRecipeBookMaker
         {
             Cuisines = await LoadList("cuisine.json");
             Courses = await LoadList("course.json");
+            Units = await LoadList("units.json");
             OnPropertyChanged(nameof(Cuisines));
             OnPropertyChanged(nameof(Courses));
+            OnPropertyChanged(nameof(Units));
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -34,6 +37,8 @@ namespace MyRecipeBookMaker
             if (query.ContainsKey("recipe"))
             {
                 selectedRecipe = query["recipe"] as Recipe;
+                instructionGroups = selectedRecipe.instructionGroups;
+                ingredientGroups = selectedRecipe.ingredientGroups;
                 OnPropertyChanged(nameof(selectedRecipe));
             }
 
@@ -92,38 +97,7 @@ namespace MyRecipeBookMaker
         */
     }
 
-    public class Product
-    {
-        private List<string>? previewImages;
-        public string? Name { get; set; }
-        public string? Summary { get; set; }
-        public decimal ActualPrice { get; set; }
-        public int DiscountPercent { get; set; }
-        public string? Description { get; set; }
-        public List<string>? PreviewImages
-        {
-            get
-            {
-                if (this.previewImages != null)
-                {
-                    for (var i = 0; i < this.previewImages.Count; i++)
-                    {
-                        this.previewImages[i] = this.previewImages[i].Contains(App.ImageServerPath) ? this.previewImages[i] : App.ImageServerPath + this.previewImages[i];
-                    }
-                }
 
-                return this.previewImages;
-            }
-
-            set
-            {
-                this.previewImages = value;
-            }
-        }
-
-        public List<string>? SizeVariants { get; set; }
-        public List<Review>? DetailPageReviews { get; set; }
-    }
 
     public class Review
     {
