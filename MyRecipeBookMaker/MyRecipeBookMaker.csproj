@@ -59,11 +59,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Splash\dreamstimemaximum_128742680.jpg" />
+	  <None Remove="Resources\Splash\dreamstimemaximum_128742680.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\dreamstimemaximum_128742680.jpg" />
+	  <MauiSplashScreen Include="Resources\Splash\dreamstimemaximum_128742680.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

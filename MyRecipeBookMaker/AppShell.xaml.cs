@@ -21,7 +21,7 @@ namespace MyRecipeBookMaker
             base.OnNavigated(args);
 
 
-            pageTitle.Text = Current.CurrentPage.Title;
+            //pageTitle.Text = Current.CurrentPage.Title;
         }
     }
 }

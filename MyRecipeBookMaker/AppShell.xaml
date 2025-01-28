@@ -9,6 +9,14 @@
     Title="MyRecipeBookMaker">
 
     <Shell.TitleView>
+        <Label
+            x:Name="pageTitle"
+            FontSize="Large"
+            Margin="10,0"
+            HorizontalOptions="Center"
+            Text="Recipes Book Maker"
+            VerticalOptions="Center" />
+        <!--
         <Grid ColumnDefinitions="*,40,40">
             <Label
                 x:Name="pageTitle"
@@ -46,7 +54,9 @@
             </ImageButton>
 
         </Grid>
+        -->
     </Shell.TitleView>
+
     <ShellContent
         Title="Cards"
         ContentTemplate="{DataTemplate views:RecipeCollection}"

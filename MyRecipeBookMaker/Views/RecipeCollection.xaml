@@ -13,108 +13,99 @@
         <local:RecipeCollectionViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
+        <ScrollView>
+            <FlexLayout
+                Padding="8"
+                AlignContent="Start"
+                AlignItems="Start"
+                BindableLayout.ItemsSource="{Binding ListOfRecipes}"
+                Direction="Row"
+                JustifyContent="Start"
+                Wrap="Wrap">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            HeightRequest="120"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 4,4,4,4"
+                            StrokeThickness="0"
+                            WidthRequest="400"
+                            MaximumWidthRequest="600">
+                            <!--  View of each card item  -->
+                            <Border
+                                Margin="10"
+                                Padding="0"
+                                BackgroundColor="{AppThemeBinding Light={DynamicResource BackgroundColorLight},
+                                                                  Dark={DynamicResource BackgroundColorDark}}"
+                                HorizontalOptions="Fill"
+                                Stroke="{AppThemeBinding Light={DynamicResource BackgroundColorLight},
+                                                         Dark={DynamicResource BackgroundColorDark}}"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1"
+                                VerticalOptions="Fill">
 
-        <Grid RowDefinitions="*" WidthRequest="{OnPlatform WinUI=650, MacCatalyst=650}">
+                                <Grid
+                                    ColumnDefinitions="120, *"
+                                    ColumnSpacing="0"
+                                    RowSpacing="0">
 
-            <!--  Title View  -->
-
-            <Grid Grid.Row="1">
-
-                <listView:SfListView
-                    x:Name="navigationList"
-                    Padding="15,0,10,0"
-                    AutoFitMode="Height"
-                    ItemsSource="{Binding ListOfRecipes}"
-                    ScrollBarVisibility="Never"
-                    SelectionBackground="Transparent"
-                    VerticalOptions="Fill">
-
-                    <listView:SfListView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Recipe">
-                            <ViewCell>
-                                <!--  View of each card item  -->
-                                <Border
-                                    Margin="10"
-                                    Padding="0"
-                                    BackgroundColor="{AppThemeBinding Light={DynamicResource BackgroundColorLight},
-                                                                      Dark={DynamicResource BackgroundColorDark}}"
-                                    HorizontalOptions="Fill"
-                                    Stroke="{AppThemeBinding Light={DynamicResource BackgroundColorLight},
-                                                             Dark={DynamicResource BackgroundColorDark}}"
-                                    StrokeShape="RoundRectangle 10"
-                                    StrokeThickness="1"
-                                    VerticalOptions="Fill">
-
-                                    <Border
+                                    <!--  Image to display the Item  -->
+                                    <Image
+                                        Aspect="AspectFill"
+                                        BackgroundColor="{DynamicResource Gray-200}"
                                         HeightRequest="120"
-                                        Stroke="Transparent"
-                                        StrokeShape="RoundRectangle 4,4,4,4"
-                                        StrokeThickness="0">
-                                        <Grid
-                                            ColumnDefinitions="120, *"
-                                            ColumnSpacing="0"
-                                            RowSpacing="0">
+                                        WidthRequest="120">
+                                        <Image.Source>
+                                            <UriImageSource
+                                                CacheValidity="14"
+                                                CachingEnabled="true"
+                                                Uri="{Binding imageURL}" />
+                                        </Image.Source>
+                                    </Image>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Margin="4"
+                                        HorizontalOptions="Fill"
+                                        Spacing="0"
+                                        VerticalOptions="Start">
 
-                                            <!--  Image to display the Item  -->
-                                            <Image
-                                                Aspect="AspectFill"
-                                                BackgroundColor="{DynamicResource Gray-200}"
-                                                HeightRequest="120"
-                                                WidthRequest="120">
-                                                <Image.Source>
-                                                    <UriImageSource
-                                                        CacheValidity="14"
-                                                        CachingEnabled="true"
-                                                        Uri="{Binding imageURL}" />
-                                                </Image.Source>
-                                            </Image>
-                                            <StackLayout
-                                                Grid.Column="1"
-                                                Padding="16"
-                                                HorizontalOptions="Fill"
-                                                Spacing="0"
-                                                VerticalOptions="Fill">
+                                        <!--  Name of the item  -->
+                                        <Label
+                                            FontFamily="Roboto-Medium"
+                                            HorizontalOptions="Start"
+                                            HorizontalTextAlignment="Start"
+                                            Text="{Binding name}"
+                                            TextColor="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight},
+                                                                        Dark={DynamicResource PrimaryTextColorDark}}"
+                                            VerticalOptions="Start" />
 
-                                                <!--  Name of the item  -->
-                                                <Label
-                                                    FontFamily="Roboto-Medium"
-                                                    HorizontalOptions="Start"
-                                                    HorizontalTextAlignment="Start"
-                                                    Text="{Binding name}"
-                                                    TextColor="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight},
-                                                                                Dark={DynamicResource PrimaryTextColorDark}}" />
+                                        <!--  Description about the item  -->
+                                        <Label
+                                            Margin="0,4,10,8"
+                                            FontFamily="Roboto-Regular"
+                                            FontSize="12"
+                                            HorizontalOptions="Start"
+                                            HorizontalTextAlignment="Start"
+                                            LineBreakMode="TailTruncation"
+                                            LineHeight="{OnPlatform Android=1.25,
+                                                                    Default=-1}"
+                                            MaxLines="5"
+                                            Text="{Binding description}"
+                                            TextColor="{AppThemeBinding Light={DynamicResource SecondaryTextColorLight},
+                                                                        Dark={DynamicResource SecondaryTextColorDark}}" />
 
-                                                <!--  Description about the item  -->
-                                                <Label
-                                                    Margin="0,4,10,8"
-                                                    FontFamily="Roboto-Regular"
-                                                    FontSize="12"
-                                                    HorizontalOptions="Start"
-                                                    HorizontalTextAlignment="Start"
-                                                    LineBreakMode="TailTruncation"
-                                                    LineHeight="{OnPlatform Android=1.25,
-                                                                            Default=-1}"
-                                                    MaxLines="5"
-                                                    Text="{Binding description}"
-                                                    TextColor="{AppThemeBinding Light={DynamicResource SecondaryTextColorLight},
-                                                                                Dark={DynamicResource SecondaryTextColorDark}}" />
+                                        <!--  Average rating from the overall rating  -->
 
-                                                <!--  Average rating from the overall rating  -->
-                                             
-                                            </StackLayout>
-                                        </Grid>
-                                    </Border>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=ItemTappedCommand}" CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-                                </Border>
-                            </ViewCell>
-                        </DataTemplate>
-                    </listView:SfListView.ItemTemplate>
-                </listView:SfListView>
-            </Grid>
-
-        </Grid>
-
+                                    </StackLayout>
+                                </Grid>
+                            </Border>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=ItemTappedCommand}" CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
