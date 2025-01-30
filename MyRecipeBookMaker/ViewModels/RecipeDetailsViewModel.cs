@@ -10,13 +10,13 @@ namespace MyRecipeBookMaker
     public partial class RecipeDetailsViewModel : ObservableObject, IQueryAttributable
     {
 
-        public Recipe? selectedRecipe { get; set; }
+        [ObservableProperty] Recipe? selectedRecipe = new();
         public ObservableCollection<DropDownListObject> Cuisines { get; set; } = new();
         public ObservableCollection<DropDownListObject> Courses { get; set; } = new();
         public ObservableCollection<DropDownListObject> Units { get; set; } = new();
         public ObservableCollection<InstructionGroup> instructionGroups { get; set; } = new();
         public ObservableCollection<IngredientGroup> ingredientGroups { get; set; } = new();
-
+        [ObservableProperty] public bool? isImageURL;//= (string.IsNullOrWhiteSpace(selectedRecipe.imageBASE64));
         public RecipeDetailsViewModel()
         {
             LoadListsAsync();
@@ -39,6 +39,7 @@ namespace MyRecipeBookMaker
                 selectedRecipe = query["recipe"] as Recipe;
                 instructionGroups = selectedRecipe.instructionGroups;
                 ingredientGroups = selectedRecipe.ingredientGroups;
+                isImageURL = (string.IsNullOrWhiteSpace(selectedRecipe.imageBASE64));
                 OnPropertyChanged(nameof(selectedRecipe));
             }
 
@@ -64,7 +65,7 @@ namespace MyRecipeBookMaker
                         }
                     }
 
-      
+
                 }
                 return list;
             }
@@ -74,8 +75,32 @@ namespace MyRecipeBookMaker
                 return list;
             }
         }
+        [RelayCommand]
+        public async Task ChangePicture()
+        {
 
+            await TakePhoto();
 
+        }
+
+        public async Task TakePhoto()
+        {
+            if (MediaPicker.Default.IsCaptureSupported)
+            {
+                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+
+                if (photo != null)
+                {
+                    // save the file into local storage
+                    string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
+                    using Stream sourceStream = await photo.OpenReadAsync();
+                    using FileStream localFileStream = File.OpenWrite(localFilePath);
+
+                    await sourceStream.CopyToAsync(localFileStream);
+                }
+            }
+        }
         private void SaveCuisines()
         {
             var json = JsonSerializer.Serialize(Cuisines.ToList());

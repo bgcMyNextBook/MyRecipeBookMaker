@@ -13,7 +13,9 @@
         <local:RecipeCollectionViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ScrollView>
+        <Grid RowDefinitions="40,*">
+              
+        <ScrollView Grid.Row="1">
             <FlexLayout
                 Padding="8"
                 AlignContent="Start"
@@ -107,5 +109,6 @@
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
         </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

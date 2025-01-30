@@ -61,5 +61,7 @@ namespace MyRecipeBookMaker.Models
         public ObservableCollection<InstructionGroup> instructionGroups { get; set; }
         public ObservableCollection<string> tags { get; set; }
         public string notes { get; set; }
+        
+    
     }
 }
