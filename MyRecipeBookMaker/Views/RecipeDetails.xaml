@@ -5,16 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
     xmlns:common="clr-namespace:MyRecipeBookMaker.Common"
-    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
     xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
     xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
-    xmlns:rotator="clr-namespace:Syncfusion.Maui.Rotator;assembly=Syncfusion.Maui.Rotator"
+    xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
     xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
     xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:treeview="clr-namespace:Syncfusion.Maui.TreeView;assembly=Syncfusion.Maui.TreeView"
     Title="Recipe Detail"
     x:DataType="local:RecipeDetailsViewModel">
     <ContentPage.BindingContext>
@@ -29,7 +27,7 @@
                         Margin="3,0,8,0"
                         HeightRequest="90"
                         Hint="Name">
-                        <Entry FontSize="Small" Text="{Binding SelectedRecipe.name}" />
+                        <Entry FontSize="Small" Text="{Binding SelectedRecipe.Name}" />
                     </inputLayout:SfTextInputLayout>
 
                     <VerticalStackLayout>
@@ -44,16 +42,33 @@
                                 WidthRequest="200">
 
                                 <Grid>
+                                    <radialMenu:SfRadialMenu IsVisible="{Binding ShowChangeImageMenu}">
+                                        <radialMenu:SfRadialMenu.Items>
+                                            <radialMenu:SfRadialMenuItem
+                                                Command="{Binding ChangePhotoByAlbumCommand}"
+                                                FontSize="12"
+                                                Text="PDF" />
+                                            <radialMenu:SfRadialMenuItem
+                                                Command="{Binding ChangePhotoByCameraCommand}"
+                                                FontSize="12"
+                                                Text="Camera" />
+                                            <radialMenu:SfRadialMenuItem
+                                                Command="{Binding ChangePhotoByAlbumCommand}"
+                                                FontSize="12"
+                                                Text="Album" />
+
+                                        </radialMenu:SfRadialMenu.Items>
+                                    </radialMenu:SfRadialMenu>
                                     <Image
                                         Grid.Row="0"
                                         Aspect="AspectFill"
-                                        Source="{Binding SelectedRecipe.imageURL}" />
+                                        Source="{Binding SelectedRecipe.ImageData}" />
                                     <ImageButton
                                         x:Name="chnagePicture"
                                         Grid.Row="0"
                                         Aspect="Center"
                                         BackgroundColor="Transparent"
-                                        Command="{Binding ChangePictureCommand}"
+                                        Command="{Binding ChangePhotoCommand}"
                                         CommandParameter="{Binding SelectedRecipe}"
                                         HorizontalOptions="Center"
                                         ZIndex="10">
@@ -81,7 +96,7 @@
                                     Margin="5,5"
                                     FlexLayout.Shrink=".2"
                                     FontSize="Micro"
-                                    Text="{Binding SelectedRecipe.description}"
+                                    Text="{Binding SelectedRecipe.Description}"
                                     VerticalOptions="Start"
                                     VerticalTextAlignment="Start" />
                             </inputLayout:SfTextInputLayout>
@@ -98,7 +113,7 @@
                                 WidthRequest="200">
                                 <Entry
                                     FontSize="Micro"
-                                    Text="{Binding SelectedRecipe.author}"
+                                    Text="{Binding SelectedRecipe.Author}"
                                     VerticalOptions="Start" />
                             </inputLayout:SfTextInputLayout>
                             <inputLayout:SfTextInputLayout
@@ -117,7 +132,7 @@
                                     FontSize="Micro"
                                     IsEditable="true"
                                     ItemsSource="{Binding Courses}"
-                                    Text="{Binding SelectedRecipe.course}"
+                                    Text="{Binding SelectedRecipe.Course}"
                                     TextMemberPath="Name" />
                             </inputLayout:SfTextInputLayout>
 
@@ -135,7 +150,7 @@
                                     FontSize="Micro"
                                     IsEditable="true"
                                     ItemsSource="{Binding Cuisines}"
-                                    Text="{Binding SelectedRecipe.cuisine}"
+                                    Text="{Binding SelectedRecipe.Cuisine}"
                                     TextMemberPath="Name" />
                             </inputLayout:SfTextInputLayout>
                         </FlexLayout>
@@ -150,7 +165,7 @@
                                 <Entry
                                     FontSize="Micro"
                                     Keyboard="Numeric"
-                                    Text="{Binding SelectedRecipe.servings}" />
+                                    Text="{Binding SelectedRecipe.Servings}" />
                             </inputLayout:SfTextInputLayout>
 
                             <inputLayout:SfTextInputLayout
@@ -163,7 +178,7 @@
                                 <Entry
                                     FontSize="Micro"
                                     Keyboard="Numeric"
-                                    Text="{Binding SelectedRecipe.cookTime}" />
+                                    Text="{Binding SelectedRecipe.CookTime}" />
                             </inputLayout:SfTextInputLayout>
 
                             <inputLayout:SfTextInputLayout
@@ -176,7 +191,7 @@
                                 <Entry
                                     FontSize="Micro"
                                     Keyboard="Numeric"
-                                    Text="{Binding SelectedRecipe.prepTime}" />
+                                    Text="{Binding SelectedRecipe.PrepTime}" />
                             </inputLayout:SfTextInputLayout>
 
                             <inputLayout:SfTextInputLayout
@@ -189,7 +204,7 @@
                                 <Entry
                                     FontSize="Micro"
                                     Keyboard="Numeric"
-                                    Text="{Binding SelectedRecipe.totalTime}" />
+                                    Text="{Binding SelectedRecipe.TotalTime}" />
                             </inputLayout:SfTextInputLayout>
 
                         </FlexLayout>
@@ -206,7 +221,7 @@
                         <CollectionView
                             Background="#e7dfec"
                             ItemsLayout="VerticalList"
-                            ItemsSource="{Binding SelectedRecipe.ingredientGroups}"
+                            ItemsSource="{Binding SelectedRecipe.IngredientGroups}"
                             MaximumWidthRequest="600"
                             WidthRequest="400">
                             <CollectionView.Header>
@@ -224,7 +239,7 @@
                                         <Label
                                             FontAttributes="Bold"
                                             FontSize="Small"
-                                            Text="{Binding name}" />
+                                            Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
                                             x:Name="ingredientsGrid"
                                             AllowEditing="True"
@@ -237,14 +252,14 @@
                                                 <datagrid:DataGridTextColumn
                                                     ColumnWidthMode="Auto"
                                                     HeaderText="Ingredient"
-                                                    MappingName="name"
+                                                    MappingName="Name"
                                                     MaximumWidth="200" />
-                                                <datagrid:DataGridNumericColumn HeaderText="Qty" MappingName="qty" />
+                                                <datagrid:DataGridNumericColumn HeaderText="Qty" MappingName="Quantity" />
 
                                                 <datagrid:DataGridComboBoxColumn
                                                     HeaderText="Unit"
                                                     ItemsSource="{Binding Source={x:Reference Name=RecipeDetails}, Path=BindingContext.Units}"
-                                                    MappingName="unit" />
+                                                    MappingName="Unit" />
 
                                             </datagrid:SfDataGrid.Columns>
                                         </datagrid:SfDataGrid>
@@ -260,7 +275,7 @@
                             x:Name="instructionCollectionView"
                             Background="#e7dfec"
                             ItemsLayout="VerticalList"
-                            ItemsSource="{Binding SelectedRecipe.instructionGroups}"
+                            ItemsSource="{Binding SelectedRecipe.InstructionGroups}"
                             MaximumWidthRequest="600"
                             WidthRequest="400">
                             <CollectionView.Header>
@@ -280,12 +295,12 @@
                                             Margin="6,4,0,4"
                                             FontAttributes="Bold"
                                             FontSize="Small"
-                                            Text="{Binding name}" />
+                                            Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
                                             x:Name="instructionsGrid"
                                             AllowEditing="True"
                                             AutoGenerateColumnsMode="None"
-                                            ItemsSource="{Binding instructions}"
+                                            ItemsSource="{Binding Instructions}"
                                             NavigationMode="Cell"
                                             QueryRowHeight="instructionsGrid_SizeChanged"
                                             SelectionMode="Single">
@@ -295,11 +310,12 @@
                                                     CellTextAlignment="Start"
                                                     Format="0"
                                                     HeaderText="Step"
-                                                    MappingName="step" />
+                                                    MappingName="Step" />
                                                 <datagrid:DataGridTextColumn
+                                                    CellTextAlignment="Start"
                                                     ColumnWidthMode="Auto"
                                                     HeaderText="Instruction"
-                                                    MappingName="description"
+                                                    MappingName="Description"
                                                     MaximumWidth="350" />
                                             </datagrid:SfDataGrid.Columns>
                                         </datagrid:SfDataGrid>

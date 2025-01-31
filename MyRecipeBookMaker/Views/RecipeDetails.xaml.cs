@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Collections.Generic;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Layouts;
 
@@ -55,16 +57,17 @@ namespace MyRecipeBookMaker.Views
                 // Calculate the total height of all rows
                 var dataGrid = sender as SfDataGrid;
                 double totalHeight = 0;
-                for (int i = 0; i < dataGrid.View.Records.Count; i++)
+                int i;
+                for ( i = 0; i < dataGrid.View.Records.Count; i++)
                 {
 
                     totalHeight += (dataGrid.GetRowHeight(i));
-                    totalHeight += 7;
+                    totalHeight += 25;
                 }
-
+                Debug.WriteLine($"Total Height: { totalHeight} i: {i}" );
                 // Set the DataGrid height with additional padding based on the font size
                 //double padding = dataGrid.FontSize * 1.5; // Adjust the multiplier as needed
-                dataGrid.HeightRequest = totalHeight + dataGrid.HeaderRowHeight +60;
+                dataGrid.HeightRequest = totalHeight + dataGrid.HeaderRowHeight;// +60;
             }
 
 
@@ -90,7 +93,7 @@ namespace MyRecipeBookMaker.Views
 
                 // Set the DataGrid height with additional padding based on the font size
                 //double padding = dataGrid.FontSize * 1.5; // Adjust the multiplier as needed
-                dataGrid.HeightRequest = totalHeight + dataGrid.HeaderRowHeight + 20;
+                dataGrid.HeightRequest = totalHeight + dataGrid.HeaderRowHeight + 60;
             }
         }
     }

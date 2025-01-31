@@ -4,46 +4,110 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using MyRecipeBookMaker.Common;
+using System.Diagnostics;
+
+using System.ComponentModel;
+using System.Reflection;
+
 
 namespace MyRecipeBookMaker
 {
     public partial class RecipeDetailsViewModel : ObservableObject, IQueryAttributable
     {
 
-        [ObservableProperty] Recipe? selectedRecipe = new();
-        public ObservableCollection<DropDownListObject> Cuisines { get; set; } = new();
-        public ObservableCollection<DropDownListObject> Courses { get; set; } = new();
-        public ObservableCollection<DropDownListObject> Units { get; set; } = new();
-        public ObservableCollection<InstructionGroup> instructionGroups { get; set; } = new();
-        public ObservableCollection<IngredientGroup> ingredientGroups { get; set; } = new();
-        [ObservableProperty] public bool? isImageURL;//= (string.IsNullOrWhiteSpace(selectedRecipe.imageBASE64));
+
+
+
+        [ObservableProperty] bool showChangeImageMenu = false;
+
+
+        [ObservableProperty] public ObservableCollection<DropDownListObject>? cuisines;
+        [ObservableProperty] public ObservableCollection<DropDownListObject>? courses;
+        [ObservableProperty] public ObservableCollection<DropDownListObject>? units;
+        //[ObservableProperty]  public ObservableCollection<InstructionGroup> instructionGroups { get; set; } = new();
+        //public ObservableCollection<IngredientGroup> ingredientGroups { get; set; } = new();
+
         public RecipeDetailsViewModel()
         {
             LoadListsAsync();
+
+            // PropertyChanged += RecipeDetailsViewModel_PropertyChanged;
+            // Subscribe to all property changes with Debug.WriteLine
+            this.SubscribeRecursive((propertyName, sender, args) =>
+            {
+                // Handle property changes here
+                Debug.WriteLine($"Property changed: {propertyName}, Value: {args.PropertyName}");
+            });
         }
+        [ObservableProperty] public Recipe? selectedRecipe;
+
+
+
+
+        private static string GetFullPath(object obj)
+        {
+            var fullPath = new List<string>();
+            var current = obj;
+
+            while (current != null)
+            {
+                if (current.GetType().GetProperty("name")?.GetValue(current) is string name)
+                    fullPath.Add(name);
+                current = current.GetType().GetProperty("parent")?.GetValue(current);
+            }
+
+            return string.Join(".", fullPath.Reverse<string>());
+        }
+
+
+   
+
+    
+
+
+
 
         private async void LoadListsAsync()
         {
             Cuisines = await LoadList("cuisine.json");
             Courses = await LoadList("course.json");
             Units = await LoadList("units.json");
-            OnPropertyChanged(nameof(Cuisines));
-            OnPropertyChanged(nameof(Courses));
-            OnPropertyChanged(nameof(Units));
+            //PropertyChanged += ViewModelPropertyChanged;
+            //OnPropertyChanged(nameof(Cuisines));
+            //OnPropertyChanged(nameof(Courses));
+            //OnPropertyChanged(nameof(Units));
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("recipe"))
             {
-                selectedRecipe = query["recipe"] as Recipe;
-                instructionGroups = selectedRecipe.instructionGroups;
-                ingredientGroups = selectedRecipe.ingredientGroups;
-                isImageURL = (string.IsNullOrWhiteSpace(selectedRecipe.imageBASE64));
-                OnPropertyChanged(nameof(selectedRecipe));
+                SelectedRecipe = query["recipe"] as Recipe;
+                //instructionGroups = SelectedRecipe.InstructionGroups;
+                //ingredientGroups = SelectedRecipe.IngredientGroups;
+
+                try
+                {
+                    // Delay the subscription to PropertyChanged event until SelectedRecipe is fully initialized
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        SelectedRecipe?.SubscribeRecursive((propertyName, sender, args) =>
+                        {
+                            //Debug.WriteLine($"Property changed: {propertyName}");
+
+                            // Optional: Show full path including parent object
+                            var fullPath = GetFullPath(sender);
+                            Debug.WriteLine($"Full path: {fullPath}.{propertyName}");
+                        });
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions that occur during execution
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
             }
-
-
         }
 
         private async Task<ObservableCollection<DropDownListObject>> LoadList(string listName)
@@ -75,19 +139,23 @@ namespace MyRecipeBookMaker
                 return list;
             }
         }
-        [RelayCommand]
-        public async Task ChangePicture()
-        {
+        
 
-            await TakePhoto();
+
+        #region Commands
+        [RelayCommand]
+        public Task ChangePhoto()
+        {
+            ShowChangeImageMenu = !ShowChangeImageMenu;
+            return Task.CompletedTask;
 
         }
-
-        public async Task TakePhoto()
+        [RelayCommand]
+        public async Task ChangePhotoByAlbum(object recipe)
         {
             if (MediaPicker.Default.IsCaptureSupported)
             {
-                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+                FileResult? photo = await MediaPicker.Default.PickPhotoAsync();
 
                 if (photo != null)
                 {
@@ -95,12 +163,47 @@ namespace MyRecipeBookMaker
                     string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 
                     using Stream sourceStream = await photo.OpenReadAsync();
-                    using FileStream localFileStream = File.OpenWrite(localFilePath);
 
-                    await sourceStream.CopyToAsync(localFileStream);
+                    // Convert to base64
+                    sourceStream.Position = 0;
+                    using MemoryStream memoryStream = new();
+                    await sourceStream.CopyToAsync(memoryStream);
+                    byte[] photoBytes = memoryStream.ToArray();
+                    SelectedRecipe.ImageBASE64 = Convert.ToBase64String(photoBytes);
+
+                    OnPropertyChanged(nameof(SelectedRecipe));
                 }
             }
         }
+
+        [RelayCommand]
+        public async Task ChangePhotoByCamera()
+        {
+            if (MediaPicker.Default.IsCaptureSupported)
+            {
+
+                FileResult? photo = await MediaPicker.Default.CapturePhotoAsync();
+
+                if (photo != null)
+                {
+                    // save the file into local storage
+                    string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
+                    using Stream sourceStream = await photo.OpenReadAsync();
+
+                    // Convert to base64
+                    sourceStream.Position = 0;
+                    using MemoryStream memoryStream = new();
+                    await sourceStream.CopyToAsync(memoryStream);
+                    byte[] photoBytes = memoryStream.ToArray();
+                    SelectedRecipe.ImageBASE64 = Convert.ToBase64String(photoBytes);
+
+                    OnPropertyChanged(nameof(SelectedRecipe));
+                }
+            }
+        }
+        #endregion
+
         private void SaveCuisines()
         {
             var json = JsonSerializer.Serialize(Cuisines.ToList());
@@ -108,6 +211,7 @@ namespace MyRecipeBookMaker
 
             File.WriteAllText(appDataFilePath, json);
         }
+
 
         /*
         [RelayCommand]

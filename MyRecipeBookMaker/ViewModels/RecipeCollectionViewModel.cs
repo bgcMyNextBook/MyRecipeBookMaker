@@ -10,7 +10,8 @@ namespace MyRecipeBookMaker
 {
     public partial class RecipeCollectionViewModel : ObservableObject
     {
-        public ObservableCollection<Recipe>? ListOfRecipes { get; set; }
+        [ObservableProperty]
+        public ObservableCollection<Recipe>? listOfRecipes;
 
         public RecipeCollectionViewModel()
         {
@@ -42,11 +43,22 @@ namespace MyRecipeBookMaker
                 }
             }
         }
-
-        [RelayCommand]
-        public async Task ItemTapped(Recipe recipe)
+        #region Commands
+        [RelayCommand] public async Task AddNewRecipePDF()
         {
-            Debug.WriteLine($"Item tapped: {recipe.name}");
+            await Shell.Current.GoToAsync("RecipeDetails?recipe=new");
+        }
+        [RelayCommand] public async Task AddNewRecipeCamera()
+        {
+            await Shell.Current.GoToAsync("RecipeDetails?recipe=new");
+        }
+        [RelayCommand] public async Task AddNewRecipeAlbum()
+        {
+            await Shell.Current.GoToAsync("RecipeDetails?recipe=new");
+        }
+        [RelayCommand] public async Task ItemTapped(Recipe recipe)
+        {
+            Debug.WriteLine($"Item tapped: {recipe.Name}");
             // Navigate to RecipeDetails page with the selected recipe as a query parameter
             var navigationParameter = new Dictionary<string, object>
             {
@@ -54,6 +66,7 @@ namespace MyRecipeBookMaker
             };
             await Shell.Current.GoToAsync("RecipeDetails", navigationParameter);
         }
+        #endregion
     }
 
 }

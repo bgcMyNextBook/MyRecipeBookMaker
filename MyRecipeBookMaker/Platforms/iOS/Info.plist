@@ -37,5 +37,9 @@
 		<string>This app needs access to the photo gallery for picking photos and videos.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>This app needs access to photos gallery for picking photos and videos.</string>
+		<key>NSSpeechRecognitionUsageDescription</key>
+		<string>SpeechToText requires speech recognition usage</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>SpeechToText requires microphone usage</string>
 	</dict>
 </plist>

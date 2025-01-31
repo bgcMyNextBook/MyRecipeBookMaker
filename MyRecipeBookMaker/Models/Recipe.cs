@@ -5,63 +5,89 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
+using CommunityToolkit.Mvvm.ComponentModel;
 namespace MyRecipeBookMaker.Models
 {
 
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class Ingredient
+    public partial class Ingredient : ObservableObject
     {
-        public string name { get; set; }
-        public double? quantity { get; set; }
-        public string unit { get; set; }
+        [ObservableProperty] public string? name;
+        [ObservableProperty] public double? quantity;
+        [ObservableProperty] public string? unit;
     }
 
-    public class IngredientGroup
+    public partial class IngredientGroup : ObservableObject
     {
-        public string name { get; set; }
-        public ObservableCollection<Ingredient> ingredients { get; set; }
+        [ObservableProperty] public string? name;
+        [ObservableProperty] public ObservableCollection<Ingredient>? ingredients;
     }
 
-    public class Instruction
+    public partial class Instruction : ObservableObject
     {
-        public int step { get; set; }
-        public string description { get; set; }
+        [ObservableProperty] public int? step;
+        [ObservableProperty] public string? description;
     }
 
-    public class InstructionGroup
+    public partial class InstructionGroup : ObservableObject
     {
-        public string name { get; set; }
-        public ObservableCollection<Instruction> instructions { get; set; }
+        [ObservableProperty] public string? name;
+        [ObservableProperty] public ObservableCollection<Instruction>? instructions;
     }
 
-    public class Nutrition
+    public partial class Nutrition : ObservableObject
     {
-        public string combinedListOfNutriates { get; set; }
-        public List<string> listOfNutriates { get; set; }
+        [ObservableProperty] public string? combinedListOfNutriates;
+        [ObservableProperty] public ObservableCollection<string>? listOfNutriates;
 
     }
 
-    public class Recipe
+    public partial class Recipe : ObservableObject
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string servings { get; set; }
-        public string cookTime { get; set; }
-        public string prepTime { get; set; }
-        public string totalTime { get; set; }
-        public string author { get; set; }
-        public string cuisine { get; set; }
-        public string course { get; set; }
-        public string imageBASE64 { get; set; }
-        public string imageURL { get; set; }
-        public object calories { get; set; }
-        public Nutrition nutrition { get; set; }
-        public ObservableCollection<IngredientGroup> ingredientGroups { get; set; }
-        public ObservableCollection<InstructionGroup> instructionGroups { get; set; }
-        public ObservableCollection<string> tags { get; set; }
-        public string notes { get; set; }
+        [ObservableProperty] public int id;
+        [ObservableProperty] public string? name;
+        [ObservableProperty] public string? description;
+        [ObservableProperty] public string? servings;
+        [ObservableProperty] public string? cookTime;
+        [ObservableProperty] public string? prepTime;
+        [ObservableProperty] public string? totalTime;
+        [ObservableProperty] public string? author;
+        [ObservableProperty] public string? cuisine;
+        [ObservableProperty] public string? course;
+        [ObservableProperty] public string? imageBASE64;
+        [ObservableProperty] public string? imageURL;
+        [ObservableProperty] public object? calories;
+        [ObservableProperty] public Nutrition? nutrition;
+        [ObservableProperty] public ObservableCollection<IngredientGroup>? ingredientGroups;
+        [ObservableProperty] public ObservableCollection<InstructionGroup>? instructionGroups;
+        [ObservableProperty] public ObservableCollection<string>? tags;
+        [ObservableProperty] public string? notes;
+
         
-    
+
+        public ImageSource? ImageData
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(imageBASE64))
+                {
+                    if (!string.IsNullOrWhiteSpace(imageURL))
+                    {
+                        return ImageSource.FromUri(new Uri(imageURL));
+                    }
+                    return null;
+                }
+                else
+                {
+
+                    byte[] imageBytes = Convert.FromBase64String(imageBASE64);
+                    return ImageSource.FromStream(() => new MemoryStream(imageBytes));
+
+                }
+            }
+
+        }
+
     }
 }
