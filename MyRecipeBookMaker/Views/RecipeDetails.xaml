@@ -13,6 +13,7 @@
     xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
     xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
     xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    x:Name="RecipeDetailsName"
     Title="Recipe Detail"
     x:DataType="local:RecipeDetailsViewModel">
     <ContentPage.BindingContext>
@@ -22,6 +23,7 @@
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout>
+
                 <FlexLayout Direction="Column">
                     <inputLayout:SfTextInputLayout
                         Margin="3,0,8,0"
@@ -42,7 +44,12 @@
                                 WidthRequest="200">
 
                                 <Grid>
-                                    <radialMenu:SfRadialMenu IsVisible="{Binding ShowChangeImageMenu}">
+                                    <radialMenu:SfRadialMenu
+                                        CenterButtonText="Add"
+                                        HeightRequest="180"
+                                        IsVisible="{Binding ShowChangeImageMenu}"
+                                        WidthRequest="180"
+                                        ZIndex="20">
                                         <radialMenu:SfRadialMenu.Items>
                                             <radialMenu:SfRadialMenuItem
                                                 Command="{Binding ChangePhotoByAlbumCommand}"
@@ -59,6 +66,24 @@
 
                                         </radialMenu:SfRadialMenu.Items>
                                     </radialMenu:SfRadialMenu>
+                                    <radialMenu:SfRadialMenu IsVisible="{Binding ShowChangeImageMenu}" ZIndex="20">
+                                        <radialMenu:SfRadialMenu.Items>
+                                            <radialMenu:SfRadialMenuItem
+                                                Command="{Binding ChangePhotoByAlbumCommand}"
+                                                FontSize="12"
+                                                Text="PDF" />
+                                            <radialMenu:SfRadialMenuItem
+                                                Command="{Binding ChangePhotoByCameraCommand}"
+                                                FontSize="12"
+                                                Text="Camera" />
+                                            <radialMenu:SfRadialMenuItem
+                                                Command="{Binding ChangePhotoByAlbumCommand}"
+                                                FontSize="12"
+                                                Text="Album" />
+
+                                        </radialMenu:SfRadialMenu.Items>
+                                    </radialMenu:SfRadialMenu>
+
                                     <Image
                                         Grid.Row="0"
                                         Aspect="AspectFill"
@@ -222,8 +247,8 @@
                             Background="#e7dfec"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.IngredientGroups}"
-                            MaximumWidthRequest="600"
-                            WidthRequest="400">
+                            MaximumWidthRequest="900"
+                            WidthRequest="500">
                             <CollectionView.Header>
 
                                 <Label
@@ -244,7 +269,7 @@
                                             x:Name="ingredientsGrid"
                                             AllowEditing="True"
                                             AutoGenerateColumnsMode="None"
-                                            ItemsSource="{Binding ingredients}"
+                                            ItemsSource="{Binding Ingredients}"
                                             NavigationMode="Cell"
                                             QueryRowHeight="ingredientsGrid_SizeChanged_1"
                                             SelectionMode="Single">
@@ -254,12 +279,16 @@
                                                     HeaderText="Ingredient"
                                                     MappingName="Name"
                                                     MaximumWidth="200" />
-                                                <datagrid:DataGridNumericColumn HeaderText="Qty" MappingName="Quantity" />
+                                                <datagrid:DataGridNumericColumn HeaderText="Qty" 
+                                                                                Width="100"
+                                                                                MappingName="Quantity" />
 
                                                 <datagrid:DataGridComboBoxColumn
+                                                    Width="180"
+                                                    DisplayMemberPath="DisplayDropDown.Name"
                                                     HeaderText="Unit"
-                                                    ItemsSource="{Binding Source={x:Reference Name=RecipeDetails}, Path=BindingContext.Units}"
-                                                    MappingName="Unit" />
+                                                    ItemsSource="{Binding Source={x:Reference Name=RecipeDetailsName}, Path=BindingContext.Units}"
+                                                    MappingName="DisplayDropDown.Name" />
 
                                             </datagrid:SfDataGrid.Columns>
                                         </datagrid:SfDataGrid>
@@ -276,8 +305,8 @@
                             Background="#e7dfec"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.InstructionGroups}"
-                            MaximumWidthRequest="600"
-                            WidthRequest="400">
+                            MaximumWidthRequest="900"
+                            WidthRequest="500">
                             <CollectionView.Header>
 
                                 <Label
@@ -302,6 +331,7 @@
                                             AutoGenerateColumnsMode="None"
                                             ItemsSource="{Binding Instructions}"
                                             NavigationMode="Cell"
+                                            WidthRequest="900"
                                             QueryRowHeight="instructionsGrid_SizeChanged"
                                             SelectionMode="Single">
                                             <datagrid:SfDataGrid.Columns>

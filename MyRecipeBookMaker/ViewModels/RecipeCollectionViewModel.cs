@@ -26,7 +26,17 @@ namespace MyRecipeBookMaker
             List<Recipe>? recipes = null;
             try
             {
-                recipes = JsonConvert.DeserializeObject<List<Recipe>>(jsonData);
+                var settings = new JsonSerializerSettings
+                {
+                    Error = (sender, args) =>
+                    {
+                        if (args.ErrorContext.Member.ToString() == "nutrition")
+                        {
+                            args.ErrorContext.Handled = true;
+                        }
+                    }
+                };
+                recipes = JsonConvert.DeserializeObject<List<Recipe>>(jsonData, settings);
             }
             catch (JsonException)
             {
