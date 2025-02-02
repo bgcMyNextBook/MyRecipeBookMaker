@@ -129,7 +129,7 @@ namespace MyRecipeBookMaker.Models
         partial void OnTagsChanged(ObservableCollection<string>? oldValue, ObservableCollection<string>? newValue) => PropertyHasChanged("Recipe/Tags", oldValue?.ToString(), newValue?.ToString());
         partial void OnNotesChanged(string? oldValue, string? newValue) => PropertyHasChanged("Recipe/Notes", oldValue, newValue);
 
-        static public void PropertyHasChanged(string propertyPath, string? oldValue, string? newValue)
+        static public void PropertyHasChanged(string propertyPath, object? oldValue, object? newValue)
         {
             Debug.WriteLine($"Property {propertyPath} changed from {oldValue} to {newValue}");
             // Add additional logic here if needed

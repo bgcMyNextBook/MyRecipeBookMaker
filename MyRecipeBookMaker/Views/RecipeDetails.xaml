@@ -45,66 +45,36 @@
 
                                 <Grid>
                                     <radialMenu:SfRadialMenu
-                                        CenterButtonText="Add"
-                                        HeightRequest="180"
-                                        IsVisible="{Binding ShowChangeImageMenu}"
-                                        WidthRequest="180"
+                                        CenterButtonText="Change"
+                                        HorizontalOptions="Center"
+                                        Point="70,70"
+                                        RimRadius="180"
+                                        VerticalOptions="Center"
                                         ZIndex="20">
+
                                         <radialMenu:SfRadialMenu.Items>
                                             <radialMenu:SfRadialMenuItem
                                                 Command="{Binding ChangePhotoByAlbumCommand}"
-                                                FontSize="12"
+                                                FontSize="10"
                                                 Text="PDF" />
                                             <radialMenu:SfRadialMenuItem
                                                 Command="{Binding ChangePhotoByCameraCommand}"
-                                                FontSize="12"
+                                                FontSize="10"
                                                 Text="Camera" />
                                             <radialMenu:SfRadialMenuItem
                                                 Command="{Binding ChangePhotoByAlbumCommand}"
-                                                FontSize="12"
+                                                FontSize="10"
                                                 Text="Album" />
 
                                         </radialMenu:SfRadialMenu.Items>
                                     </radialMenu:SfRadialMenu>
-                                    <radialMenu:SfRadialMenu IsVisible="{Binding ShowChangeImageMenu}" ZIndex="20">
-                                        <radialMenu:SfRadialMenu.Items>
-                                            <radialMenu:SfRadialMenuItem
-                                                Command="{Binding ChangePhotoByAlbumCommand}"
-                                                FontSize="12"
-                                                Text="PDF" />
-                                            <radialMenu:SfRadialMenuItem
-                                                Command="{Binding ChangePhotoByCameraCommand}"
-                                                FontSize="12"
-                                                Text="Camera" />
-                                            <radialMenu:SfRadialMenuItem
-                                                Command="{Binding ChangePhotoByAlbumCommand}"
-                                                FontSize="12"
-                                                Text="Album" />
 
-                                        </radialMenu:SfRadialMenu.Items>
-                                    </radialMenu:SfRadialMenu>
 
                                     <Image
                                         Grid.Row="0"
                                         Aspect="AspectFill"
                                         Source="{Binding SelectedRecipe.ImageData}" />
-                                    <ImageButton
-                                        x:Name="chnagePicture"
-                                        Grid.Row="0"
-                                        Aspect="Center"
-                                        BackgroundColor="Transparent"
-                                        Command="{Binding ChangePhotoCommand}"
-                                        CommandParameter="{Binding SelectedRecipe}"
-                                        HorizontalOptions="Center"
-                                        ZIndex="10">
-                                        <ImageButton.Source>
-                                            <FontImageSource
-                                                FontFamily="IMD"
-                                                Glyph="{x:Static common:IconsMaterialDesign.Plus}"
-                                                Size="100"
-                                                Color="Black" />
-                                        </ImageButton.Source>
-                                    </ImageButton>
+
 
                                 </Grid>
 
@@ -269,6 +239,7 @@
                                             x:Name="ingredientsGrid"
                                             AllowEditing="True"
                                             AutoGenerateColumnsMode="None"
+                                            EditTapAction="OnTap"
                                             ItemsSource="{Binding Ingredients}"
                                             NavigationMode="Cell"
                                             QueryRowHeight="ingredientsGrid_SizeChanged_1"
@@ -279,16 +250,18 @@
                                                     HeaderText="Ingredient"
                                                     MappingName="Name"
                                                     MaximumWidth="200" />
-                                                <datagrid:DataGridNumericColumn HeaderText="Qty" 
-                                                                                Width="100"
-                                                                                MappingName="Quantity" />
+                                                <datagrid:DataGridNumericColumn
+                                                    Width="100"
+                                                    HeaderText="Qty"
+                                                    MappingName="Quantity" />
 
                                                 <datagrid:DataGridComboBoxColumn
                                                     Width="180"
-                                                    DisplayMemberPath="DisplayDropDown.Name"
+                                                    DisplayMemberPath="Name"
                                                     HeaderText="Unit"
-                                                    ItemsSource="{Binding Source={x:Reference Name=RecipeDetailsName}, Path=BindingContext.Units}"
-                                                    MappingName="DisplayDropDown.Name" />
+                                                    ItemsSource="{Binding Source={x:Reference RecipeDetailsName}, Path=BindingContext.Units}"
+                                                    MappingName="Unit"
+                                                    ValueMemberPath="Name" />
 
                                             </datagrid:SfDataGrid.Columns>
                                         </datagrid:SfDataGrid>
@@ -327,13 +300,14 @@
                                             Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
                                             x:Name="instructionsGrid"
+                                            AllowDraggingRow="True"
                                             AllowEditing="True"
                                             AutoGenerateColumnsMode="None"
                                             ItemsSource="{Binding Instructions}"
                                             NavigationMode="Cell"
-                                            WidthRequest="900"
                                             QueryRowHeight="instructionsGrid_SizeChanged"
-                                            SelectionMode="Single">
+                                            SelectionMode="Single"
+                                            WidthRequest="500">
                                             <datagrid:SfDataGrid.Columns>
                                                 <datagrid:DataGridNumericColumn
                                                     Width="60"

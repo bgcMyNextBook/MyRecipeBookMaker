@@ -51,7 +51,7 @@ namespace MyRecipeBookMaker.Views
         {
             if (e.RowIndex > 0)
             {
-                e.Height = e.GetIntrinsicRowHeight(e.RowIndex, false, new List<string> { "Description" });
+                e.Height = e.GetIntrinsicRowHeight(e.RowIndex, false, new List<string> { "" });
                 e.Handled = true;
 
                 // Calculate the total height of all rows

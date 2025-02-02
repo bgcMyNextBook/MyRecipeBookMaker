@@ -8,79 +8,47 @@
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
+    xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="Recipe Collection">
 
     <ContentPage.BindingContext>
         <local:RecipeCollectionViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.Content>
-        <Grid
-            Margin="0,0,20,0"
-            ColumnDefinitions="*,40,40,40"
-            RowDefinitions="40,*">
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,0,0"
-                HorizontalOptions="End"
-                Text="Add a new recipe from: "
-                VerticalOptions="Center" />
-            <ImageButton
-                x:Name="addNewRecipeCamera"
-                Grid.Row="0"
-                Grid.Column="1"
-                Aspect="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding AddNewRecipeCameraCommand}"
-                HorizontalOptions="End"
-                VerticalOptions="End">
-                <ImageButton.Source>
-                    <FontImageSource
-                        FontFamily="IMD"
-                        Glyph="{x:Static common:IconsMaterialDesign.ImageAlbum}"
-                        Size="30"
-                        Color="Black" />
-                </ImageButton.Source>
-            </ImageButton>
-            <ImageButton
-                x:Name="addNewRecipeAlbum"
-                Grid.Row="0"
-                Grid.Column="2"
-                Aspect="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding AddNew}"
-                HorizontalOptions="End"
-                VerticalOptions="End">
-                <ImageButton.Source>
-                    <FontImageSource
-                        FontFamily="IMD"
-                        Glyph="{x:Static common:IconsMaterialDesign.Camera}"
-                        Size="30"
-                        Color="Black" />
-                </ImageButton.Source>
-            </ImageButton>
-            <ImageButton
-                x:Name="addNewRecipePDF"
-                Grid.Row="0"
-                Grid.Column="3"
-                Aspect="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding AddNewRecipePDFCommand}"
-                HorizontalOptions="End"
-                VerticalOptions="End">
-                <ImageButton.Source>
-                    <FontImageSource
-                        FontFamily="IMD"
-                        Glyph="{x:Static common:IconsMaterialDesign.PdfBox}"
-                        Size="40"
-                        Color="Black" />
-                </ImageButton.Source>
-            </ImageButton>
 
-            <ScrollView
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="3">
+
+    <ContentPage.Content>
+        <Grid SizeChanged="Grid_SizeChanged" >
+
+            <radialMenu:SfRadialMenu
+                x:Name="addMenu"
+                CenterButtonRadius="25"
+                CenterButtonText="Add"
+                IsOpen="{Binding ShowAddMenu}"
+                IsVisible="True"
+                
+                Opening="addMenu_Opening"
+                Closing="addMenu_Closing"
+                Point="{Binding AddMenuPoint}"
+                RimRadius="180"
+                ZIndex="20">
+
+                <radialMenu:SfRadialMenu.Items>
+                    <radialMenu:SfRadialMenuItem
+                        Command="{Binding ChangePhotoByAlbumCommand}"
+                        FontSize="10"
+                        Text="PDF" />
+                    <radialMenu:SfRadialMenuItem
+                        Command="{Binding ChangePhotoByCameraCommand}"
+                        FontSize="10"
+                        Text="Camera" />
+                    <radialMenu:SfRadialMenuItem
+                        Command="{Binding ChangePhotoByAlbumCommand}"
+                        FontSize="10"
+                        Text="Album" />
+                </radialMenu:SfRadialMenu.Items>
+            </radialMenu:SfRadialMenu>
+            <ScrollView>
                 <FlexLayout
                     Padding="8"
                     AlignContent="Start"
