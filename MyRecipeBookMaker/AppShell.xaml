@@ -16,45 +16,7 @@
             HorizontalOptions="Center"
             Text="Recipes Book Maker"
             VerticalOptions="Center" />
-        <!--
-        <Grid ColumnDefinitions="*,40,40">
-            <Label
-                x:Name="pageTitle"
-                FontSize="Large"
-                VerticalOptions="Center" />
-            <ImageButton
-                Grid.Row="0"
-                Grid.Column="1"
-                Margin="0,0,0,0"
-                HeightRequest="30"
-                VerticalOptions="Center"
-                WidthRequest="30">
-                <ImageButton.Source>
-                    <FontImageSource
-                        FontFamily="icofont"
-                        Glyph="{x:Static fonts:IconsMaterialDesign.Plus}"
-                        Size="30"
-                        Color="Black" />
-                </ImageButton.Source>
-            </ImageButton>
-            <ImageButton
-                Grid.Row="0"
-                Grid.Column="2"
-                Margin="0,0,0,0"
-                HeightRequest="30"
-                VerticalOptions="Center"
-                WidthRequest="30">
-                <ImageButton.Source>
-                    <FontImageSource
-                        FontFamily="icofont"
-                        Glyph="{x:Static fonts:IconsMaterialDesign.ApplicationSettings}"
-                        Size="30"
-                        Color="Black" />
-                </ImageButton.Source>
-            </ImageButton>
-
-        </Grid>
-        -->
+   
     </Shell.TitleView>
 
     <ShellContent

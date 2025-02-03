@@ -12,8 +12,7 @@ namespace MyRecipeBookMaker
     {
         [ObservableProperty] public ObservableCollection<Recipe>? listOfRecipes;
         [ObservableProperty] bool showAddMenu = false;
-        [ObservableProperty] int gridRow = 0;
-        [ObservableProperty] int gridColumn = 1;
+      
         
         double radialMenuWidth;
         double radialMenuHeight;
@@ -26,18 +25,10 @@ namespace MyRecipeBookMaker
             LoadData();
           
             AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
-            OnPropertyChanged(nameof(AddMenuPoint));
-            AppShell.Current.Window.SizeChanged += MainWindow_SizeChanged;
+          
         }
         
-        private void MainWindow_SizeChanged(object sender, EventArgs e)
-
-        {
-       
-      
-            AddMenuPoint = new Point(AppShell.Current.Window.Width-80, -20);
-            OnPropertyChanged(nameof(AddMenuPoint));
-        }
+     
         
         private async Task LoadData()
         {
@@ -85,21 +76,21 @@ namespace MyRecipeBookMaker
         [RelayCommand]
         public async Task ChangePhotoByAlbum()
         {
-            AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
+      
            
             ShowAddMenu = false;
         }
         [RelayCommand]
         public async Task ChangePhotoByCamera()
         {
-            AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
+            
       
             ShowAddMenu = false;
         }
         [RelayCommand]
         public async Task ChangePhotoByPdf()
         {
-            AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
+          
         
             ShowAddMenu = false;
         }

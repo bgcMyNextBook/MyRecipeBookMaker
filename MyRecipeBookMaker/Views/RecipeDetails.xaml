@@ -6,6 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
     xmlns:common="clr-namespace:MyRecipeBookMaker.Common"
     xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+    xmlns:dx="http://schemas.devexpress.com/maui"
     xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
@@ -21,7 +22,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView Background="{dx:ThemeColor Surface}">
             <VerticalStackLayout>
 
                 <FlexLayout Direction="Column">
@@ -75,7 +76,6 @@
                                         Aspect="AspectFill"
                                         Source="{Binding SelectedRecipe.ImageData}" />
 
-
                                 </Grid>
 
                             </Border>
@@ -84,6 +84,7 @@
                                 Margin="2,2,8,0"
                                 HeightRequest="200"
                                 Hint="Description"
+                              
                                 InputViewPadding="14,14,0,0"
                                 ShowHelperText="False">
 
@@ -95,6 +96,7 @@
                                     VerticalOptions="Start"
                                     VerticalTextAlignment="Start" />
                             </inputLayout:SfTextInputLayout>
+
                         </FlexLayout>
 
                         <FlexLayout Wrap="Wrap">
@@ -123,6 +125,8 @@
                                 <editors:SfComboBox
                                     x:Name="comboBoxCourse"
                                     DisplayMemberPath="Name"
+                                    
+                             
                                     EnableAutoSize="True"
                                     FontSize="Micro"
                                     IsEditable="true"
@@ -214,10 +218,9 @@
                 <FlexLayout Direction="Row" Wrap="Wrap">
                     <Border Margin="3,0,0,0" StrokeShape="RoundRectangle  6,6,6,6">
                         <CollectionView
-                            Background="#e7dfec"
+                            Background="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.IngredientGroups}"
-                            MaximumWidthRequest="900"
                             WidthRequest="500">
                             <CollectionView.Header>
 
@@ -234,6 +237,7 @@
                                         <Label
                                             FontAttributes="Bold"
                                             FontSize="Small"
+                                            HorizontalOptions="Center"
                                             Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
                                             x:Name="ingredientsGrid"
@@ -243,20 +247,17 @@
                                             ItemsSource="{Binding Ingredients}"
                                             NavigationMode="Cell"
                                             QueryRowHeight="ingredientsGrid_SizeChanged_1"
-                                            SelectionMode="Single">
+                                            SelectionMode="Single"
+                                            WidthRequest="500">
                                             <datagrid:SfDataGrid.Columns>
                                                 <datagrid:DataGridTextColumn
+                                                    Width="250"
                                                     ColumnWidthMode="Auto"
                                                     HeaderText="Ingredient"
-                                                    MappingName="Name"
-                                                    MaximumWidth="200" />
-                                                <datagrid:DataGridNumericColumn
-                                                    Width="100"
-                                                    HeaderText="Qty"
-                                                    MappingName="Quantity" />
+                                                    MappingName="Name" />
+                                                <datagrid:DataGridNumericColumn HeaderText="Qty" MappingName="Quantity" />
 
                                                 <datagrid:DataGridComboBoxColumn
-                                                    Width="180"
                                                     DisplayMemberPath="Name"
                                                     HeaderText="Unit"
                                                     ItemsSource="{Binding Source={x:Reference RecipeDetailsName}, Path=BindingContext.Units}"
@@ -275,7 +276,7 @@
 
                         <CollectionView
                             x:Name="instructionCollectionView"
-                            Background="#e7dfec"
+                            Background="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.InstructionGroups}"
                             MaximumWidthRequest="900"
