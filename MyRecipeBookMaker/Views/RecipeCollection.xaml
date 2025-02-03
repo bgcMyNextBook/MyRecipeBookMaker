@@ -8,10 +8,8 @@
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
-        xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
     xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    BackgroundColor="{dx:ThemeColor Surface}"
     Title="Recipe Collection">
 
     <ContentPage.BindingContext>
@@ -20,16 +18,17 @@
 
 
     <ContentPage.Content>
-        <Grid SizeChanged="Grid_SizeChanged">
+        <Grid SizeChanged="Grid_SizeChanged" >
 
             <radialMenu:SfRadialMenu
                 x:Name="addMenu"
                 CenterButtonRadius="25"
                 CenterButtonText="Add"
-                Closing="addMenu_Closing"
                 IsOpen="{Binding ShowAddMenu}"
                 IsVisible="True"
+                
                 Opening="addMenu_Opening"
+                Closing="addMenu_Closing"
                 Point="{Binding AddMenuPoint}"
                 RimRadius="180"
                 ZIndex="20">
@@ -64,7 +63,6 @@
                                 HeightRequest="120"
                                 MaximumWidthRequest="600"
                                 Stroke="Transparent"
-                              
                                 StrokeShape="RoundRectangle 4,4,4,4"
                                 StrokeThickness="0"
                                 WidthRequest="400">
@@ -72,9 +70,11 @@
                                 <Border
                                     Margin="10"
                                     Padding="0"
-                                 
+                                    BackgroundColor="{AppThemeBinding Light={DynamicResource BackgroundColorLight},
+                                                                      Dark={DynamicResource BackgroundColorDark}}"
                                     HorizontalOptions="Fill"
-                                   
+                                    Stroke="{AppThemeBinding Light={DynamicResource BackgroundColorLight},
+                                                             Dark={DynamicResource BackgroundColorDark}}"
                                     StrokeShape="RoundRectangle 10"
                                     StrokeThickness="1"
                                     VerticalOptions="Fill">
@@ -87,7 +87,7 @@
                                         <!--  Image to display the Item  -->
                                         <Image
                                             Aspect="AspectFill"
-                                          
+                                            BackgroundColor="{DynamicResource Gray-200}"
                                             HeightRequest="120"
                                             Source="{Binding ImageData}"
                                             WidthRequest="120" />
@@ -104,6 +104,8 @@
                                                 HorizontalOptions="Start"
                                                 HorizontalTextAlignment="Start"
                                                 Text="{Binding Name}"
+                                                TextColor="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight},
+                                                                            Dark={DynamicResource PrimaryTextColorDark}}"
                                                 VerticalOptions="Start" />
 
                                             <!--  Description about the item  -->

@@ -18,10 +18,7 @@ namespace MyRecipeBookMaker
                 .ConfigureSyncfusionCore()
                 .ConfigureSyncfusionToolkit()
                 .UseMauiApp<App>()
-                
                 .UseDevExpress()
-                
-              
                 .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitCamera()
                 .ConfigureFonts(fonts =>
