@@ -6,6 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
     xmlns:common="clr-namespace:MyRecipeBookMaker.Common"
     xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
     xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
@@ -21,7 +22,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="{dx:ThemeColor Surface}">
             <VerticalStackLayout>
 
                 <FlexLayout Direction="Column">
@@ -47,7 +48,6 @@
                                     <radialMenu:SfRadialMenu
                                         CenterButtonText="Change"
                                         HorizontalOptions="Center"
-                                        Point="70,70"
                                         RimRadius="180"
                                         VerticalOptions="Center"
                                         ZIndex="20">
@@ -211,13 +211,16 @@
                 </FlexLayout>
 
 
-                <FlexLayout Direction="Row" Wrap="Wrap">
+                <FlexLayout
+                    BackgroundColor="{dx:ThemeColor Surface}"
+                    Direction="Row"
+                    Wrap="Wrap">
                     <Border Margin="3,0,0,0" StrokeShape="RoundRectangle  6,6,6,6">
                         <CollectionView
-                            Background="#e7dfec"
+                            Margin="3,0"
+                            BackgroundColor="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.IngredientGroups}"
-                            MaximumWidthRequest="900"
                             WidthRequest="500">
                             <CollectionView.Header>
 
@@ -240,23 +243,27 @@
                                             AllowEditing="True"
                                             AutoGenerateColumnsMode="None"
                                             EditTapAction="OnTap"
+                                            HorizontalScrollBarVisibility="Always"
                                             ItemsSource="{Binding Ingredients}"
                                             NavigationMode="Cell"
                                             QueryRowHeight="ingredientsGrid_SizeChanged_1"
                                             SelectionMode="Single">
                                             <datagrid:SfDataGrid.Columns>
                                                 <datagrid:DataGridTextColumn
+                                                    CellTextAlignment="Start"
                                                     ColumnWidthMode="Auto"
                                                     HeaderText="Ingredient"
                                                     MappingName="Name"
                                                     MaximumWidth="200" />
                                                 <datagrid:DataGridNumericColumn
                                                     Width="100"
+                                                    CellTextAlignment="Center"
                                                     HeaderText="Qty"
                                                     MappingName="Quantity" />
 
                                                 <datagrid:DataGridComboBoxColumn
                                                     Width="180"
+                                                    CellTextAlignment="End"
                                                     DisplayMemberPath="Name"
                                                     HeaderText="Unit"
                                                     ItemsSource="{Binding Source={x:Reference RecipeDetailsName}, Path=BindingContext.Units}"
@@ -271,14 +278,14 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </Border>
-                    <Border Margin="3,0,0,0" StrokeShape="RoundRectangle  6,6,6,6">
+                    <Border Margin="10,0,0,0" StrokeShape="RoundRectangle  6,6,6,6">
 
                         <CollectionView
                             x:Name="instructionCollectionView"
                             Background="#e7dfec"
+                            BackgroundColor="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.InstructionGroups}"
-                            MaximumWidthRequest="900"
                             WidthRequest="500">
                             <CollectionView.Header>
 

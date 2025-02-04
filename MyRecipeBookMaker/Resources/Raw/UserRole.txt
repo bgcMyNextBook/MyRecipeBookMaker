@@ -1,0 +1,1 @@
+﻿"Extract the recipe from this document"

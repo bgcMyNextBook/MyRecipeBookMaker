@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyRecipeBookMaker.Models
+namespace MyRecipeBookMaker.Common
 {
-    public class CuisineDropDownItem
+    public static class RecipeImageHelper
     {
-        public string Name { get; set; }
+
     }
 }

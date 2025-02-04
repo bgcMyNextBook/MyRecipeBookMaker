@@ -35,20 +35,20 @@
 
                 <radialMenu:SfRadialMenu.Items>
                     <radialMenu:SfRadialMenuItem
-                        Command="{Binding ChangePhotoByAlbumCommand}"
+                        Command="{Binding AddRecipeoByPdfCommand}"
                         FontSize="10"
                         Text="PDF" />
                     <radialMenu:SfRadialMenuItem
-                        Command="{Binding ChangePhotoByCameraCommand}"
+                        Command="{Binding AddRecipeByCameraCommand}"
                         FontSize="10"
                         Text="Camera" />
                     <radialMenu:SfRadialMenuItem
-                        Command="{Binding ChangePhotoByAlbumCommand}"
+                        Command="{Binding AddRecipeByPhotoByAlbumCommand}"
                         FontSize="10"
                         Text="Album" />
                 </radialMenu:SfRadialMenu.Items>
             </radialMenu:SfRadialMenu>
-            <ScrollView>
+            <ScrollView Margin="0,40">
                 <FlexLayout
                     Padding="8"
                     AlignContent="Start"

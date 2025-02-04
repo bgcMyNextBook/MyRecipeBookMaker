@@ -98,14 +98,14 @@ namespace MyRecipeBookMaker.Models
                 {
                     if (!string.IsNullOrWhiteSpace(imageURL))
                     {
-                        return ImageSource.FromUri(new Uri(imageURL));
+                        return ImageSource.FromUri(new Uri(ImageURL));
                     }
                     return null;
                 }
                 else
                 {
-                    byte[] imageBytes = Convert.FromBase64String(imageBASE64);
-                    return ImageSource.FromStream(() => new MemoryStream(imageBytes));
+                    byte[] imageBytes = Convert.FromBase64String(ImageBASE64);
+                    return ImageSource.FromStream(() => new MemoryStream(ImageBytes));
                 }
             }
         }

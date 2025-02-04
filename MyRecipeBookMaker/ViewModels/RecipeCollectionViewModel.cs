@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MyRecipeBookMaker.Common;
+using MyRecipeBookMaker.AI;
 namespace MyRecipeBookMaker
 {
     public partial class RecipeCollectionViewModel : ObservableObject
@@ -25,7 +26,7 @@ namespace MyRecipeBookMaker
             ListOfRecipes = new ObservableCollection<Recipe>();
             LoadData();
           
-            AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
+            AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -5);
             OnPropertyChanged(nameof(AddMenuPoint));
             AppShell.Current.Window.SizeChanged += MainWindow_SizeChanged;
         }
@@ -35,7 +36,7 @@ namespace MyRecipeBookMaker
         {
        
       
-            AddMenuPoint = new Point(AppShell.Current.Window.Width-80, -20);
+            AddMenuPoint = new Point(AppShell.Current.Window.Width-80, -5);
             OnPropertyChanged(nameof(AddMenuPoint));
         }
         
@@ -83,21 +84,40 @@ namespace MyRecipeBookMaker
             ShowAddMenu = true;
         }
         [RelayCommand]
-        public async Task ChangePhotoByAlbum()
+        public async Task AddRecipeByPhotoByAlbum()
         {
             AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
-           
+            if (MediaPicker.Default.IsCaptureSupported)
+            {
+                FileResult? photo = await MediaPicker.Default.PickPhotoAsync();
+
+                if (photo != null)
+                {
+
+                    using Stream sourceStream = await photo.OpenReadAsync();
+
+                    // Convert to base64
+                    sourceStream.Position = 0;
+                    using MemoryStream memoryStream = new();
+                    await sourceStream.CopyToAsync(memoryStream);
+                    byte[] photoBytes = memoryStream.ToArray();
+                    AIReadRecipe ai = new AIReadRecipe();
+                    Recipe r = await ai.ReadRecipeFromImage(photoBytes);
+
+             
+                }
+            }
             ShowAddMenu = false;
         }
         [RelayCommand]
-        public async Task ChangePhotoByCamera()
+        public async Task AddRecipeByCamera()
         {
             AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
       
             ShowAddMenu = false;
         }
         [RelayCommand]
-        public async Task ChangePhotoByPdf()
+        public async Task AddRecipeoByPdf()
         {
             AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -20);
         

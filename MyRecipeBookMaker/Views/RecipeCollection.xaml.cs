@@ -25,7 +25,7 @@ public partial class RecipeCollection : ContentPage
         var radialMenu = sender as Syncfusion.Maui.RadialMenu.SfRadialMenu;
         if (radialMenu != null)
         {
-            radialMenu.Point = new Point(AppShell.Current.Window.Width - 80, -20);
+            radialMenu.Point = new Point(AppShell.Current.Window.Width - 80, -5);
         }
     }
 
@@ -36,6 +36,9 @@ public partial class RecipeCollection : ContentPage
 
     private void Grid_SizeChanged(object sender, EventArgs e)
     {
-        addMenu.Point = new Point(AppShell.Current.Window.Width - 80, -20);
+        if (AppShell.Current?.Window != null)
+        {
+            addMenu.Point = new Point(AppShell.Current.Window.Width - 80, -5);
+        }
     }
 }
