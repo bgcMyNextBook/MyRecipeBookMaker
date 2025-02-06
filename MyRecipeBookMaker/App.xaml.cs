@@ -1,9 +1,11 @@
-
+using MyRecipeBookMaker.Models;
+using MyRecipeBookMaker.Common;
 namespace MyRecipeBookMaker
 {
     public partial class App : Application
     {
-		public static string ImageServerPath { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-.net-maui/common/uikitimages/";
+        public static UserSessionData currentSessionData;
+        public static string ImageServerPath { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-.net-maui/common/uikitimages/";
 
         public App()
         {
@@ -19,5 +21,15 @@ namespace MyRecipeBookMaker
             }
             return window;
         }
+        protected override void OnStart()
+        {
+            // Handle when your app is activated
+            
+            currentSessionData = new UserSessionData();
+            GetSecretsHelper.GetSecrets();
+        }
+        
+ 
+     
     }
 }

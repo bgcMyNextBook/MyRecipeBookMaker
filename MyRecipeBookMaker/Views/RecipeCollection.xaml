@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
     xmlns:common="clr-namespace:MyRecipeBookMaker.Common"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
@@ -15,20 +16,31 @@
     <ContentPage.BindingContext>
         <local:RecipeCollectionViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsStringNullOrWhiteSpaceConverter x:Key="IsStringNullOrWhiteSpaceConverter" />
 
+            <x:String x:Key="failedStatus">failed</x:String>
+            <toolkit:CompareConverter
+                x:Key="CompareConverter"
+                ComparingValue="{StaticResource failedStatus}"
+                ComparisonOperator="Equal"
+                FalseObject="{dx:ThemeColor OnSurface}"
+                TrueObject="{dx:ThemeColor Error}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid SizeChanged="Grid_SizeChanged" >
+        <Grid SizeChanged="Grid_SizeChanged">
 
             <radialMenu:SfRadialMenu
                 x:Name="addMenu"
                 CenterButtonRadius="25"
                 CenterButtonText="Add"
+                Closing="addMenu_Closing"
                 IsOpen="{Binding ShowAddMenu}"
                 IsVisible="True"
-                
                 Opening="addMenu_Opening"
-                Closing="addMenu_Closing"
                 Point="{Binding AddMenuPoint}"
                 RimRadius="180"
                 ZIndex="20">
@@ -82,11 +94,16 @@
                                     <Grid
                                         ColumnDefinitions="120, *"
                                         ColumnSpacing="0"
+                                        RowDefinitions="*,*"
+                                        MaximumHeightRequest="120"
                                         RowSpacing="0">
 
                                         <!--  Image to display the Item  -->
                                         <Image
                                             Aspect="AspectFill"
+                                            Grid.RowSpan="2"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
                                             BackgroundColor="{DynamicResource Gray-200}"
                                             HeightRequest="120"
                                             Source="{Binding ImageData}"
@@ -100,6 +117,7 @@
 
                                             <!--  Name of the item  -->
                                             <Label
+                                                Grid.Row="0"
                                                 FontFamily="Roboto-Medium"
                                                 HorizontalOptions="Start"
                                                 HorizontalTextAlignment="Start"
@@ -107,10 +125,21 @@
                                                 TextColor="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight},
                                                                             Dark={DynamicResource PrimaryTextColorDark}}"
                                                 VerticalOptions="Start" />
-
+                                            <Label
+                                                Grid.Row="1"
+                                                ZIndex="2"
+                                                FontFamily="Roboto-Regular"
+                                                FontSize="12"
+                                                HorizontalOptions="Start"
+                                                HorizontalTextAlignment="Start"
+                                                IsEnabled="False"
+                                                IsVisible="{Binding Status}"
+                                                MaxLines="5"
+                                                Text="{Binding ProcessingMessage}"
+                                                TextColor="{dx:ThemeColor Error}" />
                                             <!--  Description about the item  -->
                                             <Label
-                                                Margin="0,4,10,8"
+                                                Margin="0,2,10,8"
                                                 FontFamily="Roboto-Regular"
                                                 FontSize="12"
                                                 HorizontalOptions="Start"

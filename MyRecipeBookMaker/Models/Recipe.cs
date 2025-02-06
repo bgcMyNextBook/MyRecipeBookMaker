@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Text.Json.Serialization;
+using CommunityToolkit.Mvvm.Messaging;
 namespace MyRecipeBookMaker.Models
 {
 
@@ -22,7 +24,7 @@ namespace MyRecipeBookMaker.Models
         partial void OnQuantityChanged(double? oldValue, double? newValue) => Recipe.PropertyHasChanged("Ingredient/Quantity", oldValue?.ToString(), newValue?.ToString());
         partial void OnUnitChanged(string? oldValue, string? newValue) => Recipe.PropertyHasChanged("Ingredient/Unit", oldValue, newValue);
 
-      
+
     }
 
     public partial class IngredientGroup : ObservableObject
@@ -33,7 +35,7 @@ namespace MyRecipeBookMaker.Models
         partial void OnNameChanged(string? oldValue, string? newValue) => Recipe.PropertyHasChanged("IngredientGroup/Name", oldValue, newValue);
         partial void OnIngredientsChanged(ObservableCollection<Ingredient>? oldValue, ObservableCollection<Ingredient>? newValue) => Recipe.PropertyHasChanged("IngredientGroup/Ingredients", oldValue?.ToString(), newValue?.ToString());
 
-   
+
     }
 
     public partial class Instruction : ObservableObject
@@ -44,7 +46,7 @@ namespace MyRecipeBookMaker.Models
         partial void OnStepChanged(int? oldValue, int? newValue) => Recipe.PropertyHasChanged("Instruction/Step", oldValue?.ToString(), newValue?.ToString());
         partial void OnDescriptionChanged(string? oldValue, string? newValue) => Recipe.PropertyHasChanged("Instruction/Description", oldValue, newValue);
 
-       
+
     }
 
     public partial class InstructionGroup : ObservableObject
@@ -55,7 +57,7 @@ namespace MyRecipeBookMaker.Models
         partial void OnNameChanged(string? oldValue, string? newValue) => Recipe.PropertyHasChanged("InstructionGroup/Name", oldValue, newValue);
         partial void OnInstructionsChanged(ObservableCollection<Instruction>? oldValue, ObservableCollection<Instruction>? newValue) => Recipe.PropertyHasChanged("InstructionGroup/Instructions", oldValue?.ToString(), newValue?.ToString());
 
-   
+
     }
 
     public partial class Nutrition : ObservableObject
@@ -66,11 +68,22 @@ namespace MyRecipeBookMaker.Models
         partial void OnNameChanged(string? oldValue, string? newValue) => Recipe.PropertyHasChanged("Nutrition/Name", oldValue, newValue);
         partial void OnValueChanged(string? oldValue, string? newValue) => Recipe.PropertyHasChanged("Nutrition/Value", oldValue, newValue);
 
-       
-    }
 
+    }
+    public class ReadRecipeMessage
+    {
+        public Recipe r;
+        public string status;
+        public string processingMessage;
+        public Guid uid;
+
+    }
     public partial class Recipe : ObservableObject
     {
+
+        [ObservableProperty] public Guid uid;
+        [ObservableProperty] public bool? status;
+        [ObservableProperty] public string? processingMessage;
         [ObservableProperty] public int id;
         [ObservableProperty] public string? name;
         [ObservableProperty] public string? description;
@@ -90,6 +103,7 @@ namespace MyRecipeBookMaker.Models
         [ObservableProperty] public ObservableCollection<string>? tags;
         [ObservableProperty] public string? notes;
 
+        [JsonIgnore]
         public ImageSource? ImageData
         {
             get
@@ -105,13 +119,13 @@ namespace MyRecipeBookMaker.Models
                 else
                 {
                     byte[] imageBytes = Convert.FromBase64String(ImageBASE64);
-                    return ImageSource.FromStream(() => new MemoryStream(ImageBytes));
+                    return ImageSource.FromStream(() => new MemoryStream(imageBytes));
                 }
             }
         }
 
         partial void OnIdChanged(int oldValue, int newValue) => PropertyHasChanged("Recipe/Id", oldValue.ToString(), newValue.ToString());
-        partial void OnNameChanged(string? oldValue, string? newValue) =>       PropertyHasChanged("Recipe/Name", oldValue, newValue);
+        partial void OnNameChanged(string? oldValue, string? newValue) => PropertyHasChanged("Recipe/Name", oldValue, newValue);
         partial void OnDescriptionChanged(string? oldValue, string? newValue) => PropertyHasChanged("Recipe/Description", oldValue, newValue);
         partial void OnServingsChanged(string? oldValue, string? newValue) => PropertyHasChanged("Recipe/Servings", oldValue, newValue);
         partial void OnCookTimeChanged(string? oldValue, string? newValue) => PropertyHasChanged("Recipe/CookTime", oldValue, newValue);

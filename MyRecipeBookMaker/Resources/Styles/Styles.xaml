@@ -175,7 +175,7 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="TextColor" Value="{dx:ThemeColor OnSurface}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -188,14 +188,14 @@
     </Style>
 
     <Style x:Key="Headline" TargetType="Label">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
-        <Setter Property="FontSize" Value="32" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnSurface}" />
+        <Setter Property="FontSize" Value="Large" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="SubHeadline" TargetType="Label">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnSecondary}" />
         <Setter Property="FontSize" Value="24" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />

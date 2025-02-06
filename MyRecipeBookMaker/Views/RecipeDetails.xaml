@@ -221,7 +221,7 @@
                             BackgroundColor="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.IngredientGroups}"
-                            WidthRequest="500">
+                            MaximumWidthRequest="600">
                             <CollectionView.Header>
 
                                 <Label
@@ -235,8 +235,10 @@
                                 <DataTemplate x:DataType="models:IngredientGroup">
                                     <StackLayout Orientation="Vertical">
                                         <Label
+                                            Margin="10,0"
                                             FontAttributes="Bold"
                                             FontSize="Small"
+                                            Style="{StaticResource Headline}"
                                             Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
                                             x:Name="ingredientsGrid"
@@ -278,7 +280,7 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </Border>
-                    <Border Margin="10,0,0,0" StrokeShape="RoundRectangle  6,6,6,6">
+                    <Border Margin="3,0,0,0" StrokeShape="RoundRectangle  6,6,6,6">
 
                         <CollectionView
                             x:Name="instructionCollectionView"
@@ -286,7 +288,7 @@
                             BackgroundColor="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.InstructionGroups}"
-                            WidthRequest="500">
+                            MaximumWidthRequest="600">
                             <CollectionView.Header>
 
                                 <Label
@@ -301,9 +303,10 @@
                                 <DataTemplate x:DataType="models:InstructionGroup">
                                     <StackLayout Orientation="Vertical">
                                         <Label
-                                            Margin="6,4,0,4"
+                                            Margin="10,0"
                                             FontAttributes="Bold"
                                             FontSize="Small"
+                                            Style="{StaticResource Headline}"
                                             Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
                                             x:Name="instructionsGrid"
@@ -312,9 +315,9 @@
                                             AutoGenerateColumnsMode="None"
                                             ItemsSource="{Binding Instructions}"
                                             NavigationMode="Cell"
+                                            VerticalScrollBarVisibility="Default"
                                             QueryRowHeight="instructionsGrid_SizeChanged"
-                                            SelectionMode="Single"
-                                            WidthRequest="500">
+                                            SelectionMode="Single">
                                             <datagrid:SfDataGrid.Columns>
                                                 <datagrid:DataGridNumericColumn
                                                     Width="60"

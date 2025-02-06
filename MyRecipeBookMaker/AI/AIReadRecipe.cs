@@ -18,23 +18,27 @@ using MyRecipeBookMaker.Models;
 using Newtonsoft.Json;
 
 using OpenAI.Chat;
+using System.Diagnostics;
+using Azure;
 
 
 namespace MyRecipeBookMaker.AI
 {
     class AIReadRecipe
     {
+      
+
         private const int Zero = 0;
-        DefaultAzureCredential? credential;
-        AzureOpenAIClient? openAIClient;
-        ChatClient? chatClient;
-        ChatCompletionOptions? chatOptions;
-        string? developerPrompt;
-        string? userPrompt;
+        private DefaultAzureCredential? credential;
+        private AzureOpenAIClient? openAIClient;
+        private ChatClient? chatClient;
+        private ChatCompletionOptions? chatOptions;
+        private string? developerPrompt;
+        private string? userPrompt;
 
-        public AIReadRecipe()
+        private AIReadRecipe()
         {
-
+            
         }
         public static async Task<AIReadRecipe> CreateAsync()
         {
@@ -44,33 +48,28 @@ namespace MyRecipeBookMaker.AI
         }
         private async Task InitializeAsync()
         {
-            credential = new DefaultAzureCredential();
-
-
-            // Get secrets from Azure Key Vault
-            string vaultUri = "https://kv-recipe-reader.vault.azure.net/";
-
-
-
-            if (string.IsNullOrEmpty(vaultUri))
+            try
             {
-                throw new InvalidOperationException("Vault URI is not configured.");
+                string AIEndPoint = await GetSecretsHelper.GetAppSecret("AIEndPoint");
+                string ModelDeployment = await GetSecretsHelper.GetAppSecret("dep-ai-recipereader-model");
+                string AIEndPointAPIKey = await GetSecretsHelper.GetAppSecret("AIEndPointAPIKey");
+
+                openAIClient = new AzureOpenAIClient(new Uri(AIEndPoint), new AzureKeyCredential(AIEndPointAPIKey));
+                chatClient = openAIClient.GetChatClient(ModelDeployment);
+                await LoadPrompts();
+                chatOptions = new ChatCompletionOptions()
+                {
+                    ResponseFormat = StructuredOutputsExtensions.CreateJsonSchemaFormat<Recipe>("Recipe", jsonSchemaIsStrict: true),
+                    MaxOutputTokenCount = 14000,
+                    Temperature = 0.1f,
+                    TopP = 1.0f,
+                };
+              
             }
-            var keyVaultClient = new SecretClient(new Uri(vaultUri), credential);
-
-            KeyVaultSecret AIEndPoint = await keyVaultClient.GetSecretAsync("AIEndPoint");
-            KeyVaultSecret ModelDeployment = await keyVaultClient.GetSecretAsync("dep-ai-recipereader-model");
-            openAIClient = new AzureOpenAIClient(new Uri(AIEndPoint.Value), credential);
-            chatClient = openAIClient.GetChatClient(ModelDeployment.Value);
-            chatOptions = new ChatCompletionOptions()
+            catch (Exception ex)
             {
-                ResponseFormat = StructuredOutputsExtensions.CreateJsonSchemaFormat<Recipe>("Recipe", jsonSchemaIsStrict: true),
-                MaxOutputTokenCount = 14000,
-                Temperature = 0.1f,
-                TopP = 1.0f,
-            };
-            await LoadPrompts();
-
+                Debug.WriteLine(ex);
+            }
         }
         public async Task LoadPrompts()
         {
@@ -83,7 +82,7 @@ namespace MyRecipeBookMaker.AI
         {
             try
             {
-                
+                await InitializeAsync();
                 List<ChatMessage> messages = new List<ChatMessage>();
 
                 // User Prompt includes the prompt and the immage to read
@@ -141,16 +140,16 @@ namespace MyRecipeBookMaker.AI
 
                 sb.AppendLine("Response Content Filter Results:");
 
-                if (respResults.Hate.Filtered == true)
+                if (respResults.Hate?.Filtered == true)
                 {
                     filterDetected = true;
                     sb.AppendLine($"- Hate speech detected: {respResults.Hate.Severity} {respResults.Hate.ToString()}");
 
                 }
-                if (respResults.Profanity.Filtered == true) { filterDetected = true; sb.AppendLine($"- Profanity content detected: {respResults.Profanity.ToString()}"); }
-                if (respResults.SelfHarm.Filtered == true) { filterDetected = true; sb.AppendLine($"- Self harm content detected: {respResults.SelfHarm.Severity} {respResults.SelfHarm.ToString()}"); }
-                if (respResults.Sexual.Filtered == true) { filterDetected = true; sb.AppendLine($"- Sexual content detected: {respResults.Sexual.Severity} {respResults.Sexual.ToString()}"); }
-                if (respResults.Violence.Filtered == true) { filterDetected = true; sb.AppendLine($"- Violence content detected: {respResults.Violence.Severity} {respResults.Violence.ToString()}"); }
+                if (respResults.Profanity?.Filtered == true) { filterDetected = true; sb.AppendLine($"- Profanity content detected: {respResults.Profanity.ToString()}"); }
+                if (respResults.SelfHarm?.Filtered == true) { filterDetected = true; sb.AppendLine($"- Self harm content detected: {respResults.SelfHarm.Severity} {respResults.SelfHarm.ToString()}"); }
+                if (respResults.Sexual?.Filtered == true) { filterDetected = true; sb.AppendLine($"- Sexual content detected: {respResults.Sexual.Severity} {respResults.Sexual.ToString()}"); }
+                if (respResults.Violence?.Filtered == true) { filterDetected = true; sb.AppendLine($"- Violence content detected: {respResults.Violence.Severity} {respResults.Violence.ToString()}"); }
 
                 if (filterDetected)
                 {

@@ -1,13 +1,16 @@
 ﻿using MyRecipeBookMaker.Views;
-
+using MyRecipeBookMaker.Common;
+using MyRecipeBookMaker.Models;
 namespace MyRecipeBookMaker
 {
     public partial class AppShell : Shell
     {
+       
         public AppShell()
         {
             InitializeComponent();
             RegisterRoutes();
+         //   GetSecretsHelper.GetSecrets();
         }
         private void RegisterRoutes()
         {
@@ -24,5 +27,6 @@ namespace MyRecipeBookMaker
 
             //pageTitle.Text = Current.CurrentPage.Title;
         }
+   
     }
 }

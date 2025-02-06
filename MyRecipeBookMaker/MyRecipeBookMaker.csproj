@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--
 	<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 		<CompilerGeneratedFilesOutputPath>..\..\GeneratedFiles</CompilerGeneratedFilesOutputPath>
-		<!-- Other properties -->
+		
 	</PropertyGroup>
+	-->
 	<PropertyGroup>
 	
 
@@ -25,7 +27,9 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
+		<NoWarn>CA1416</NoWarn>
+		<NoWarn>MVVMTK0045</NoWarn>
+	
 		<!-- Display name -->
 		<ApplicationTitle>MyRecipeBookMaker</ApplicationTitle>
 

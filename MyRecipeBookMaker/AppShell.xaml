@@ -14,7 +14,7 @@
             FontSize="Large"
             Margin="10,0"
             HorizontalOptions="Center"
-            Text="Recipes Book Maker"
+            Text="Recipe Book Maker"
             VerticalOptions="Center" />
         <!--
         <Grid ColumnDefinitions="*,40,40">

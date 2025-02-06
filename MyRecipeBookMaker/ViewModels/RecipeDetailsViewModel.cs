@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Reflection;
 using System.Collections;
+using CommunityToolkit.Mvvm.Messaging;
 
 
 
@@ -29,8 +30,8 @@ namespace MyRecipeBookMaker
             ShowChangeImageMenu = false;
            
         }
-
-         private async void LoadListsAsync()
+     
+        private async void LoadListsAsync()
         {
             Cuisines = await LoadList("cuisine.json");
             Courses = await LoadList("course.json");

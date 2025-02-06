@@ -23,8 +23,17 @@ namespace MyRecipeBookMaker.Common
 
                     var required = new JsonArray();
                     var properties = jsonObject["properties"] as JsonObject;
+                    var keysToRemove = new List<string>();
+
                     foreach (var property in properties!)
                     {
+                        // Collect keys to be removed
+                        if (property.Key == "Uid")
+                        {
+                            keysToRemove.Add(property.Key);
+                            continue;
+                        }
+
                         required.Add(property.Key);
 
                         if (property.Value is JsonObject nestedObject)
@@ -32,6 +41,12 @@ namespace MyRecipeBookMaker.Common
                             // Process nested objects to ensure schema validity.
                             ProcessJsonObject(nestedObject);
                         }
+                    }
+
+                    // Remove keys after iteration
+                    foreach (var key in keysToRemove)
+                    {
+                        properties.Remove(key);
                     }
 
                     // Ensures that object types include the "required" field containing all of the property keys.
@@ -58,10 +73,10 @@ namespace MyRecipeBookMaker.Common
 
         public static ChatResponseFormat CreateJsonSchemaFormat<T>(string jsonSchemaFormatName, string? jsonSchemaFormatDescription = null, bool? jsonSchemaIsStrict = null)
         {
-
+            string s = JsonSchemaExporter.GetJsonSchemaAsNode(JsonSerializerOptions.Default, typeof(T), new JsonSchemaExporterOptions() { TreatNullObliviousAsNonNullable = true, TransformSchemaNode = StructuredOutputsTransform }).ToString();
             return ChatResponseFormat.CreateJsonSchemaFormat(
                 jsonSchemaFormatName,
-                jsonSchema: BinaryData.FromString(JsonSchemaExporter.GetJsonSchemaAsNode(JsonSerializerOptions.Default, typeof(T), new JsonSchemaExporterOptions() { TreatNullObliviousAsNonNullable = true, TransformSchemaNode = StructuredOutputsTransform }).ToString()),
+                jsonSchema: BinaryData.FromString(s),
                 jsonSchemaFormatDescription: jsonSchemaFormatDescription,
                 jsonSchemaIsStrict: jsonSchemaIsStrict
             );
