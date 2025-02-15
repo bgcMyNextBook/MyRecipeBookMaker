@@ -1,5 +1,6 @@
 using MyRecipeBookMaker.Models;
 using MyRecipeBookMaker.Common;
+using AsyncAwaitBestPractices;
 namespace MyRecipeBookMaker
 {
     public partial class App : Application
@@ -26,7 +27,8 @@ namespace MyRecipeBookMaker
             // Handle when your app is activated
             
             currentSessionData = new UserSessionData();
-            GetSecretsHelper.GetSecrets();
+            currentSessionData.LoadData().SafeFireAndForget();
+            GetSecretsHelper.GetSecrets().SafeFireAndForget(); ;
         }
         
  

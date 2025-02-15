@@ -9,7 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 
 using MyRecipeBookMaker.Common;
-
+using AsyncAwaitBestPractices;
 using Newtonsoft.Json;
 
 namespace MyRecipeBookMaker.Models
@@ -19,10 +19,10 @@ namespace MyRecipeBookMaker.Models
         [ObservableProperty] public ObservableCollection<Recipe>? listOfRecipes = new();
         public UserSessionData()
         {
-            LoadData();
+            //LoadData().SafeFireAndForget();
         }
 
-        async Task LoadData()
+        public async Task LoadData()
         {
             string jsonData = await ListHelper.ReadDataFileWithDefault("Recipes.json", "Recipes.json");
 

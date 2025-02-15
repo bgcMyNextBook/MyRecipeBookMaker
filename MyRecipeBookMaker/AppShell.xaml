@@ -11,8 +11,8 @@
     <Shell.TitleView>
         <Label
             x:Name="pageTitle"
-            FontSize="Large"
             Margin="10,0"
+            FontSize="Large"
             HorizontalOptions="Center"
             Text="Recipe Book Maker"
             VerticalOptions="Center" />

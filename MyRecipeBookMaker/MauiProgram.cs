@@ -12,13 +12,15 @@ namespace MyRecipeBookMaker
         public static MauiApp CreateMauiApp()
         {
             ThemeManager.UseAndroidSystemColor = false;
-            ThemeManager.Theme = new Theme(ThemeSeedColor.Brown);
+            ThemeManager.Theme = new Theme(ThemeSeedColor.TealGreen);
             var builder = MauiApp.CreateBuilder();
             builder
                 .ConfigureSyncfusionCore()
                 .ConfigureSyncfusionToolkit()
                 .UseMauiApp<App>()
+                .UseDevExpressControls()
                 .UseDevExpress()
+                .UseDevExpressCollectionView()
                 .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitCamera()
                 .ConfigureFonts(fonts =>

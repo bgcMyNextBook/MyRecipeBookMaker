@@ -1,231 +1,237 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<!--
-	<PropertyGroup>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-		<CompilerGeneratedFilesOutputPath>..\..\GeneratedFiles</CompilerGeneratedFilesOutputPath>
-		
-	</PropertyGroup>
-	-->
-	<PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">  
+<!--  
+<PropertyGroup>  
+	<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>  
+	<CompilerGeneratedFilesOutputPath>..\..\GeneratedFiles</CompilerGeneratedFilesOutputPath>  
 	
+</PropertyGroup>  
+-->  
+<PropertyGroup>  
 
-		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
 
-		<!-- Note for MacCatalyst:
-		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
-		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
-		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
-		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
-		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+	<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>  
+	<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->  
+	<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->  
 
-		<OutputType>Exe</OutputType>
-		<RootNamespace>MyRecipeBookMaker</RootNamespace>
-		<UseMaui>true</UseMaui>
-		<SingleProject>true</SingleProject>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<NoWarn>CA1416</NoWarn>
-		<NoWarn>MVVMTK0045</NoWarn>
-	
-		<!-- Display name -->
-		<ApplicationTitle>MyRecipeBookMaker</ApplicationTitle>
+	<!-- Note for MacCatalyst:  
+	The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.  
+	When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.  
+	The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;  
+	either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->  
+	<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->  
 
-		<!-- App Identifier -->
-		<ApplicationId>com.houdinisoftware.myrecipemaker</ApplicationId>
+	<OutputType>Exe</OutputType>  
+	<RootNamespace>MyRecipeBookMaker</RootNamespace>  
+	<UseMaui>true</UseMaui>  
+	<SingleProject>true</SingleProject>  
+	<ImplicitUsings>enable</ImplicitUsings>  
+	<Nullable>enable</Nullable>  
+	<NoWarn>CA1416</NoWarn>  
+	<NoWarn>MVVMTK0045</NoWarn>  
 
-		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+	<!-- Display name -->  
+	<ApplicationTitle>MyRecipeBookMaker</ApplicationTitle>  
 
-		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
-		<WindowsPackageType>None</WindowsPackageType>
+	<!-- App Identifier -->  
+	<ApplicationId>com.houdinisoftware.myrecipemaker</ApplicationId>  
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-	</PropertyGroup>
+	<!-- Versions -->  
+	<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>  
+	<ApplicationVersion>1</ApplicationVersion>  
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
-		<ProvisioningType>manual</ProvisioningType>
-		<CodesignKey>Apple Development: Created via API (AC9MHHXQ3B)</CodesignKey>
-		<CodesignProvision>HoudiniSoftwareMyRecipeBookMaker</CodesignProvision>
-	</PropertyGroup>
+	<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->  
+	<WindowsPackageType>None</WindowsPackageType>  
 
-	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>  
+	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>  
+	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>  
+	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>  
+	<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>  
+	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>  
+</PropertyGroup>  
 
-		<!-- Splash Screen -->
+<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">  
+	<ProvisioningType>manual</ProvisioningType>  
+	<CodesignKey>Apple Development: Created via API (AC9MHHXQ3B)</CodesignKey>  
+	<CodesignProvision>HoudiniSoftwareMyRecipeBookMaker</CodesignProvision>  
+</PropertyGroup>  
 
-		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+<ItemGroup>  
+	<!-- App Icon -->  
+	<MauiIcon Include="Resources\AppIcon\appicon.svg"  Color="#FFDEAD" />  
 
-		<!-- Custom Fonts -->
-		<MauiFont Include="Resources\Fonts\*" />
+	<!-- Splash Screen -->  
+	<MauiSplashScreen Include="Resources\Splash\appicon.svg" Color="#FFDEAD" />  
 
-		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
+	<!-- Images -->  
+	<MauiImage Include="Resources\Images\*" />  
+	<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />  
 
-	<ItemGroup>
-	  <Compile Remove="Models\UserData.cs" />
-	</ItemGroup>
+	<!-- Custom Fonts -->  
+	<MauiFont Include="Resources\Fonts\*" />  
 
-	<ItemGroup>
-	  <None Remove="Resources\Splash\appicon.svg" />
-	</ItemGroup>
+	<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->  
+	<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />  
+</ItemGroup>  
 
-	<ItemGroup>
-		<PackageReference Include="Azure.AI.OpenAI" Version="2.1.0" />
-		<PackageReference Include="Azure.Identity" Version="1.13.2" />
-		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />
-		<PackageReference Include="CommunityToolkit.Maui.Camera" Version="2.0.1" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="DevExpress.Maui.Core" Version="24.2.4-pre-25016" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.1" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Syncfusion.Maui.Buttons" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.DataForm" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.Inputs" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.ListView" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.Maps" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.ProgressBar" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.RadialMenu" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.Rotator" Version="28.2.3" />
-		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.3" />
-		<PackageReference Include="Syncfusion.Maui.TreeView" Version="28.2.3" />
-	</ItemGroup>
+<ItemGroup>  
+  <Compile Remove="Models\UserData.cs" />  
+</ItemGroup>  
 
-	<ItemGroup>
-		<Compile Update="Views\RecipeDetails.xaml.cs">
-			<DependentUpon>RecipeDetails.xaml</DependentUpon>
-		</Compile>
-	</ItemGroup>
 
-	<ItemGroup>
-		<MauiXaml Update="Styles\AvatarViewStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\BorderStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\BoxViewStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\ButtonStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\Colors.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\ComboBoxStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\EditorStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\EntryStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\FontIcons.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\LabelStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\ListViewStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\RadioButtonStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\RatingStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Styles\SegmentedControlStyles.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Themes\DarkTheme.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Themes\LightTheme.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\AboutUsPageWithCards.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\ChangeRecipePhoto.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\ChatConversation.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\ContactUs.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Feedback.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\ForgotPassword.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Help.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\IncomingImageTemplate.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\IncomingTextTemplate.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Login.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\LoginWithSocialIcon.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\RecipeCollection.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\NoInternetConnection.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\OutgoingImageTemplate.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\OutgoingTextTemplate.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\RecipeDetails.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\ResetPassword.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Settings.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Signup.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\SomethingWentWrong.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\appicon.svg" />
-	</ItemGroup>
+<ItemGroup>  
+	<PackageReference Include="AsyncAwaitBestPractices" Version="9.0.0" />  
+	<PackageReference Include="Azure.AI.OpenAI" Version="2.2.0-beta.1" />  
+	<PackageReference Include="Azure.Identity" Version="1.14.0-beta.1" />  
+	<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />  
+	<PackageReference Include="CommunityToolkit.Maui" Version="11.0.0" />  
+	<PackageReference Include="CommunityToolkit.Maui.Camera" Version="2.0.1" />  
+	<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />  
+	<PackageReference Include="DevExpress.Maui.CollectionView" Version="24.2.4-pre-25016" />  
+	<PackageReference Include="DevExpress.Maui.Controls" Version="24.2.4-pre-25016" />  
+	<PackageReference Include="DevExpress.Maui.Core" Version="24.2.4-pre-25016" />  
+	<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />  
+	<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />  
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />  
+	<PackageReference Include="Syncfusion.DocIO.Net.Core" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Buttons" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Core" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.DataForm" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.DataGrid" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Inputs" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.ListView" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Maps" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Popup" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.ProgressBar" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.RadialMenu" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Rotator" Version="28.2.5" />  
+	<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.3" />  
+	<PackageReference Include="Syncfusion.Maui.TreeView" Version="28.2.5" />  
+</ItemGroup>  
+
+<ItemGroup>  
+	<Compile Update="Views\RecipeDetails.xaml.cs">  
+		<DependentUpon>RecipeDetails.xaml</DependentUpon>  
+	</Compile>  
+</ItemGroup>  
+
+<ItemGroup>  
+	<MauiXaml Update="Styles\AvatarViewStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\BorderStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\BoxViewStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\ButtonStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\Colors.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\ComboBoxStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\EditorStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\EntryStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\FontIcons.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\LabelStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\ListViewStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\RadioButtonStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\RatingStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Styles\SegmentedControlStyles.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Themes\DarkTheme.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Themes\LightTheme.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\AboutUsPageWithCards.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\ChangeRecipePhoto.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\ChatConversation.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\ContactUs.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\Feedback.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\ForgotPassword.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\Help.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\IncomingImageTemplate.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\IncomingTextTemplate.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\Login.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\LoginWithSocialIcon.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\RecipeCollection.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\NoInternetConnection.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\OutgoingImageTemplate.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\OutgoingTextTemplate.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\RecipeDetails.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\RecipesViewDXCollectionView.xaml">  
+   <Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\ResetPassword.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\Settings.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\Signup.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\SomethingWentWrong.xaml">  
+		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+</ItemGroup>  
+
+<ItemGroup>  
+  <MauiSplashScreen Include="Resources\Splash\appicon.svg" Color="#FFDEAD" />  
+</ItemGroup>  
 
 </Project>

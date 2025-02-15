@@ -2,12 +2,62 @@
 <ResourceDictionary
     x:Class="MyRecipeBookMaker.Styles.LabelStyles"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core">
 
     <!--  Common style for Title labels  -->
     <Style x:Key="TitleLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight}, Dark={DynamicResource PrimaryTextColorDark}}" />
+        <Setter Property="FontSize" Value="Title" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Roboto-Medium" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}" />
+    </Style>
+
+    <Style x:Key="HeaderLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="Header" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Roboto-Medium" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1, Default=-1}" />
+    </Style>
+    <Style x:Key="BodyLargeLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Roboto-Medium" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1, Default=-1}" />
+    </Style>
+    <Style x:Key="BodyMediumLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Roboto-Medium" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1, Default=-1}" />
+    </Style>
+    <Style x:Key="BodySmallLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Roboto-Medium" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1, Default=-1}" />
+    </Style>
+    <Style x:Key="BodyMicroLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="Micro" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Roboto-Medium" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1, Default=-1}" />
+    </Style>
+    <Style x:Key="BodyLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="Roboto-Medium" />
@@ -16,8 +66,8 @@
 
     <!--  Common style for Description labels  -->
     <Style x:Key="DescriptionLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight}, Dark={DynamicResource PrimaryTextColorDark}}" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="Roboto-Regular" />
@@ -37,7 +87,7 @@
     <!--  Common style for Simple labels  -->
     <Style x:Key="SimpleLabelStyle" TargetType="Label">
         <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={DynamicResource PrimaryTextColorLight}, Dark={DynamicResource PrimaryTextColorDark}}" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnPrimary}" />
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalOptions" Value="Center" />
@@ -53,7 +103,7 @@
         <Setter Property="FontSize" Value="18" />
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="HorizontalTextAlignment" Value="End" />
-        <Setter Property="TextColor" Value="{DynamicResource Red}" />
+        <Setter Property="TextColor" Value="{dx:ThemeColor OnError}" />
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 

@@ -754,5 +754,761 @@
       "New York Cheesecake"
     ],
     "notes": "Always bake the cheesecake in a water bath as they do at Junior’s. It keeps the heat in the oven moist and helps the cake bake slowly, gently, and evenly. It also helps to ensure that your cake will have a smooth top with no large cracks. Cheesecake can be frozen for up to 6 months."
+  },
+  {
+    "id": 1,
+    "name": "Bean And Beef Dinner",
+    "description": "",
+    "servings": "1",
+    "cookTime": "0:00",
+    "prepTime": "0:00",
+    "totalTime": "",
+    "author": "",
+    "cuisine": "",
+    "course": "",
+    "image": true,
+    "imageURL": "https://picsum.photos/id/30/200/300",
+    "calories": true,
+    "nutrition": {
+      "combinedListOfNutriates": "",
+      "listOfNutriates": [
+      ]
+    },
+    "ingredientGroups": [
+      {
+        "name": "Ingredients",
+        "ingredients": [
+          {
+            "name": "Ground Beef, Browned And Drained",
+            "quantity": 1.0,
+            "unit": "pound"
+          },
+          {
+            "name": "Tabasco",
+            "quantity": 0.25,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "Worcestershire",
+            "quantity": 3.0,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "Chopped Onion",
+            "quantity": 0.25,
+            "unit": "cup"
+          },
+          {
+            "name": "Baked Beans",
+            "quantity": 16.0,
+            "unit": "ounce can"
+          },
+          {
+            "name": "Tomato Paste",
+            "quantity": 6.0,
+            "unit": "ounce can"
+          },
+          {
+            "name": "Shredded Cheese",
+            "quantity": 1.0,
+            "unit": "cup"
+          },
+          {
+            "name": "All Purpose Flour",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "Salt",
+            "quantity": 0.5,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "Baking Powder",
+            "quantity": 0.5,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "Crisco",
+            "quantity": 0.25,
+            "unit": "cup"
+          },
+          {
+            "name": "Sour Cream",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "Egg",
+            "quantity": 1.0,
+            "unit": ""
+          }
+        ]
+      }
+    ],
+    "instructionGroups": [
+      {
+        "name": "Instructions",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Combine all but cheese. Put in (on) crust. Bake 20 minutes at 450 degrees. Sprinkle with cheese, bake 5 minutes more."
+          },
+          {
+            "step": 2,
+            "description": "Crust: Grease 9 inch glass pie pan. Combine flour, salt, baking powder, Crisco, sour cream, and egg and put in pan."
+          }
+        ]
+      }
+    ],
+    "tags": [
+    ],
+    "notes": "Lynn Chambers"
+  },
+  {
+    "id": 1,
+    "name": "Coconut Shrimp",
+    "description": "A delicious coconut shrimp recipe with a creamy coconut mustard sauce.",
+    "servings": "1",
+    "cookTime": "0:00",
+    "prepTime": "0:00",
+    "totalTime": "",
+    "author": "",
+    "cuisine": "",
+    "course": "",
+    "image": true,
+    "imageURL": "https://picsum.photos/id/1/200/300",
+    "calories": true,
+    "nutrition": {
+      "combinedListOfNutriates": "",
+      "listOfNutriates": []
+    },
+    "ingredientGroups": [
+      {
+        "name": "Main Ingredients",
+        "ingredients": [
+          {
+            "name": "Shrimp, Peeled And De veined",
+            "quantity": 2.0,
+            "unit": "pounds"
+          },
+          {
+            "name": "Flour",
+            "quantity": 2.0,
+            "unit": "cups"
+          },
+          {
+            "name": "Fish Fry Batter Mix",
+            "quantity": 2.0,
+            "unit": "cups"
+          },
+          {
+            "name": "Coconut Milk",
+            "quantity": 1.0,
+            "unit": "can"
+          },
+          {
+            "name": "Coconut Flakes",
+            "quantity": 0.5,
+            "unit": "pounds"
+          },
+          {
+            "name": "Oil For Frying",
+            "quantity": 1.0,
+            "unit": "cup"
+          },
+          {
+            "name": "Cream Of Coconut",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "Dijon Mustard",
+            "quantity": 0.25,
+            "unit": "cup"
+          }
+        ]
+      },
+      {
+        "name": "Sauce",
+        "ingredients": [
+          {
+            "name": "Non-fat vanilla Greek yogurt",
+            "quantity": 5.3,
+            "unit": "ounces"
+          },
+          {
+            "name": "Crushed pineapple",
+            "quantity": 0.25,
+            "unit": "cup"
+          },
+          {
+            "name": "Sweetened, shredded coconut",
+            "quantity": 2.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "Salt",
+            "quantity": null,
+            "unit": "Pinch"
+          }
+        ]
+      }
+    ],
+    "instructionGroups": [
+      {
+        "name": "Instructions",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Dredge shrimp in flour to coat."
+          },
+          {
+            "step": 2,
+            "description": "Mix fry batter mix and coconut milk together, adding water, if necessary, to create cake batter consistency."
+          },
+          {
+            "step": 3,
+            "description": "Dip shrimp in batter mixture. Roll shrimp in coconut flakes."
+          },
+          {
+            "step": 4,
+            "description": "Deep fry until golden brown."
+          },
+          {
+            "step": 5,
+            "description": "Serve with sauce made by mixing cream of coconut and mustard (1/2 cup cream of coconut and 1/4 cup Dijon mustard)."
+          }
+        ]
+      },
+      {
+        "name": "Sauce Instructions",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Stir together 1/4 cup sweet chili sauce with 1/4 cup apricot preserves."
+          },
+          {
+            "step": 2,
+            "description": "Serve shrimp with dipping sauce and squeeze fresh lime juice over finished shrimp before serving if desired."
+          }
+        ]
+      }
+    ],
+    "tags": [],
+    "notes": ""
+  },
+  {
+    "id": 1,
+    "name": "Homemade Cinnamon Rolls (Cinnabon Copycat Recipe)",
+    "description": "The best homemade cinnamon rolls ever! If you love gooey cinnamon buns, THIS is the recipe with the secret ingredient that makes all the difference.",
+    "servings": "12",
+    "cookTime": "12 mins",
+    "prepTime": "30 mins",
+    "totalTime": "1 hr 42 mins",
+    "author": "Julie Clark",
+    "cuisine": "American",
+    "course": "Breakfast",
+    "image": true,
+
+    "imageURL": "https://picsum.photos/id/1/200/300",
+    "calories": true,
+    "nutrition": {
+      "combinedListOfNutriates": "Calories: 618kcal | Carbohydrates: 85g | Protein: 7g | Fat: 28g | Saturated Fat: 17g | Cholesterol: 109mg | Sodium: 427mg | Potassium: 145mg | Fiber: 1g | Sugar: 47g | Vitamin A: 965IU | Calcium: 89mg | Iron: 2.6mg",
+      "listOfNutriates": [ "Calories: 618kcal", "Carbohydrates: 85g", "Protein: 7g", "Fat: 28g", "Saturated Fat: 17g", "Cholesterol: 109mg", "Sodium: 427mg", "Potassium: 145mg", "Fiber: 1g", "Sugar: 47g", "Vitamin A: 965IU", "Calcium: 89mg", "Iron: 2.6mg" ]
+    },
+    "ingredientGroups": [
+      {
+        "name": "For the Dough",
+        "ingredients": [
+          {
+            "name": "warm milk",
+            "quantity": 1.0,
+            "unit": "cup"
+          },
+          {
+            "name": "instant dry yeast",
+            "quantity": 2.5,
+            "unit": "teaspoons"
+          },
+          {
+            "name": "large eggs",
+            "quantity": 2.0,
+            "unit": ""
+          },
+          {
+            "name": "salted butter",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "granulated sugar",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "salt",
+            "quantity": 1.0,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "bread flour",
+            "quantity": 4.5,
+            "unit": "cups"
+          }
+        ]
+      },
+      {
+        "name": "For the Filling",
+        "ingredients": [
+          {
+            "name": "salted butter (almost melted)",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "packed brown sugar",
+            "quantity": 1.0,
+            "unit": "cup"
+          },
+          {
+            "name": "cinnamon",
+            "quantity": 2.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "heavy cream (for pouring over the risen rolls)",
+            "quantity": 0.5,
+            "unit": "cup"
+          }
+        ]
+      },
+      {
+        "name": "For the Frosting",
+        "ingredients": [
+          {
+            "name": "cream cheese (softened)",
+            "quantity": 6.0,
+            "unit": "ounces"
+          },
+          {
+            "name": "salted butter (softened)",
+            "quantity": 0.33,
+            "unit": "cup"
+          },
+          {
+            "name": "powdered sugar",
+            "quantity": 2.0,
+            "unit": "cups"
+          },
+          {
+            "name": "maple extract or vanilla",
+            "quantity": 0.5,
+            "unit": "tablespoon"
+          }
+        ]
+      }
+    ],
+    "instructionGroups": [
+      {
+        "name": "Instructions",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Warm the milk (115ºF) in the bowl of a stand mixer and sprinkle the yeast overtop. Let it sit for 1-2 minutes."
+          },
+          {
+            "step": 2,
+            "description": "Add the eggs, butter, salt, and sugar to the milk and mix until combined."
+          },
+          {
+            "step": 3,
+            "description": "Add in 4 cups of flour and mix on low speed until the dough starts to form. Add additional flour as needed."
+          },
+          {
+            "step": 4,
+            "description": "Knead the dough on medium speed for 5-7 minutes, adding up to 1/2 cup more flour if needed."
+          },
+          {
+            "step": 5,
+            "description": "Spray a large bowl with cooking spray. Place the dough in the bowl and cover with a towel or wax paper."
+          },
+          {
+            "step": 6,
+            "description": "Set the bowl in a warm place and allow the dough to rise until double."
+          },
+          {
+            "step": 7,
+            "description": "While the dough is rising, prepare the cinnamon filling. In a medium bowl, combine the soft butter, brown sugar, and cinnamon."
+          },
+          {
+            "step": 8,
+            "description": "Sprinkle a pastry mat or work surface generously with flour. Roll out the dough to about a 24x15\" rectangle."
+          },
+          {
+            "step": 9,
+            "description": "Use a rubber spatula to smooth the cinnamon filling over the whole dough rectangle."
+          },
+          {
+            "step": 10,
+            "description": "Starting on the long side, roll the dough up tightly jelly-roll style."
+          },
+          {
+            "step": 11,
+            "description": "Cut into 12 slices and place in a greased 9x13 baking pan."
+          },
+          {
+            "step": 12,
+            "description": "Warm the heavy cream until the chill is off. Pour over the risen rolls."
+          },
+          {
+            "step": 13,
+            "description": "Bake in a preheated oven at 375ºF for 20 minutes."
+          },
+          {
+            "step": 14,
+            "description": "While the rolls are cooling, prepare the cream cheese frosting."
+          },
+          {
+            "step": 15,
+            "description": "In a large bowl, combine the softened cream cheese and butter using a hand mixer. Blend well."
+          },
+          {
+            "step": 16,
+            "description": "Add the powdered sugar and maple extract and beat until combined."
+          },
+          {
+            "step": 17,
+            "description": "Spread the frosting over the cooled rolls."
+          }
+        ]
+      }
+    ],
+    "tags": [ "brunch", "christmas morning", "weekend" ],
+    "notes": "*One packet of yeast is 2 1/4 teaspoons. If you have packets rather than bulk yeast, it is completely fine to just use one packet of yeast. Different yeast calls for slightly different proofing methods. We follow Red Star Platinum’s temperature guidelines. Please check your yeast packet to see what temperature the milk should be at.\n\n**A note about the butter, we have used 1/2 cup of butter instead of 1/3 cup many times. We feel it keeps the rolls softer. Give it a try!\n\n***If you don’t have cream, use half and half, coffee creamer, evaporated milk, whole milk or coconut cream. Any of these will work. Even 2% milk will work, but we prefer a higher fat milk.\n\nFor smaller rolls, cut the dough into 15 slices and use a 10x15” baking pan. The larger pan will also allow the rolls to rise more evenly.\n\nOur original recipe called for all-purpose flour, but we make them exclusively with bread flour now. Either will work, but bread flour yields a fluffier, sturdier roll with a slightly chewy texture. All-purpose flour gives a softer, more tender roll.\n\nOvernight Instructions\n\nWe often make the cinnamon rolls and get them to the point of the second rise (they are rolled out, cut up and put in the pan). Cover and refrigerate until morning.\n\nThe morning you want to bake them, pull them out of the fridge and let them rise. They may have doubled in size in the fridge overnight. If they have, let them sit for 30 minutes to get the chill off, then bake.\n\nIf they did not rise in the fridge overnight, allow them to rise at room temperature. This could take at least an hour for this. Then pour on the cream and bake.\n\n*The calorie count shows the amount with ALL of the frosting used. There is likely more frosting than one would use on 12 rolls, so the count is slightly elevated."
+  },
+  {
+    "id": 1,
+    "name": "Lemon Almond Scones",
+    "description": "These lemon almonds scones have a bright lemony flavor, complemented by a hint of almond. They are sweet and tangy; crumbly, yet perfectly moist.",
+    "servings": "8",
+    "cookTime": "15 mins",
+    "prepTime": "10 mins",
+    "totalTime": "25 mins",
+    "author": "Alyssa--In Fine Taste",
+    "cuisine": "American",
+    "course": "Pastries",
+    "image": true,
+    "imageURL": "https://picsum.photos/id/1/200/300",
+    "calories": 313,
+    "nutrition": {
+      "protein": 5,
+      "fat": 7,
+      "carbohydrates": 57,
+      "fiber": 1,
+      "sugar": 32,
+      "sodium": 314,
+      "SaturatedFat": 4,
+      "Fat": 7
+    },
+    "ingredientGroups": [
+      {
+        "name": "Scones",
+        "ingredients": [
+          {
+            "name": "flour",
+            "quantity": 2.0,
+            "unit": "cups"
+          },
+          {
+            "name": "butter cold",
+            "quantity": 8.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "sugar",
+            "quantity": 6.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "salt",
+            "quantity": 0.5,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "baking powder",
+            "quantity": 2.5,
+            "unit": "teaspoons"
+          },
+          {
+            "name": "lemon zest (about 2 lemons worth)",
+            "quantity": 2.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "heavy cream",
+            "quantity": 8.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "egg large",
+            "quantity": 1.0,
+            "unit": ""
+          },
+          {
+            "name": "lemon juice (about a ½ lemon)",
+            "quantity": 2.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "almond extract",
+            "quantity": 1.0,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "vanilla",
+            "quantity": 0.5,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "Sliced almonds (for topping)",
+            "quantity": null,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Glaze",
+        "ingredients": [
+          {
+            "name": "butter melted",
+            "quantity": 3.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "powdered sugar",
+            "quantity": 1.5,
+            "unit": "cups"
+          },
+          {
+            "name": "lemon juice (about 1 lemon)",
+            "quantity": 3.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "almond extract",
+            "quantity": 1.0,
+            "unit": "teaspoon"
+          }
+        ]
+      }
+    ],
+    "instructionGroups": [
+      {
+        "name": "Instructions",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Preheat oven to 400 degrees Fahrenheit. Using a food processor (or pastry cutter or two knives) cut butter into flour until in resembles a coarse, crumbly meal. Stir in sugar, lemon zest, baking powder, and salt."
+          },
+          {
+            "step": 2,
+            "description": "In a separate bowl combine eggs, cream, lemon juice, almond extract, and vanilla extract until smooth. Pour liquid mixture into dry mixture and stir until just combined and a dough forms."
+          },
+          {
+            "step": 3,
+            "description": "Tip dough onto a lightly floured work surface. Shape dough into a circle about ¾” thick. Using a sharp knife divide the dough into 8 even triangles. Place dough on a lined or greased baking sheet with about 1” in between each piece. Bake for 15-18 minutes."
+          },
+          {
+            "step": 4,
+            "description": "While scones are cooling prepare the glaze. Whisk together all glaze ingredients until smooth. Once scones are cool spoon glaze on scones. Let the scones sit for a few minutes and then glaze them a second time. Then top with sliced almonds."
+          }
+        ]
+      }
+    ],
+    "tags": [ "Lemon", "Almond", "Scones" ],
+    "notes": ""
+  },
+  {
+    "id": 1,
+    "name": "New York Cheesecake – Junior’s Original",
+    "description": "This recipe for New York cheesecake is the magic formula used by Junior’s Bakery in NYC since the 1950s to make their world-famous cheesecake!",
+    "servings": "12",
+    "cookTime": "1 hour 15 minutes",
+    "prepTime": "30 minutes",
+    "totalTime": "1 hour 45 minutes",
+    "author": "© Spend with Pennies",
+    "cuisine": "Dessert",
+    "course": "Dessert",
+    "image": true,
+    "imageURL": "https://picsum.photos/id/1/200/300",
+
+    "calories": true,
+    "nutrition": {
+      "combinedListOfNutriates": "Calories 404, Total Fat 16g, Saturated Fat 9g, Trans Fat 0g, Unsaturated Fat 6g, Cholesterol 134mg, Sodium 107mg, Carbohydrates 61g, Fiber 1g, Sugar 52g, Protein 6g",
+      "listOfNutriates": [
+        "Calories 404",
+        "Total Fat 16g",
+        "Saturated Fat 9g",
+        "Trans Fat 0g",
+        "Unsaturated Fat 6g",
+        "Cholesterol 134mg",
+        "Sodium 107mg",
+        "Carbohydrates 61g",
+        "Fiber 1g",
+        "Sugar 52g",
+        "Protein 6g"
+      ]
+    },
+    "ingredientGroups": [
+      {
+        "name": "For the Sponge Cake Crust",
+        "ingredients": [
+          {
+            "name": "Softened unsalted butter (for buttering the pan)",
+            "quantity": null,
+            "unit": ""
+          },
+          {
+            "name": "1/4 cup sifted cake flour",
+            "quantity": 0.25,
+            "unit": "cup"
+          },
+          {
+            "name": "1/3 cup potato starch",
+            "quantity": 0.33,
+            "unit": "cup"
+          },
+          {
+            "name": "2 extra-large eggs (separated)",
+            "quantity": 2.0,
+            "unit": "large"
+          },
+          {
+            "name": "1/2 cup sugar",
+            "quantity": 0.5,
+            "unit": "cup"
+          },
+          {
+            "name": "1 teaspoon pure vanilla extract",
+            "quantity": 1.0,
+            "unit": "teaspoon"
+          },
+          {
+            "name": "2 drops pure lemon extract",
+            "quantity": 2.0,
+            "unit": "drops"
+          },
+          {
+            "name": "2 tablespoons unsalted butter (melted)",
+            "quantity": 2.0,
+            "unit": "tablespoons"
+          },
+          {
+            "name": "1/4 teaspoon cream of tartar",
+            "quantity": 0.25,
+            "unit": "teaspoon"
+          }
+        ]
+      },
+      {
+        "name": "Ingredients for the Cheesecake",
+        "ingredients": [
+          {
+            "name": "4 (8-ounce) packages cream cheese (use only full fat) at room temperature",
+            "quantity": 4.0,
+            "unit": "packages"
+          },
+          {
+            "name": "1 2/3 cups sugar",
+            "quantity": 1.67,
+            "unit": "cups"
+          },
+          {
+            "name": "1/4 cup cornstarch",
+            "quantity": 0.25,
+            "unit": "cup"
+          },
+          {
+            "name": "1 tablespoon pure vanilla extract",
+            "quantity": 1.0,
+            "unit": "tablespoon"
+          },
+          {
+            "name": "2 extra-large eggs",
+            "quantity": 2.0,
+            "unit": "large"
+          },
+          {
+            "name": "3/4 cup heavy whipping cream",
+            "quantity": 0.75,
+            "unit": "cup"
+          }
+        ]
+      }
+    ],
+    "instructionGroups": [
+      {
+        "name": "Instructions for the Sponge Cake Crust",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Preheat the oven to 350°F (at least 30 minutes before putting in the oven) and generously butter a 9-inch springform pan. Wrap the outside with aluminum foil, covering the bottom and extending all the way up the sides."
+          },
+          {
+            "step": 2,
+            "description": "In a small bowl, sift the cake flour and cornstarch together."
+          },
+          {
+            "step": 3,
+            "description": "Beat the egg yolks in a large bowl with an electric mixer on high for 3 minutes. With the mixer running, slowly add 1/3 cup of the sugar and continue beating until thick light-yellow ribbons form, about 5 minutes more. Beat in the vanilla and lemon extracts."
+          },
+          {
+            "step": 4,
+            "description": "Sift the flour mixture over the batter and stir it in by hand until no white flecks. At this point blend in the melted butter."
+          },
+          {
+            "step": 5,
+            "description": "Wash and dry the mixing bowl and beaters very well. (If there’s any fat or oil left, this can make the egg whites not beat correctly.) Now, put the egg whites and cream of tartar into the mixing bowl and beat on high until frothy. Gradually add the remaining sugar and continue beating until stiff peaks form (the whites should stand up and look glossy, not dry). Fold about one-third of the whites into the batter, then remaining whites. Don’t worry if you still see a few white specks, as they’ll disappear during baking."
+          },
+          {
+            "step": 6,
+            "description": "Gently spread the batter over the bottom of the prepared pan and bake just until set and golden (not wet or sticky), about 10-12 minutes. Touch the cake gently in the center. If it springs back, it’s done. Watch carefully and don’t let the top brown. Leave the cake in the pan and place on a wire rack to cool. Leave the oven on while you prepare the cheesecake filling."
+          }
+        ]
+      },
+      {
+        "name": "Instructions for the Cheesecake",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "While the crust is cooling on the wire rack, leaving the aluminum foil on. We’ll start the cheesecake batter."
+          },
+          {
+            "step": 2,
+            "description": "Place one 8-ounce package of cream cheese (only one) and the cornstarch in a large bowl. Beat with an electric mixer fitted with the paddle attachment, on low speed until creamy, about 3 minutes, scraping down the bowl a few times. Beat in the remaining cream cheese, one package at a time, scraping down the bowl after each one, until smooth, about 3 minutes more. Increase the mixer speed to medium and beat in the remaining sugar, then the vanilla. Blend in the eggs, one at a time, beating well after each one. Beat in the cream just until it’s completely blended. Be careful not to overmix! Gently spoon the batter over the crust."
+          },
+          {
+            "step": 3,
+            "description": "Place the cake in a large shallow pan containing hot water that comes about 1 inch up the sides of the springform. Bake until the edges are light golden brown and the top is light gold, about 1 1/4 hours. If the cake still feels soft around the edge, let it bake for 10 minutes more. Remove the cheesecake from the water bath, transfer to a wire rack, and let cool for 2 hours (just walk away—do not move it). Then, leave the cake in its pan, cover loosely with plastic wrap, and refrigerate until completely cold (preferably overnight) or for at least 4 hours."
+          }
+        ]
+      },
+      {
+        "name": "To Serve",
+        "instructions": [
+          {
+            "step": 1,
+            "description": "Release and remove the sides of the springform, leaving the cake on the bottom of the pan. Place on a cake plate. Refrigerate until ready to serve. Slice with a sharp straight-edge knife, not a serrated one, rinsing the knife under hot water between slices. Refrigerate leftover cake, tightly covered, and enjoy within 2 days, or wrap and freeze for up to 1 month."
+          }
+        ]
+      }
+    ],
+    "tags": [
+      "Cheesecake",
+      "Dessert",
+      "New York Cheesecake"
+    ],
+    "notes": "Always bake the cheesecake in a water bath as they do at Junior’s. It keeps the heat in the oven moist and helps the cake bake slowly, gently, and evenly. It also helps to ensure that your cake will have a smooth top with no large cracks. Cheesecake can be frozen for up to 6 months."
   }
 ]

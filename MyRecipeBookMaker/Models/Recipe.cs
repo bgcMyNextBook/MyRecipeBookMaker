@@ -16,6 +16,8 @@ namespace MyRecipeBookMaker.Models
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public partial class Ingredient : ObservableObject
     {
+   
+
         [ObservableProperty] public string? name;
         [ObservableProperty] public double? quantity;
         [ObservableProperty] public string? unit;
@@ -80,7 +82,7 @@ namespace MyRecipeBookMaker.Models
     }
     public partial class Recipe : ObservableObject
     {
-
+        [JsonIgnore][ObservableProperty] public bool? showItemMenu = false;
         [ObservableProperty] public Guid uid;
         [ObservableProperty] public bool? status;
         [ObservableProperty] public string? processingMessage;

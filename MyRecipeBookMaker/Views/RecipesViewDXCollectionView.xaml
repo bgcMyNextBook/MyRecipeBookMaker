@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MyRecipeBookMaker.Views.RecipeCollection"
+    x:Class="MyRecipeBookMaker.Views.RecipesViewDXCollectionView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
@@ -8,8 +8,6 @@
     xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
-     xmlns:fonts="clr-namespace:MyRecipeBookMaker.Common"
-    xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
     Title="RecipesView">
     <ContentPage.BindingContext>
         <local:RecipeCollectionViewModel />
@@ -30,7 +28,7 @@
                 VerticalOptions="Fill"
                 WidthRequest="500">
                 <Grid
-                    BackgroundColor="{dx:ThemeColor Primary}"
+                    BackgroundColor="NavajoWhite"
                     ColumnDefinitions="120, *"
                     ColumnSpacing="0"
                     HeightRequest="120"
@@ -48,31 +46,13 @@
                         WidthRequest="120" />
 
 
-                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,20"
+                    <StackLayout
                         Grid.Column="1"
                         Margin="4"
                         HorizontalOptions="Fill"
-                        
+                        Spacing="0"
                         VerticalOptions="Start">
-                        <ImageButton  
-                           Grid.Row="0"  
-                           Grid.Column="1"  
-                           Grid.RowSpan="2"  
-                           ZIndex="2"  
-                           Margin="0,0,0,0"  
-                           HeightRequest="20"  
-                           HorizontalOptions="End"  
-                           Command="{Binding Source={RelativeSource Mode=TemplatedParent}, Path=ItemPopupCommand}"
-                           VerticalOptions="Center"  
-                           WidthRequest="20">  
-                           <ImageButton.Source>  
-                               <FontImageSource  
-                                   FontFamily="IMD"  
-                                   Glyph="{x:Static fonts:IconsMaterialDesign.DotsHorizontalCircle}"  
-                                   Size="20"  
-                                   Color="{dx:ThemeColor OnPrimary}" />  
-                           </ImageButton.Source>  
-                        </ImageButton>
+
                         <!--  Name of the item  -->
                         <Label
                             Grid.Row="0"
@@ -93,18 +73,17 @@
                             ZIndex="2" />
                         <!--  Description about the item  -->
                         <Label
-                            Grid.Row="1"
                             Margin="0,2,10,8"
                             HorizontalOptions="Start"
                             HorizontalTextAlignment="Start"
                             LineBreakMode="TailTruncation"
-                            MaxLines="8"
+                            MaxLines="5"
                             Style="{StaticResource BodyMicroLabelStyle}"
                             Text="{Binding Description}" />
 
                         <!--  Average rating from the overall rating  -->
 
-                    </Grid>
+                    </StackLayout>
                 </Grid>
             </Border>
 
@@ -112,47 +91,8 @@
 
 
     </ContentPage.Resources>
-    <Grid
-        Margin="0,10"
-        BackgroundColor="{dx:ThemeColor Surface}"
-        RowDefinitions="40,*"
-        SizeChanged="Grid_SizeChanged">
-
-        <radialMenu:SfRadialMenu
-            x:Name="addMenu"
-            Grid.Row="1"
-            CenterButtonRadius="25"
-            CenterButtonText="Add"
-            Closing="addMenu_Closing"
-            IsOpen="{Binding ShowAddMenu}"
-            IsVisible="True"
-            Opening="addMenu_Opening"
-            Point="{Binding AddMenuPoint}"
-            RimRadius="180"
-            ZIndex="20">
-
-            <radialMenu:SfRadialMenu.Items>
-                <radialMenu:SfRadialMenuItem
-                    Command="{Binding AddRecipeoByPdfCommand}"
-                    FontSize="10"
-                    Text="PDF" />
-                <radialMenu:SfRadialMenuItem
-                    Command="{Binding AddRecipeByCameraCommand}"
-                    FontSize="10"
-                    Text="Camera" />
-                <radialMenu:SfRadialMenuItem
-                    Command="{Binding AddRecipeByPhotoByAlbumCommand}"
-                    FontSize="10"
-                    Text="Album" />
-            </radialMenu:SfRadialMenu.Items>
-        </radialMenu:SfRadialMenu>
-
-        <dxcv:DXCollectionView
-            Grid.Row="1"
-            BackgroundColor="Transparent"
-            ItemSpanCount="{Binding ColumnsCount}"
-            ItemTemplate="{x:StaticResource itemTemplate}"
-            ItemsSource="{Binding ListOfRecipes}" />
+    <Grid BackgroundColor="{dx:ThemeColor Surface}">
+        <dxcv:DXCollectionView ItemTemplate="{x:StaticResource itemTemplate}" ItemsSource="{Binding ListOfRecipes}" />
 
 
     </Grid>

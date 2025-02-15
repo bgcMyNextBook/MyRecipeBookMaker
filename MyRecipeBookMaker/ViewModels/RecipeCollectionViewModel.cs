@@ -16,14 +16,10 @@ namespace MyRecipeBookMaker
     {
         [ObservableProperty]  public ObservableCollection<Recipe>? listOfRecipes;
         [ObservableProperty] bool showAddMenu = false;
-        //[ObservableProperty] int gridRow = 0;
-        //[ObservableProperty] int gridColumn = 1;
-
-        //double radialMenuWidth;
-        //double radialMenuHeight;
+        [ObservableProperty] int columnsCount = 1;
         [ObservableProperty] public Point addMenuPoint = new(0, 0);
 
-
+        [ObservableProperty] public bool showItemMenu = false;
         public RecipeCollectionViewModel()
         {
             // Register the ViewModel to receive messages
@@ -97,7 +93,34 @@ namespace MyRecipeBookMaker
 
 
         #region Commands
-
+        [RelayCommand]
+        public async Task DeleteRecipe()
+        {
+            ShowAddMenu = !ShowAddMenu;
+        }
+        [RelayCommand]
+        public async Task CreateRecipeWordDocument(Recipe recipe)
+        {
+            Debug.WriteLine($"CreateRecipeWordDocument: {recipe.Name}");
+            // Navigate to RecipeDetails page with the selected recipe as a query parameter
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "recipe", recipe }
+            };
+            await Shell.Current.GoToAsync("RecipeDetails", navigationParameter);
+        }
+        [RelayCommand]
+        public async Task ShowRecipeDetail(Recipe theRecipe)
+        {
+            Debug.WriteLine($"ShowShowRecipeDetailCommand: {theRecipe.Name}");
+            theRecipe.ShowItemMenu = false;
+            // Navigate to RecipeDetails page with the selected recipe as a query parameter
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "recipe", theRecipe }
+            };
+            await Shell.Current.GoToAsync("RecipeDetails", navigationParameter);
+        }
 
         [RelayCommand]
         public async Task AddNewRecipe()
@@ -243,8 +266,17 @@ namespace MyRecipeBookMaker
 
         }
         [RelayCommand]
-        public async Task ItemTapped(Recipe recipe)
+        public async Task ItemPopup (Recipe recipe)
         {
+              ShowItemMenu = true;
+        }
+        [RelayCommand]
+        public async Task ShowItemPopupMenu(Recipe recipe)
+        {
+           // var itemContainer = (Border) ((TapGestureRecognizer) sender).Parent;
+            //actionMenu.PlacementTarget = itemContainer;
+            ShowItemMenu = true;
+            /*
             Debug.WriteLine($"Item tapped: {recipe.Name}");
             // Navigate to RecipeDetails page with the selected recipe as a query parameter
             var navigationParameter = new Dictionary<string, object>
@@ -252,6 +284,7 @@ namespace MyRecipeBookMaker
                 { "recipe", recipe }
             };
             await Shell.Current.GoToAsync("RecipeDetails", navigationParameter);
+            */
         }
         #endregion
     }

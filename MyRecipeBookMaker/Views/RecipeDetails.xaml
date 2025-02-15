@@ -236,8 +236,7 @@
                                     <StackLayout Orientation="Vertical">
                                         <Label
                                             Margin="10,0"
-                                            FontAttributes="Bold"
-                                            FontSize="Small"
+                                          
                                             Style="{StaticResource Headline}"
                                             Text="{Binding Name}" />
                                         <datagrid:SfDataGrid
@@ -284,7 +283,7 @@
 
                         <CollectionView
                             x:Name="instructionCollectionView"
-                            Background="#e7dfec"
+                          Margin="3,0"
                             BackgroundColor="{dx:ThemeColor Surface}"
                             ItemsLayout="VerticalList"
                             ItemsSource="{Binding SelectedRecipe.InstructionGroups}"
@@ -301,7 +300,7 @@
                             </CollectionView.Header>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:InstructionGroup">
-                                    <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Vertical"  BackgroundColor="Transparent">
                                         <Label
                                             Margin="10,0"
                                             FontAttributes="Bold"
@@ -312,6 +311,7 @@
                                             x:Name="instructionsGrid"
                                             AllowDraggingRow="True"
                                             AllowEditing="True"
+                                            BackgroundColor="Transparent"
                                             AutoGenerateColumnsMode="None"
                                             ItemsSource="{Binding Instructions}"
                                             NavigationMode="Cell"
