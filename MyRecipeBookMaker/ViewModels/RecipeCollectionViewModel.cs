@@ -1,27 +1,38 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Maui.Views;
+
+using MyRecipeBookMaker.AI;
+using MyRecipeBookMaker.Common;
+using MyRecipeBookMaker.Models;
+using MyRecipeBookMaker.ViewModels;
 
 using Newtonsoft.Json;
-using MyRecipeBookMaker.Models;
-using CommunityToolkit.Mvvm.Input;
-using System.Diagnostics;
-using CommunityToolkit.Mvvm.ComponentModel;
-using MyRecipeBookMaker.Common;
-using MyRecipeBookMaker.AI;
-using CommunityToolkit.Mvvm.Messaging;
+using MyRecipeBookMaker.ViewModel;
+using Syncfusion.Maui.Core.Internals;
 namespace MyRecipeBookMaker
 {
 
     public partial class RecipeCollectionViewModel : ObservableObject, IRecipient<ReadRecipeMessage>, IRecipient<RecipeListUpdatedMessage>
 
     {
+        private readonly IPopupService popupService;
         [ObservableProperty]  public ObservableCollection<Recipe>? listOfRecipes;
         [ObservableProperty] bool showAddMenu = false;
         [ObservableProperty] int columnsCount = 1;
         [ObservableProperty] public Point addMenuPoint = new(0, 0);
+        [ObservableProperty] public double deviceWidth;
 
         [ObservableProperty] public bool showItemMenu = false;
-        public RecipeCollectionViewModel()
+        public RecipeCollectionViewModel(IPopupService popupService)
         {
+            this.popupService = popupService;
+            DeviceWidth = DeviceDisplay.Current.MainDisplayInfo.Width;
             // Register the ViewModel to receive messages
             WeakReferenceMessenger.Default.Register<ReadRecipeMessage>(this);
             WeakReferenceMessenger.Default.Register<RecipeListUpdatedMessage>(this);
@@ -32,6 +43,21 @@ namespace MyRecipeBookMaker
             AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -5);
             OnPropertyChanged(nameof(AddMenuPoint));
             AppShell.Current.Window.SizeChanged += MainWindow_SizeChanged;
+        
+        DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
+            GetDeviceWidth();
+        }
+
+        private void GetDeviceWidth()
+        {
+            // Retrieve the width of the device
+            DeviceWidth = DeviceDisplay.Current.MainDisplayInfo.Width / DeviceDisplay.Current.MainDisplayInfo.Density;
+        }
+
+        private void OnMainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+        {
+            // Update the device width when the screen size or orientation changes
+            DeviceWidth = e.DisplayInfo.Width / e.DisplayInfo.Density;
         }
         public void Receive(RecipeListUpdatedMessage updated)
         {
@@ -93,6 +119,24 @@ namespace MyRecipeBookMaker
 
 
         #region Commands
+        [RelayCommand]
+        public async Task DisplayPopup(Border callingControl)
+        {
+            if (callingControl == null)
+                throw new InvalidOperationException("Calling control is not set.");
+
+       
+            
+            // Set the location property
+
+            var name = await this.popupService.ShowPopupAsync<RecipeCollectionItemPopupViewModel>(
+                    onPresenting: ViewModel => {
+                        // Pass information about the calling control to the popup's ViewModel
+                        ViewModel.callingControl = callingControl;
+  
+            }); 
+        }
+    
         [RelayCommand]
         public async Task DeleteRecipe()
         {

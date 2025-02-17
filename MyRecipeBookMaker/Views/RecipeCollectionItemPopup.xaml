@@ -1,0 +1,78 @@
+<toolkit:Popup
+    x:Class="MyRecipeBookMaker.Views.RecipeCollectionItemPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:fonts="clr-namespace:MyRecipeBookMaker.Common"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:MyRecipeBookMaker.ViewModels"
+    x:DataType="viewModels:RecipeCollectionItemPopupViewModel"
+
+    Anchor="{Binding callingControl}">
+    <Border>
+        <Grid
+            HeightRequest="120"
+            RowDefinitions="40,40,40"
+            WidthRequest="40">
+            <ImageButton
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                Command="{Binding Source={RelativeSource Mode=TemplatedParent}, Path=ItemPopupCommand}"
+                HeightRequest="20"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                WidthRequest="20"
+                ZIndex="2">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="IMD"
+                        Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
+                        Size="8"
+                        Color="{dx:ThemeColor OnPrimary}" />
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                Command="{Binding Source={RelativeSource Mode=TemplatedParent}, Path=ItemPopupCommand}"
+                HeightRequest="20"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                WidthRequest="20"
+                ZIndex="2">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="IMD"
+                        Glyph="{x:Static fonts:IconsMaterialDesign.CardAccountDetails}"
+                        Size="8"
+                        Color="{dx:ThemeColor OnPrimary}" />
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                Command="{Binding Source={RelativeSource Mode=TemplatedParent}, Path=ItemPopupCommand}"
+                HeightRequest="20"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                WidthRequest="20"
+                ZIndex="2">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="IMD"
+                        Glyph="{x:Static fonts:IconsMaterialDesign.Delete}"
+                        Size="8"
+                        Color="{dx:ThemeColor OnPrimary}" />
+                </ImageButton.Source>
+            </ImageButton>
+
+        </Grid>
+    </Border>
+
+</toolkit:Popup>

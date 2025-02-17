@@ -1,15 +1,19 @@
 using Syncfusion.Maui.RadialMenu;
 using DevExpress.Maui.Core;
+using CommunityToolkit.Maui.Core;
 
 namespace MyRecipeBookMaker.Views;
 
 public partial class RecipeCollection : ContentPage
 {
-    RecipeCollectionViewModel ViewModel => BindingContext as RecipeCollectionViewModel;
-    public RecipeCollection()
+    RecipeCollectionViewModel vm;// l => BindingContext as RecipeCollectionViewModel;
+    public RecipeCollection(RecipeCollectionViewModel _vm)
     {
         InitializeComponent();
-        
+        BindingContext = _vm;
+        vm = _vm;
+       
+        //BindingContext = new RecipeCollectionViewModel();
         ON.OrientationChanged(this, OnOrientationChanged);
         OnOrientationChanged(this);
     }
@@ -19,7 +23,7 @@ public partial class RecipeCollection : ContentPage
     }
     void UpdateColumnsCount()
     {
-        ViewModel.ColumnsCount = ON.Idiom<int>(ON.Orientation<int>(1, 2), ON.Orientation<int>(2, Height < 600 ? 2 : 4));
+        vm.ColumnsCount = ON.Idiom<int>(ON.Orientation<int>(1, 2), ON.Orientation<int>(2, Height < 600 ? 2 : 4));
     }
 
     

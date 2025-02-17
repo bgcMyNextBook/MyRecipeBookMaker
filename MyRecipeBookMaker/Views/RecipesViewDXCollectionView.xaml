@@ -9,9 +9,7 @@
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
     Title="RecipesView">
-    <ContentPage.BindingContext>
-        <local:RecipeCollectionViewModel />
-    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
 
         <DataTemplate x:Key="itemTemplate" x:DataType="models:Recipe">

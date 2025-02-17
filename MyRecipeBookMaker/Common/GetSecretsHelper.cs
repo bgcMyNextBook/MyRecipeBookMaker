@@ -50,7 +50,7 @@ namespace MyRecipeBookMaker.Common
             {
                 try
                 {
-                    client.Timeout = TimeSpan.FromSeconds(30); // Set custom timeout value
+                    client.Timeout = TimeSpan.FromSeconds(130); // Set custom timeout value
                                                                //string[] scopes = { "https://MyNextbook.onmicrosoft.com/MyNextBookAPIs/GetSecrets" };
                                                                //AuthenticationResult authResult = await PCAWrapperB2C.Instance.AcquireTokenSilentAsync(scopes);
                                                                //todo: check if authResult is null and expiration

@@ -58,7 +58,7 @@
 
 <ItemGroup>  
 	<!-- App Icon -->  
-	<MauiIcon Include="Resources\AppIcon\appicon.svg"  Color="#FFDEAD" />  
+	<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFDEAD" />  
 
 	<!-- Splash Screen -->  
 	<MauiSplashScreen Include="Resources\Splash\appicon.svg" Color="#FFDEAD" />  
@@ -209,6 +209,9 @@
 	</MauiXaml>  
 	<MauiXaml Update="Views\OutgoingTextTemplate.xaml">  
 		<Generator>MSBuild:Compile</Generator>  
+	</MauiXaml>  
+	<MauiXaml Update="Views\RecipeCollectionItemPopup.xaml">
+	  <Generator>MSBuild:Compile</Generator>
 	</MauiXaml>  
 	<MauiXaml Update="Views\RecipeDetails.xaml">  
 		<Generator>MSBuild:Compile</Generator>  

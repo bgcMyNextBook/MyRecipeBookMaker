@@ -1,8 +1,14 @@
 using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Core;
 
-using Microsoft.Extensions.Logging;
 using DevExpress.Maui;
 using DevExpress.Maui.Core;
+
+using Microsoft.Extensions.Logging;
+
+using MyRecipeBookMaker.ViewModels;
+using MyRecipeBookMaker.Views;
+
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
 namespace MyRecipeBookMaker
@@ -32,6 +38,11 @@ namespace MyRecipeBookMaker
                     fonts.AddFont("materialdesignicons-webfont.ttf", "IMD");
                     fonts.AddFont("Segoe UI.ttf", "Segoe UI");
                 });
+            builder.Services.AddTransientPopup<RecipeCollectionItemPopup, RecipeCollectionItemPopupViewModel>();
+            builder.Services.AddSingleton<RecipeCollection>();
+            builder.Services.AddSingleton<RecipeCollectionViewModel>();
+            builder.Services.AddTransient<IPopupService, PopupService>();
+
             //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWX5cdXVVR2FZUEx2WEE=");
 

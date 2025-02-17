@@ -41,5 +41,13 @@
 		<string>SpeechToText requires speech recognition usage</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>SpeechToText requires microphone usage</string>
+
+		<key>NSDocumentsFolderUsageDescription</key>
+		<string>This app needs access to the documents folder to save files.</string>
+		<key>NSDownloadsFolderUsageDescription</key>
+		<string>This app needs access to the downloads folder to save files.</string>
+		<key>NSFileProtectionComplete</key>
+		<string>This app needs to ensure that files are stored securely.</string>
+
 	</dict>
 </plist>

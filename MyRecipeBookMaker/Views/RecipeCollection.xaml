@@ -6,14 +6,13 @@
     xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
     xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
     xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+    xmlns:fonts="clr-namespace:MyRecipeBookMaker.Common"
     xmlns:local="clr-namespace:MyRecipeBookMaker"
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
-     xmlns:fonts="clr-namespace:MyRecipeBookMaker.Common"
     xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="RecipesView">
-    <ContentPage.BindingContext>
-        <local:RecipeCollectionViewModel />
-    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
 
         <DataTemplate x:Key="itemTemplate" x:DataType="models:Recipe">
@@ -23,7 +22,7 @@
                 Padding="0"
                 BackgroundColor="{dx:ThemeColor Surface}"
                 HorizontalOptions="Fill"
-                MaximumWidthRequest="500"
+                MaximumWidthRequest="400"
                 Stroke="{dx:ThemeColor Outline}"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="1"
@@ -48,30 +47,31 @@
                         WidthRequest="120" />
 
 
-                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,20"
+                    <Grid
                         Grid.Column="1"
                         Margin="4"
+                        ColumnDefinitions="*,20"
                         HorizontalOptions="Fill"
-                        
+                        RowDefinitions="*,*"
                         VerticalOptions="Start">
-                        <ImageButton  
-                           Grid.Row="0"  
-                           Grid.Column="1"  
-                           Grid.RowSpan="2"  
-                           ZIndex="2"  
-                           Margin="0,0,0,0"  
-                           HeightRequest="20"  
-                           HorizontalOptions="End"  
-                           Command="{Binding Source={RelativeSource Mode=TemplatedParent}, Path=ItemPopupCommand}"
-                           VerticalOptions="Center"  
-                           WidthRequest="20">  
-                           <ImageButton.Source>  
-                               <FontImageSource  
-                                   FontFamily="IMD"  
-                                   Glyph="{x:Static fonts:IconsMaterialDesign.DotsHorizontalCircle}"  
-                                   Size="20"  
-                                   Color="{dx:ThemeColor OnPrimary}" />  
-                           </ImageButton.Source>  
+                        <ImageButton
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=DisplayPopupCommand}" CommandParameter="{Binding .}"
+                            HeightRequest="20"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            WidthRequest="20"
+                            ZIndex="2">
+                            <ImageButton.Source>
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.DotsHorizontalCircle}"
+                                    Size="20"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
                         </ImageButton>
                         <!--  Name of the item  -->
                         <Label
@@ -106,6 +106,9 @@
 
                     </Grid>
                 </Grid>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=ItemTappedCommand}" CommandParameter="{Binding .}" />
+                </Border.GestureRecognizers>
             </Border>
 
         </DataTemplate>
@@ -113,14 +116,17 @@
 
     </ContentPage.Resources>
     <Grid
-        Margin="0,10"
+        Margin="5,10,5,0"
+        x:DataType="local:RecipeCollectionViewModel"
         BackgroundColor="{dx:ThemeColor Surface}"
         RowDefinitions="40,*"
+        ColumnDefinitions="*"
         SizeChanged="Grid_SizeChanged">
 
         <radialMenu:SfRadialMenu
             x:Name="addMenu"
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
             CenterButtonRadius="25"
             CenterButtonText="Add"
             Closing="addMenu_Closing"
