@@ -6,9 +6,7 @@
     xmlns:fonts="clr-namespace:MyRecipeBookMaker.Common"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:MyRecipeBookMaker.ViewModels"
-    x:DataType="viewModels:RecipeCollectionItemPopupViewModel"
-
-    Anchor="{Binding callingControl}">
+    x:DataType="viewModels:RecipeCollectionItemPopupViewModel">
     <Border>
         <Grid
             HeightRequest="120"

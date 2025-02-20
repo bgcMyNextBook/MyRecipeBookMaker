@@ -14,24 +14,32 @@ using MyRecipeBookMaker.ViewModels;
 
 using Newtonsoft.Json;
 using MyRecipeBookMaker.ViewModel;
-using Syncfusion.Maui.Core.Internals;
+using DevExpress.Maui.Controls;
+
 namespace MyRecipeBookMaker
 {
 
     public partial class RecipeCollectionViewModel : ObservableObject, IRecipient<ReadRecipeMessage>, IRecipient<RecipeListUpdatedMessage>
 
     {
-        private readonly IPopupService popupService;
         [ObservableProperty]  public ObservableCollection<Recipe>? listOfRecipes;
         [ObservableProperty] bool showAddMenu = false;
         [ObservableProperty] int columnsCount = 1;
         [ObservableProperty] public Point addMenuPoint = new(0, 0);
         [ObservableProperty] public double deviceWidth;
+        [ObservableProperty] public Recipe selectedRecipe;
+        [ObservableProperty] public  BottomSheetState itemState =  BottomSheetState.Hidden;
 
-        [ObservableProperty] public bool showItemMenu = false;
-        public RecipeCollectionViewModel(IPopupService popupService)
+        partial void OnSelectedRecipeChanged(Recipe? oldValue, Recipe newValue)
         {
-            this.popupService = popupService;
+            if (newValue != null) ItemState = BottomSheetState.HalfExpanded;
+            // Handle the logic when the selected recipe changes
+           // Debug.WriteLine($"SelectedRecipe changed from {oldValue?.Name} to {newValue?.Name}");
+            // Additional logic can be added here
+        }
+        [ObservableProperty] public bool showItemMenu = false;
+        public RecipeCollectionViewModel()
+        {
             DeviceWidth = DeviceDisplay.Current.MainDisplayInfo.Width;
             // Register the ViewModel to receive messages
             WeakReferenceMessenger.Default.Register<ReadRecipeMessage>(this);
@@ -122,19 +130,8 @@ namespace MyRecipeBookMaker
         [RelayCommand]
         public async Task DisplayPopup(Border callingControl)
         {
-            if (callingControl == null)
-                throw new InvalidOperationException("Calling control is not set.");
-
-       
-            
-            // Set the location property
-
-            var name = await this.popupService.ShowPopupAsync<RecipeCollectionItemPopupViewModel>(
-                    onPresenting: ViewModel => {
-                        // Pass information about the calling control to the popup's ViewModel
-                        ViewModel.callingControl = callingControl;
-  
-            }); 
+          //  ShowItemMenu = true;
+            ItemState = BottomSheetState.HalfExpanded;
         }
     
         [RelayCommand]

@@ -11,24 +11,25 @@
     xmlns:models="clr-namespace:MyRecipeBookMaker.Models"
     xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    Title="RecipesView">
+    Title="RecipesView"
+    x:DataType="local:RecipeCollectionViewModel">
 
     <ContentPage.Resources>
 
         <DataTemplate x:Key="itemTemplate" x:DataType="models:Recipe">
 
             <Border
+                x:Name="itemBoard"
                 Margin="10"
                 Padding="0"
                 BackgroundColor="{dx:ThemeColor Surface}"
                 HorizontalOptions="Fill"
-                MaximumWidthRequest="400"
                 Stroke="{dx:ThemeColor Outline}"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="1"
-                VerticalOptions="Fill"
-                WidthRequest="500">
+                VerticalOptions="Fill">
                 <Grid
+                    x:Name="itemGrid"
                     BackgroundColor="{dx:ThemeColor Primary}"
                     ColumnDefinitions="120, *"
                     ColumnSpacing="0"
@@ -54,25 +55,7 @@
                         HorizontalOptions="Fill"
                         RowDefinitions="*,*"
                         VerticalOptions="Start">
-                        <ImageButton
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Grid.Column="1"
-                            Margin="0,0,0,0"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=DisplayPopupCommand}" CommandParameter="{Binding .}"
-                            HeightRequest="20"
-                            HorizontalOptions="End"
-                            VerticalOptions="Center"
-                            WidthRequest="20"
-                            ZIndex="2">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.DotsHorizontalCircle}"
-                                    Size="20"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
+
                         <!--  Name of the item  -->
                         <Label
                             Grid.Row="0"
@@ -106,10 +89,164 @@
 
                     </Grid>
                 </Grid>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=ItemTappedCommand}" CommandParameter="{Binding .}" />
-                </Border.GestureRecognizers>
+
             </Border>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="selectedItemTemplate" x:DataType="models:Recipe">
+            <Grid
+                Grid.Row="1"
+                BackgroundColor="Transparent"
+                ColumnDefinitions="*,40,40,40,*"
+                HorizontalOptions="Center"
+                RowDefinitions="120,30">
+
+                <Border
+                    x:Name="itemBoard"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"
+                    Padding="0"
+                    BackgroundColor="{dx:ThemeColor Surface}"
+                    HorizontalOptions="Fill"
+                    Stroke="{dx:ThemeColor Outline}"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="1"
+                    VerticalOptions="Fill">
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="5"
+                        Margin="20,0,20,0"
+                        BackgroundColor="{dx:ThemeColor Primary}"
+                        ColumnDefinitions="*,40,40,40,*">
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            HeightRequest="30"
+                            VerticalOptions="Center"
+                            WidthRequest="30">
+                            <ImageButton.Source>
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
+                                    Size="30"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            HeightRequest="30"
+                            VerticalOptions="Center"
+                            WidthRequest="30">
+                            <ImageButton.Source>
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
+                                    Size="30"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            HeightRequest="30"
+                            VerticalOptions="Center"
+                            WidthRequest="30">
+                            <ImageButton.Source>
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
+                                    Size="30"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Grid>
+
+
+                </Border>
+
+                <Border
+                    x:Name="itemBoard"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"
+                    Padding="0"
+                    BackgroundColor="{dx:ThemeColor Surface}"
+                    HorizontalOptions="Fill"
+                    Stroke="{dx:ThemeColor Outline}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    VerticalOptions="Fill">
+                    <Grid
+                        x:Name="itemGrid"
+                        BackgroundColor="{dx:ThemeColor Primary}"
+                        ColumnDefinitions="120, *"
+                        ColumnSpacing="0"
+                        HeightRequest="120"
+                        RowSpacing="0">
+
+                        <!--  Image to display the Item  -->
+                        <Image
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Aspect="AspectFill"
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            HeightRequest="120"
+                            Source="{Binding ImageData}"
+                            WidthRequest="120" />
+
+
+                        <Grid
+                            Grid.Column="1"
+                            Margin="4"
+                            ColumnDefinitions="*,20"
+                            HorizontalOptions="Fill"
+                            RowDefinitions="*,*"
+                            VerticalOptions="Start">
+
+                            <!--  Name of the item  -->
+                            <Label
+                                Grid.Row="0"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                Style="{StaticResource BodySmallLabelStyle}"
+                                Text="{Binding Name}"
+                                VerticalOptions="Start" />
+                            <Label
+                                HeightRequest="0"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                IsEnabled="False"
+                                IsVisible="{Binding Status}"
+                                MaxLines="5"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{Binding ProcessingMessage}"
+                                ZIndex="2" />
+                            <!--  Description about the item  -->
+                            <Label
+                                Grid.Row="1"
+                                Margin="0,2,10,8"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="8"
+                                Style="{StaticResource BodyMicroLabelStyle}"
+                                Text="{Binding Description}" />
+
+                            <!--  Average rating from the overall rating  -->
+
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </Grid>
 
         </DataTemplate>
 
@@ -119,8 +256,8 @@
         Margin="5,10,5,0"
         x:DataType="local:RecipeCollectionViewModel"
         BackgroundColor="{dx:ThemeColor Surface}"
-        RowDefinitions="40,*"
         ColumnDefinitions="*"
+        RowDefinitions="40,*"
         SizeChanged="Grid_SizeChanged">
 
         <radialMenu:SfRadialMenu
@@ -152,13 +289,77 @@
                     Text="Album" />
             </radialMenu:SfRadialMenu.Items>
         </radialMenu:SfRadialMenu>
+        <dxco:BottomSheet
+            x:Name="bottomSheet"
+            AllowDismiss="True"
+            BackgroundColor="{dx:ThemeColor Primary}"
+            CornerRadius="30"
+            HalfExpandedRatio="0.1"
+            IsModal="True"
+            ShowGrabber="True"
+            State="{Binding ItemState}">
+            <!--#region BottomSheetContent-->
+            <Grid ColumnDefinitions="*,40,40,40,*">
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    HeightRequest="30"
+                    VerticalOptions="Center"
+                    WidthRequest="30">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            FontFamily="IMD"
+                            Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
+                            Size="30"
+                            Color="{dx:ThemeColor OnPrimary}" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,0,0,0"
+                    HeightRequest="30"
+                    VerticalOptions="Center"
+                    WidthRequest="30">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            FontFamily="IMD"
+                            Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
+                            Size="30"
+                            Color="{dx:ThemeColor OnPrimary}" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,0,0,0"
+                    HeightRequest="30"
+                    VerticalOptions="Center"
+                    WidthRequest="30">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            FontFamily="IMD"
+                            Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
+                            Size="30"
+                            Color="{dx:ThemeColor OnPrimary}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
 
+            <!--#endregion-->
+        </dxco:BottomSheet>
         <dxcv:DXCollectionView
+            x:Name="collectionView"
             Grid.Row="1"
             BackgroundColor="Transparent"
             ItemSpanCount="{Binding ColumnsCount}"
             ItemTemplate="{x:StaticResource itemTemplate}"
-            ItemsSource="{Binding ListOfRecipes}" />
+            ItemsSource="{Binding ListOfRecipes}"
+            SelectedItem="{Binding SelectedRecipe}"
+            SelectedItemTemplate="{x:StaticResource selectedItemTemplate}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single" />
 
 
     </Grid>

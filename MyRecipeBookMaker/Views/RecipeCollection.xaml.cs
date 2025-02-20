@@ -1,6 +1,7 @@
 using Syncfusion.Maui.RadialMenu;
 using DevExpress.Maui.Core;
 using CommunityToolkit.Maui.Core;
+using System.Diagnostics;
 
 namespace MyRecipeBookMaker.Views;
 
@@ -58,18 +59,23 @@ public partial class RecipeCollection : ContentPage
 
         }
     }
+
+    private void CollectionView_SelectionChanged(object sender, DevExpress.Maui.CollectionView.CollectionViewSelectionChangedEventArgs e)
+    {
+        Debug.WriteLine("seledtion changed event.");
+    }
     /*
-    private void actionMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-       
-    }
+private void actionMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+{
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    {
-        var itemContainer = (Border) sender; //(Border)((TapGestureRecognizer)sender).Parent;
+}
 
-        // Set the PlacementTarget to the item container
-        actionMenu.PlacementTarget = itemContainer;
-    }
-    */
+private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+{
+   var itemContainer = (Border) sender; //(Border)((TapGestureRecognizer)sender).Parent;
+
+   // Set the PlacementTarget to the item container
+   actionMenu.PlacementTarget = itemContainer;
+}
+*/
 }
