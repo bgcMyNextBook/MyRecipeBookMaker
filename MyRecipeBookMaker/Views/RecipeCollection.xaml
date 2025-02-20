@@ -121,7 +121,6 @@
                         HeightRequest="120"
                         RowSpacing="0">
 
-                        <!--  Image to display the Item  -->
                         <Image
                             Grid.Row="0"
                             Grid.Column="0"
@@ -130,8 +129,6 @@
                             HeightRequest="120"
                             Source="{Binding ImageData}"
                             WidthRequest="120" />
-
-
                         <Grid
                             Grid.Row="0"
                             Grid.Column="1"
@@ -172,8 +169,6 @@
                             <!--  Average rating from the overall rating  -->
 
                         </Grid>
-
-
                     </Grid>
                 </Border>
                 <Border
