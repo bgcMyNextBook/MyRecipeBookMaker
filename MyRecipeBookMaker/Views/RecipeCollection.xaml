@@ -95,87 +95,16 @@
         </DataTemplate>
 
         <DataTemplate x:Key="selectedItemTemplate" x:DataType="models:Recipe">
+            <!--  Selected Bottom Buttons  -->
+
+
             <Grid
-                Grid.Row="1"
                 BackgroundColor="Transparent"
-                ColumnDefinitions="*,40,40,40,*"
                 HorizontalOptions="Center"
                 RowDefinitions="120,30">
-
                 <Border
                     x:Name="itemBoard"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="5"
-                    Padding="0"
-                    BackgroundColor="{dx:ThemeColor Surface}"
-                    HorizontalOptions="Fill"
-                    Stroke="{dx:ThemeColor Outline}"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="1"
-                    VerticalOptions="Fill">
-                    <Grid
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="5"
-                        Margin="20,0,20,0"
-                        BackgroundColor="{dx:ThemeColor Primary}"
-                        ColumnDefinitions="*,40,40,40,*">
-                        <ImageButton
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="0,0,0,0"
-                            HeightRequest="30"
-                            VerticalOptions="Center"
-                            WidthRequest="30">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
-                                    Size="30"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Margin="0,0,0,0"
-                            HeightRequest="30"
-                            VerticalOptions="Center"
-                            WidthRequest="30">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
-                                    Size="30"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton
-                            Grid.Row="1"
-                            Grid.Column="3"
-                            Margin="0,0,0,0"
-                            HeightRequest="30"
-                            VerticalOptions="Center"
-                            WidthRequest="30">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
-                                    Size="30"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                    </Grid>
-
-
-                </Border>
-
-                <Border
-                    x:Name="itemBoard"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="5"
+                    Margin="0"
                     Padding="0"
                     BackgroundColor="{dx:ThemeColor Surface}"
                     HorizontalOptions="Fill"
@@ -185,7 +114,8 @@
                     VerticalOptions="Fill">
                     <Grid
                         x:Name="itemGrid"
-                        BackgroundColor="{dx:ThemeColor Primary}"
+                        Grid.Row="0"
+                        BackgroundColor="Transparent"
                         ColumnDefinitions="120, *"
                         ColumnSpacing="0"
                         HeightRequest="120"
@@ -203,12 +133,12 @@
 
 
                         <Grid
+                            Grid.Row="0"
                             Grid.Column="1"
-                            Margin="4"
-                            ColumnDefinitions="*,20"
+                            Margin="0"
+                            BackgroundColor="{dx:ThemeColor Primary}"
                             HorizontalOptions="Fill"
-                            RowDefinitions="*,*"
-                            VerticalOptions="Start">
+                            RowDefinitions="*,*">
 
                             <!--  Name of the item  -->
                             <Label
@@ -246,7 +176,82 @@
 
                     </Grid>
                 </Border>
+                <Border
+                    Grid.Row="1"
+                    BackgroundColor="{dx:ThemeColor Primary}"
+                    HorizontalOptions="Fill"
+                    Margin="10,0,10,0"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 0,0,10,10">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Gray"
+                            Opacity="0.6"
+                            Radius="6"
+                            Offset="5,5" />
+                    </Border.Shadow>
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="5"
+                        Margin="20,0,20,0"
+                        BackgroundColor="{dx:ThemeColor Primary}"
+                        ColumnDefinitions="*,40,40,40,*">
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Aspect="Center"
+                            HeightRequest="30"
+                            VerticalOptions="Center"
+                            WidthRequest="30">
+                            <ImageButton.Source>
+
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
+                                    Size="30"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            Aspect="Center"
+                            HeightRequest="30"
+                            VerticalOptions="Center"
+                            WidthRequest="30">
+                            <ImageButton.Source>
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
+                                    Size="30"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Aspect="Center"
+                            HeightRequest="30"
+                            VerticalOptions="Center"
+                            WidthRequest="30">
+                            <ImageButton.Source>
+                                <FontImageSource
+                                    FontFamily="IMD"
+                                    Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
+                                    Size="30"
+                                    Color="{dx:ThemeColor OnPrimary}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Grid>
+                </Border>
+
+
             </Grid>
+
 
         </DataTemplate>
 
@@ -289,66 +294,68 @@
                     Text="Album" />
             </radialMenu:SfRadialMenu.Items>
         </radialMenu:SfRadialMenu>
+        <!--
         <dxco:BottomSheet
-            x:Name="bottomSheet"
-            AllowDismiss="True"
-            BackgroundColor="{dx:ThemeColor Primary}"
-            CornerRadius="30"
-            HalfExpandedRatio="0.1"
-            IsModal="True"
-            ShowGrabber="True"
-            State="{Binding ItemState}">
-            <!--#region BottomSheetContent-->
-            <Grid ColumnDefinitions="*,40,40,40,*">
-                <ImageButton
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="0,0,0,0"
-                    HeightRequest="30"
-                    VerticalOptions="Center"
-                    WidthRequest="30">
-                    <ImageButton.Source>
-                        <FontImageSource
-                            FontFamily="IMD"
-                            Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
-                            Size="30"
-                            Color="{dx:ThemeColor OnPrimary}" />
-                    </ImageButton.Source>
-                </ImageButton>
-                <ImageButton
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="0,0,0,0"
-                    HeightRequest="30"
-                    VerticalOptions="Center"
-                    WidthRequest="30">
-                    <ImageButton.Source>
-                        <FontImageSource
-                            FontFamily="IMD"
-                            Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
-                            Size="30"
-                            Color="{dx:ThemeColor OnPrimary}" />
-                    </ImageButton.Source>
-                </ImageButton>
-                <ImageButton
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="0,0,0,0"
-                    HeightRequest="30"
-                    VerticalOptions="Center"
-                    WidthRequest="30">
-                    <ImageButton.Source>
-                        <FontImageSource
-                            FontFamily="IMD"
-                            Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
-                            Size="30"
-                            Color="{dx:ThemeColor OnPrimary}" />
-                    </ImageButton.Source>
-                </ImageButton>
-            </Grid>
+        x:Name="bottomSheet"
+        AllowDismiss="True"
+        BackgroundColor="{dx:ThemeColor Primary}"
+        CornerRadius="30"
+        HalfExpandedRatio="0.1"
+        IsModal="True"
+        ShowGrabber="True"
+        State="{Binding ItemState}">
 
-            <!--#endregion-->
+        <Grid ColumnDefinitions="*,40,40,40,*">
+        <ImageButton
+        Grid.Row="0"
+        Grid.Column="1"
+        Margin="0,0,0,0"
+        HeightRequest="30"
+        VerticalOptions="Center"
+        WidthRequest="30">
+        <ImageButton.Source>
+        <FontImageSource
+        FontFamily="IMD"
+        Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
+        Size="30"
+        Color="{dx:ThemeColor OnPrimary}" />
+        </ImageButton.Source>
+        </ImageButton>
+        <ImageButton
+        Grid.Row="0"
+        Grid.Column="2"
+        Margin="0,0,0,0"
+        HeightRequest="30"
+        VerticalOptions="Center"
+        WidthRequest="30">
+        <ImageButton.Source>
+        <FontImageSource
+        FontFamily="IMD"
+        Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
+        Size="30"
+        Color="{dx:ThemeColor OnPrimary}" />
+        </ImageButton.Source>
+        </ImageButton>
+        <ImageButton
+        Grid.Row="0"
+        Grid.Column="2"
+        Margin="0,0,0,0"
+        HeightRequest="30"
+        VerticalOptions="Center"
+        WidthRequest="30">
+        <ImageButton.Source>
+        <FontImageSource
+        FontFamily="IMD"
+        Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
+        Size="30"
+        Color="{dx:ThemeColor OnPrimary}" />
+        </ImageButton.Source>
+        </ImageButton>
+        </Grid>
+
+
         </dxco:BottomSheet>
+        -->
         <dxcv:DXCollectionView
             x:Name="collectionView"
             Grid.Row="1"
