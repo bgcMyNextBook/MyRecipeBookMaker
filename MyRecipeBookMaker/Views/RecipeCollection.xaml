@@ -97,156 +97,172 @@
         <DataTemplate x:Key="selectedItemTemplate" x:DataType="models:Recipe">
             <!--  Selected Bottom Buttons  -->
 
-
-            <Grid
-                BackgroundColor="Transparent"
-                HorizontalOptions="Center"
-                RowDefinitions="120,30">
-                <Border
-                    x:Name="itemBoard"
-                    Margin="0"
-                    Padding="0"
-                    BackgroundColor="{dx:ThemeColor Surface}"
-                    HorizontalOptions="Fill"
-                    Stroke="{dx:ThemeColor Outline}"
-                    StrokeShape="RoundRectangle 10"
-                    StrokeThickness="1"
-                    VerticalOptions="Fill">
-                    <Grid
-                        x:Name="itemGrid"
-                        Grid.Row="0"
-                        BackgroundColor="Transparent"
-                        ColumnDefinitions="120, *"
-                        ColumnSpacing="0"
-                        HeightRequest="120"
-                        RowSpacing="0">
-
-                        <Image
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Aspect="AspectFill"
-                            BackgroundColor="{DynamicResource Gray-200}"
-                            HeightRequest="120"
-                            Source="{Binding ImageData}"
-                            WidthRequest="120" />
+            <Border
+                x:Name="selectedItemBorder"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="{dx:ThemeColor Surface}"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="1"
+                VerticalOptions="Fill">
+                <Grid
+                    BackgroundColor="Transparent"
+                    ColumnDefinitions="*"
+                    RowDefinitions="120,30">
+                    <Border
+                        x:Name="itemBoard"
+                        Margin="0"
+                        Padding="0"
+                        BackgroundColor="{dx:ThemeColor Surface}"
+                        HorizontalOptions="Fill"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1"
+                        VerticalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="Gray"
+                                Opacity="0.6"
+                                Radius="10"
+                                Offset="0,0" />
+                        </Border.Shadow>
                         <Grid
+                            x:Name="itemGrid"
                             Grid.Row="0"
-                            Grid.Column="1"
-                            Margin="0"
-                            BackgroundColor="{dx:ThemeColor Primary}"
-                            HorizontalOptions="Fill"
-                            RowDefinitions="*,*">
+                            BackgroundColor="Transparent"
+                            ColumnDefinitions="120, *"
+                            ColumnSpacing="0"
+                            HeightRequest="120"
+                            RowSpacing="0">
 
-                            <!--  Name of the item  -->
-                            <Label
+                            <Image
                                 Grid.Row="0"
-                                HorizontalOptions="Start"
-                                HorizontalTextAlignment="Start"
-                                Style="{StaticResource BodySmallLabelStyle}"
-                                Text="{Binding Name}"
-                                VerticalOptions="Start" />
-                            <Label
-                                HeightRequest="0"
-                                HorizontalOptions="Start"
-                                HorizontalTextAlignment="Start"
-                                IsEnabled="False"
-                                IsVisible="{Binding Status}"
-                                MaxLines="5"
-                                Style="{StaticResource ErrorIconLabelStyle}"
-                                Text="{Binding ProcessingMessage}"
-                                ZIndex="2" />
-                            <!--  Description about the item  -->
-                            <Label
-                                Grid.Row="1"
-                                Margin="0,2,10,8"
-                                HorizontalOptions="Start"
-                                HorizontalTextAlignment="Start"
-                                LineBreakMode="TailTruncation"
-                                MaxLines="8"
-                                Style="{StaticResource BodyMicroLabelStyle}"
-                                Text="{Binding Description}" />
+                                Grid.Column="0"
+                                Aspect="AspectFill"
+                                BackgroundColor="{DynamicResource Gray-200}"
+                                HeightRequest="120"
+                                Source="{Binding ImageData}"
+                                WidthRequest="120" />
+                            <Grid
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="0"
+                                BackgroundColor="{dx:ThemeColor Primary}"
+                                HorizontalOptions="Fill"
+                                RowDefinitions="*,*">
 
-                            <!--  Average rating from the overall rating  -->
+                                <!--  Name of the item  -->
+                                <Label
+                                    Grid.Row="0"
+                                    HorizontalOptions="Start"
+                                    HorizontalTextAlignment="Start"
+                                    Style="{StaticResource BodySmallLabelStyle}"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Start" />
+                                <Label
+                                    HeightRequest="0"
+                                    HorizontalOptions="Start"
+                                    HorizontalTextAlignment="Start"
+                                    IsEnabled="False"
+                                    IsVisible="{Binding Status}"
+                                    MaxLines="5"
+                                    Style="{StaticResource ErrorIconLabelStyle}"
+                                    Text="{Binding ProcessingMessage}"
+                                    ZIndex="2" />
+                                <!--  Description about the item  -->
+                                <Label
+                                    Grid.Row="1"
+                                    Margin="0,2,10,8"
+                                    HorizontalOptions="Start"
+                                    HorizontalTextAlignment="Start"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="8"
+                                    Style="{StaticResource BodyMicroLabelStyle}"
+                                    Text="{Binding Description}" />
 
+                                <!--  Average rating from the overall rating  -->
+
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Border>
-                <Border
-                    Grid.Row="1"
-                    BackgroundColor="{dx:ThemeColor Primary}"
-                    HorizontalOptions="Fill"
-                    Margin="10,0,10,0"
-                    Stroke="Transparent"
-                    StrokeShape="RoundRectangle 0,0,10,10">
-                    <Border.Shadow>
-                        <Shadow
-                            Brush="Gray"
-                            Opacity="0.6"
-                            Radius="6"
-                            Offset="5,5" />
-                    </Border.Shadow>
-                    <Grid
+                    </Border>
+                    <Border
                         Grid.Row="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="5"
-                        Margin="20,0,20,0"
+                        Margin="10,0,10,0"
                         BackgroundColor="{dx:ThemeColor Primary}"
-                        ColumnDefinitions="*,40,40,40,*">
-                        <ImageButton
+                        HorizontalOptions="Fill"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,10,10"
+                        StrokeThickness="0">
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="Gray"
+                                Opacity="0.6"
+                                Radius="6"
+                                Offset="5,5" />
+                        </Border.Shadow>
+                        <Grid
                             Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="0,0,0,0"
-                            Aspect="Center"
-                            HeightRequest="30"
-                            VerticalOptions="Center"
-                            WidthRequest="30">
-                            <ImageButton.Source>
+                            Grid.Column="0"
+                            Grid.ColumnSpan="5"
+                            Margin="20,0,20,0"
+                            BackgroundColor="{dx:ThemeColor Primary}"
+                            ColumnDefinitions="*,40,40,40,*">
+                            <ImageButton
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,0,0,0"
+                                Aspect="Center"
+                                HeightRequest="30"
+                                VerticalOptions="Center"
+                                WidthRequest="30">
+                                <ImageButton.Source>
 
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
-                                    Size="30"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Margin="0,0,0,0"
-                            Aspect="Center"
-                            HeightRequest="30"
-                            VerticalOptions="Center"
-                            WidthRequest="30">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
-                                    Size="30"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton
-                            Grid.Row="1"
-                            Grid.Column="3"
-                            Margin="0,0,0,0"
-                            Aspect="Center"
-                            HeightRequest="30"
-                            VerticalOptions="Center"
-                            WidthRequest="30">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    FontFamily="IMD"
-                                    Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
-                                    Size="30"
-                                    Color="{dx:ThemeColor OnPrimary}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                    </Grid>
-                </Border>
+                                    <FontImageSource
+                                        FontFamily="IMD"
+                                        Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
+                                        Size="30"
+                                        Color="{dx:ThemeColor OnPrimary}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                            <ImageButton
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="0,0,0,0"
+                                Aspect="Center"
+                                HeightRequest="30"
+                                VerticalOptions="Center"
+                                WidthRequest="30">
+                                <ImageButton.Source>
+                                    <FontImageSource
+                                        FontFamily="IMD"
+                                        Glyph="{x:Static fonts:IconsMaterialDesign.BookEdit}"
+                                        Size="30"
+                                        Color="{dx:ThemeColor OnPrimary}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                            <ImageButton
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Margin="0,0,0,0"
+                                Aspect="Center"
+                                HeightRequest="30"
+                                VerticalOptions="Center"
+                                WidthRequest="30">
+                                <ImageButton.Source>
+                                    <FontImageSource
+                                        FontFamily="IMD"
+                                        Glyph="{x:Static fonts:IconsMaterialDesign.PageLayoutBody}"
+                                        Size="30"
+                                        Color="{dx:ThemeColor OnPrimary}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                    </Border>
 
 
-            </Grid>
-
+                </Grid>
+            </Border>
 
         </DataTemplate>
 
