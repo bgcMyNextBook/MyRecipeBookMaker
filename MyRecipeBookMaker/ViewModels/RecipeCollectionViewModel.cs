@@ -236,11 +236,16 @@ namespace MyRecipeBookMaker
             r.Name = "Reading recipe";
             r.ShowProcessingStatus = true;
             ListOfRecipes.Add(r);
+
+            int index = ListOfRecipes.IndexOf(r); // Get the index of the newly added recipe
+           // Debug.WriteLine($"Recipe added at index: {index}");
+
+            WeakReferenceMessenger.Default.Send(new RecipeAdded(index));
             //OnPropertyChanged(nameof(ListOfRecipes));
 
             Task.Run(async () =>
             {
-                await Task.Delay(25000); // Sleep for 5 seconds
+                await Task.Delay(25000); // Sleep for 25 seconds
                 await DoWorkReadRecipeFromAI(r, imageData);
             });
         }

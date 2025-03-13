@@ -25,11 +25,11 @@ public partial class RecipeCollection : ContentPage
         //BindingContext = new RecipeCollectionViewModel();
         ON.OrientationChanged(this, OnOrientationChanged);
         OnOrientationChanged(this);
-        WeakReferenceMessenger.Default.Register<ReadRecipeMessage>(this, (recipient, message) =>
+        WeakReferenceMessenger.Default.Register<RecipeAdded>(this, (recipient, message) =>
         {
 
 
-            collectionView.ScrollTo(
+            collectionView.ScrollTo(message.recipeAdded,DXScrollToPosition.MakeVisible);
         });
     }
     void OnOrientationChanged(ContentPage view)
