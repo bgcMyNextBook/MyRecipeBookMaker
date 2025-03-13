@@ -15,6 +15,8 @@ namespace MyRecipeBookMaker
 {
     public static class MauiProgram
     {
+        //todo: https://learn.microsoft.com/en-us/samples/azure-samples/ms-identity-ciam-dotnet-tutorial/ms-identity-ciam-dotnet-tutorial-2-sign-in-maui/
+
         public static MauiApp CreateMauiApp()
         {
             ThemeManager.UseAndroidSystemColor = false;
@@ -29,6 +31,11 @@ namespace MyRecipeBookMaker
                 .UseDevExpressCollectionView()
                 .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitCamera()
+                .ConfigureEssentials(essentials =>
+                {
+                    essentials.UseVersionTracking();
+                })
+
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -41,7 +48,7 @@ namespace MyRecipeBookMaker
             builder.Services.AddTransientPopup<RecipeCollectionItemPopup, RecipeCollectionItemPopupViewModel>();
             builder.Services.AddSingleton<RecipeCollection>();
             builder.Services.AddSingleton<RecipeCollectionViewModel>();
-            builder.Services.AddTransient<IPopupService, PopupService>();
+            //builder.Services.AddSingleton<IReadWritePermission, ReadWriteStoragePermission>();
 
             //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWX5cdXVVR2FZUEx2WEE=");

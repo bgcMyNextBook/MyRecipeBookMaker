@@ -2,19 +2,22 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Maui.Views;
+
+using DevExpress.Maui.Controls;
+
+using KellermanSoftware.CompareNetObjects;
 
 using MyRecipeBookMaker.AI;
 using MyRecipeBookMaker.Common;
 using MyRecipeBookMaker.Models;
+using MyRecipeBookMaker.ViewModel;
 using MyRecipeBookMaker.ViewModels;
 
 using Newtonsoft.Json;
-using MyRecipeBookMaker.ViewModel;
-using DevExpress.Maui.Controls;
 
 namespace MyRecipeBookMaker
 {
@@ -22,19 +25,19 @@ namespace MyRecipeBookMaker
     public partial class RecipeCollectionViewModel : ObservableObject, IRecipient<ReadRecipeMessage>, IRecipient<RecipeListUpdatedMessage>
 
     {
-        [ObservableProperty]  public ObservableCollection<Recipe>? listOfRecipes;
+        [ObservableProperty] public ObservableCollection<Recipe>? listOfRecipes;
         [ObservableProperty] bool showAddMenu = false;
         [ObservableProperty] int columnsCount = 1;
         [ObservableProperty] public Point addMenuPoint = new(0, 0);
         [ObservableProperty] public double deviceWidth;
         [ObservableProperty] public Recipe selectedRecipe;
-        [ObservableProperty] public  BottomSheetState itemState =  BottomSheetState.Hidden;
+        [ObservableProperty] public BottomSheetState itemState = BottomSheetState.Hidden;
 
         partial void OnSelectedRecipeChanged(Recipe? oldValue, Recipe newValue)
         {
             if (newValue != null) ItemState = BottomSheetState.HalfExpanded;
             // Handle the logic when the selected recipe changes
-           // Debug.WriteLine($"SelectedRecipe changed from {oldValue?.Name} to {newValue?.Name}");
+            // Debug.WriteLine($"SelectedRecipe changed from {oldValue?.Name} to {newValue?.Name}");
             // Additional logic can be added here
         }
         [ObservableProperty] public bool showItemMenu = false;
@@ -51,8 +54,8 @@ namespace MyRecipeBookMaker
             AddMenuPoint = new Point(AppShell.Current.Window.Width - 80, -5);
             OnPropertyChanged(nameof(AddMenuPoint));
             AppShell.Current.Window.SizeChanged += MainWindow_SizeChanged;
-        
-        DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
+
+            DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
             GetDeviceWidth();
         }
 
@@ -78,44 +81,27 @@ namespace MyRecipeBookMaker
         public void Receive(ReadRecipeMessage message)
         {
             // Handle the message here
-            if (message.r.Status == true)
+
+            MainThread.BeginInvokeOnMainThread(() =>
             {
-                SetErrorMessageOnRecipeCard(message);
-            }
-            else
-            {
-                MainThread.BeginInvokeOnMainThread(() =>
+                var existingRecipe = ListOfRecipes.FirstOrDefault(r => r.Uid == message.r.Uid);
+                if (existingRecipe != null)
                 {
-                    var existingRecipe = ListOfRecipes.FirstOrDefault(r => r.Uid == message.r.Uid);
-                    if (existingRecipe != null)
-                    {
-                        var index = ListOfRecipes.IndexOf(existingRecipe);
-                        ListOfRecipes[index] = message.r;
-                        OnPropertyChanged(nameof(ListOfRecipes));
-                    }
-                    else
-                    {
-                        ListOfRecipes.Add(message.r);
-                        OnPropertyChanged(nameof(ListOfRecipes));
+                    var index = ListOfRecipes.IndexOf(existingRecipe);
+                    message.r.ImageBASE64 = existingRecipe.ImageBASE64;
 
-                    }
-                });
-            }
+                    ListOfRecipes[index] = message.r;
+                    OnPropertyChanged(nameof(ListOfRecipes));
+                }
+                else
+                {
+                    ListOfRecipes.Add(message.r);
+                    
+                    
+                }
+            });
         }
-        void SetErrorMessageOnRecipeCard(ReadRecipeMessage message)
-        {
-            Recipe r = ListOfRecipes.Where(e => e.uid == message.uid).FirstOrDefault();
-            if (r != null)
-            {
-                r.Name = "Error Reading Recipe.";
-                r.Description = message.processingMessage;
-            }
-            else
-            {
-                r = message.r;
-            }
-
-        }
+  
         private void MainWindow_SizeChanged(object sender, EventArgs e)
 
         {
@@ -130,17 +116,17 @@ namespace MyRecipeBookMaker
         [RelayCommand]
         public async Task DisplayPopup(Border callingControl)
         {
-          //  ShowItemMenu = true;
+            //  ShowItemMenu = true;
             ItemState = BottomSheetState.HalfExpanded;
         }
-    
+
         [RelayCommand]
         public async Task DeleteRecipe()
         {
             ShowAddMenu = !ShowAddMenu;
         }
         [RelayCommand]
-        public async Task CreateRecipeWordDocument(Recipe recipe)
+        static public async Task CreateRecipeWordDocument(Recipe recipe)
         {
             Debug.WriteLine($"CreateRecipeWordDocument: {recipe.Name}");
             // Navigate to RecipeDetails page with the selected recipe as a query parameter
@@ -188,6 +174,7 @@ namespace MyRecipeBookMaker
                     byte[] photoBytes = memoryStream.ToArray();
 
                     ReadRecipeFromAI(photoBytes);
+
                 }
             }
             ShowAddMenu = false;
@@ -201,21 +188,28 @@ namespace MyRecipeBookMaker
                 Debug.WriteLine($"r: {r.Uid}");
 
                 r1.uid = r.Uid;
-                r1.r = ai.ReadRecipeFromImage(imageData).Result;
+                //r1.r = ai.ReadRecipeFromImage(imageData).Result;
+                LocalAIReadRecipe ai2 = new();
+                Recipe r3 = await ai2.ReadRecipeFromImage(imageData);
+                //CompareLogic compareLogic = new CompareLogic();
+                //ComparisonResult result = compareLogic.Compare(r1.r, r3);
+                //Debug.WriteLine(result.Differences.ToString());
                 if (r1.r != null)
                 {
                     r1.r.Uid = r.Uid;
-                    r1.r.Status = true;
-                    r1.r.processingMessage = "";
+
+                    r1.r.ShowProcessingStatus = true;
+                    r1.r.ProcessingMessage = "Recipe read success.";
+
                 }
                 else
                 {
                     r1.r = new Recipe();
                     r1.r.Uid = r.Uid;
-                    r1.r.processingMessage = "Recipe read failed.";
+                    r1.r.ProcessingMessage = "Recipe read failed.";
                 }
-                r1.r.Status = false;
-                r1.processingMessage = "Recipe read failed";
+                r1.r.ShowProcessingStatus = true;
+                r1.r.ProcessingMessage = "Recipe read failed";
                 WeakReferenceMessenger.Default.Send(r1);
             }
             catch (Exception ex)
@@ -226,21 +220,29 @@ namespace MyRecipeBookMaker
                     r1.r = new Recipe();
                     r1.r.Uid = r.Uid;
                 }
-                r1.r.processingMessage = $"oops something went wrong...{ex.Message}";
+                r1.r.ShowProcessingStatus = true;
+                r1.r.ProcessingMessage = $"oops something went wrong...{ex.Message}";
                 WeakReferenceMessenger.Default.Send(r1);
             }
+            finally { OnPropertyChanged(nameof(ListOfRecipes)); }
+
         }
         void ReadRecipeFromAI(Byte[] imageData)
         {
-
             Recipe? r = new Recipe();
             r.Uid = Guid.NewGuid();
             r.ImageBASE64 = Convert.ToBase64String(imageData);
-            r.processingMessage = "Using AI to read the recipe this could take a few minutes.";
+            r.ProcessingMessage = "Using AI to read the recipe this could take a few minutes.";
             r.Name = "Reading recipe";
+            r.ShowProcessingStatus = true;
             ListOfRecipes.Add(r);
+            //OnPropertyChanged(nameof(ListOfRecipes));
+
             Task.Run(async () =>
-                    await DoWorkReadRecipeFromAI(r, imageData));
+            {
+                await Task.Delay(25000); // Sleep for 5 seconds
+                await DoWorkReadRecipeFromAI(r, imageData);
+            });
         }
         [RelayCommand]
         public async Task AddRecipeByCamera()
@@ -258,7 +260,7 @@ namespace MyRecipeBookMaker
 
                         using Stream sourceStream = await photo.OpenReadAsync();
 
-                   
+
                         sourceStream.Position = 0;
                         using MemoryStream memoryStream = new();
                         await sourceStream.CopyToAsync(memoryStream);
@@ -307,14 +309,14 @@ namespace MyRecipeBookMaker
 
         }
         [RelayCommand]
-        public async Task ItemPopup (Recipe recipe)
+        public async Task ItemPopup(Recipe recipe)
         {
-              ShowItemMenu = true;
+            ShowItemMenu = true;
         }
         [RelayCommand]
         public async Task ShowItemPopupMenu(Recipe recipe)
         {
-           // var itemContainer = (Border) ((TapGestureRecognizer) sender).Parent;
+            // var itemContainer = (Border) ((TapGestureRecognizer) sender).Parent;
             //actionMenu.PlacementTarget = itemContainer;
             ShowItemMenu = true;
             /*

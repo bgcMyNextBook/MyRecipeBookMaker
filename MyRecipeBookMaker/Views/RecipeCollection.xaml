@@ -28,68 +28,91 @@
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="1"
                 VerticalOptions="Fill">
-                <Grid
-                    x:Name="itemGrid"
-                    BackgroundColor="{dx:ThemeColor Primary}"
-                    ColumnDefinitions="120, *"
-                    ColumnSpacing="0"
-                    HeightRequest="120"
-                    RowSpacing="0">
-
-                    <!--  Image to display the Item  -->
-                    <Image
-                        Grid.Row="0"
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                        Aspect="AspectFill"
-                        BackgroundColor="{DynamicResource Gray-200}"
-                        HeightRequest="120"
-                        Source="{Binding ImageData}"
-                        WidthRequest="120" />
-
-
+                <StackLayout Orientation="Vertical">
                     <Grid
-                        Grid.Column="1"
-                        Margin="4"
-                        ColumnDefinitions="*,20"
-                        HorizontalOptions="Fill"
-                        RowDefinitions="*,*"
-                        VerticalOptions="Start">
+                        x:Name="itemGrid"
+                        Grid.Row="0"
+                        BackgroundColor="{dx:ThemeColor Primary}"
+                        ColumnDefinitions="120, *"
+                        ColumnSpacing="0"
+                        HeightRequest="120"
+                        RowSpacing="0">
 
-                        <!--  Name of the item  -->
-                        <Label
+                        <!--  Image to display the Item  -->
+                        <Image
                             Grid.Row="0"
-                            HorizontalOptions="Start"
-                            HorizontalTextAlignment="Start"
-                            Style="{StaticResource BodySmallLabelStyle}"
-                            Text="{Binding Name}"
-                            VerticalOptions="Start" />
-                        <Label
-                            HeightRequest="0"
-                            HorizontalOptions="Start"
-                            HorizontalTextAlignment="Start"
-                            IsEnabled="False"
-                            IsVisible="{Binding Status}"
-                            MaxLines="5"
-                            Style="{StaticResource ErrorIconLabelStyle}"
-                            Text="{Binding ProcessingMessage}"
-                            ZIndex="2" />
-                        <!--  Description about the item  -->
-                        <Label
-                            Grid.Row="1"
-                            Margin="0,2,10,8"
-                            HorizontalOptions="Start"
-                            HorizontalTextAlignment="Start"
-                            LineBreakMode="TailTruncation"
-                            MaxLines="8"
-                            Style="{StaticResource BodyMicroLabelStyle}"
-                            Text="{Binding Description}" />
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Aspect="AspectFill"
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            HeightRequest="120"
+                            Source="{Binding ImageData}"
+                            WidthRequest="120" />
 
-                        <!--  Average rating from the overall rating  -->
 
+                        <Grid
+                            Grid.Column="1"
+                            Margin="4"
+                            ColumnDefinitions="*,20"
+                            HorizontalOptions="Fill"
+                            RowDefinitions="*,*"
+                            VerticalOptions="Start">
+
+                            <!--  Name of the item  -->
+                            <Label
+                                Grid.Row="0"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                Style="{StaticResource BodySmallLabelStyle}"
+                                Text="{Binding Name}"
+                                VerticalOptions="Start" />
+
+                            <!--  Description about the item  -->
+                            <Label
+                                Grid.Row="1"
+                                Margin="0,2,10,8"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="8"
+                                Style="{StaticResource BodyMicroLabelStyle}"
+                                Text="{Binding Description}" />
+
+                            <!--  Average rating from the overall rating  -->
+
+                        </Grid>
                     </Grid>
-                </Grid>
+                    <Border
+                        Margin="0,0,0,0"
+                        BackgroundColor="{dx:ThemeColor Tertiary}"
+                        HeightRequest="50"
+                        HorizontalOptions="Fill"
+                        IsVisible="{Binding ShowProcessingStatus}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,10,10"
+                        StrokeThickness="0">
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="Gray"
+                                Opacity="0.6"
+                                Radius="6"
+                                Offset="5,5" />
+                        </Border.Shadow>
 
+                        <dx:DXExpander IsVisible="true">
+                            <Label
+                                HeightRequest="40"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                IsEnabled="False"
+                                IsVisible="true"
+                                MaxLines="5"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{Binding ProcessingMessage}"
+                                TextColor="{dx:ThemeColor OnTertiary}" />
+                        </dx:DXExpander>
+                    </Border>
+                </StackLayout>
             </Border>
 
         </DataTemplate>
@@ -160,16 +183,7 @@
                                     Style="{StaticResource BodySmallLabelStyle}"
                                     Text="{Binding Name}"
                                     VerticalOptions="Start" />
-                                <Label
-                                    HeightRequest="0"
-                                    HorizontalOptions="Start"
-                                    HorizontalTextAlignment="Start"
-                                    IsEnabled="False"
-                                    IsVisible="{Binding Status}"
-                                    MaxLines="5"
-                                    Style="{StaticResource ErrorIconLabelStyle}"
-                                    Text="{Binding ProcessingMessage}"
-                                    ZIndex="2" />
+
                                 <!--  Description about the item  -->
                                 <Label
                                     Grid.Row="1"
@@ -208,16 +222,17 @@
                             Margin="20,0,20,0"
                             BackgroundColor="{dx:ThemeColor Primary}"
                             ColumnDefinitions="*,40,40,40,*">
+
                             <ImageButton
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Margin="0,0,0,0"
                                 Aspect="Center"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeCollectionViewModel}}, Path=CreateRecipeWordCommand}"
                                 HeightRequest="30"
                                 VerticalOptions="Center"
                                 WidthRequest="30">
                                 <ImageButton.Source>
-
                                     <FontImageSource
                                         FontFamily="IMD"
                                         Glyph="{x:Static fonts:IconsMaterialDesign.MicrosoftWord}"
@@ -371,6 +386,7 @@
             x:Name="collectionView"
             Grid.Row="1"
             BackgroundColor="Transparent"
+            ChildAdded="collectionView_ChildAdded"
             ItemSpanCount="{Binding ColumnsCount}"
             ItemTemplate="{x:StaticResource itemTemplate}"
             ItemsSource="{Binding ListOfRecipes}"

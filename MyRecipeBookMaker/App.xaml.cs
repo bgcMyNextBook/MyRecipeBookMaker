@@ -1,6 +1,7 @@
 using MyRecipeBookMaker.Models;
 using MyRecipeBookMaker.Common;
 using AsyncAwaitBestPractices;
+using PlatformIntegrationDemo.Models;
 namespace MyRecipeBookMaker
 {
     public partial class App : Application
@@ -25,13 +26,23 @@ namespace MyRecipeBookMaker
         protected override void OnStart()
         {
             // Handle when your app is activated
-            
+
             currentSessionData = new UserSessionData();
             currentSessionData.LoadData().SafeFireAndForget();
-            GetSecretsHelper.GetSecrets().SafeFireAndForget(); ;
+            GetSecretsHelper.GetSecrets().SafeFireAndForget();
+#if ANDROID
+
+            List<PermissionItem> permissions = new List<PermissionItem>();
+            permissions.Add(new PermissionItem("Storage (Read)", new Permissions.StorageRead()));
+            permissions.Add(new PermissionItem("Storage (Write)", new Permissions.StorageWrite()));
+            permissions[0].CheckStatusCommand.Execute(null);
+#endif
+
+
+
         }
-        
- 
-     
+
+
+
     }
 }

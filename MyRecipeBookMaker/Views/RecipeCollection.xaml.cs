@@ -1,8 +1,16 @@
-using Syncfusion.Maui.RadialMenu;
-using DevExpress.Maui.Core;
-using CommunityToolkit.Maui.Core;
+using System.Collections;
 using System.Diagnostics;
 
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Messaging;
+
+using DevExpress.Maui.CollectionView;
+using DevExpress.Maui.Core;
+
+using Microsoft.Maui.Controls.Internals;
+
+using Syncfusion.Maui.RadialMenu;
+using MyRecipeBookMaker.Models;
 namespace MyRecipeBookMaker.Views;
 
 public partial class RecipeCollection : ContentPage
@@ -17,6 +25,12 @@ public partial class RecipeCollection : ContentPage
         //BindingContext = new RecipeCollectionViewModel();
         ON.OrientationChanged(this, OnOrientationChanged);
         OnOrientationChanged(this);
+        WeakReferenceMessenger.Default.Register<ReadRecipeMessage>(this, (recipient, message) =>
+        {
+
+
+            collectionView.ScrollTo(
+        });
     }
     void OnOrientationChanged(ContentPage view)
     {
@@ -64,6 +78,33 @@ public partial class RecipeCollection : ContentPage
     {
         Debug.WriteLine("seledtion changed event.");
     }
+
+    private void collectionView_ChildAdded(object sender, ElementEventArgs e)
+    {
+        // Get the added element
+        var addedElement = e.Element;
+
+        // Get the items source of the CollectionView
+        var itemsSource = (sender as DXCollectionView)?.ItemsSource as IList;
+
+        if (itemsSource != null)
+        {
+            // Find the index of the added element
+            int index = itemsSource.IndexOf(addedElement.BindingContext);
+
+            if (index >= 0)
+            {
+                // Item index found
+                Console.WriteLine($"Item index: {index}");
+            }
+            else
+            {
+                // Item not found in the items source
+                Console.WriteLine("Item not found");
+            }
+        }
+    }
+
     /*
 private void actionMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 {
@@ -72,10 +113,10 @@ private void actionMenu_Opening(object sender, System.ComponentModel.CancelEvent
 
 private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
 {
-   var itemContainer = (Border) sender; //(Border)((TapGestureRecognizer)sender).Parent;
+var itemContainer = (Border) sender; //(Border)((TapGestureRecognizer)sender).Parent;
 
-   // Set the PlacementTarget to the item container
-   actionMenu.PlacementTarget = itemContainer;
+// Set the PlacementTarget to the item container
+actionMenu.PlacementTarget = itemContainer;
 }
 */
 }

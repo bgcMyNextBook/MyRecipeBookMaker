@@ -78,13 +78,16 @@ namespace MyRecipeBookMaker.Models
         public string status;
         public string processingMessage;
         public Guid uid;
+        public int itemHandle;
+        public int itemIndex;
 
     }
     public partial class Recipe : ObservableObject
     {
         [JsonIgnore][ObservableProperty] public bool? showItemMenu = false;
+        [JsonIgnore][ObservableProperty] public bool? showProcessingStatus = false;  // shows a message to the user in the collection view regarding the status of 
         [ObservableProperty] public Guid uid;
-        [ObservableProperty] public bool? status;
+        
         [ObservableProperty] public string? processingMessage;
         [ObservableProperty] public int id;
         [ObservableProperty] public string? name;
